@@ -1,6 +1,6 @@
 [project]
 name = "llm-gateway"
-version = "0.1.0"
+version = "0.2.0"
 description = "One OpenAI-compatible endpoint; multiple providers; semantic caching; cost-aware routing."
 readme = "README.md"
 license = { text = "MIT" }

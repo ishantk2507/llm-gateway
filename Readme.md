@@ -46,7 +46,7 @@ client = OpenAI(base_url="http://localhost:8000/v1", api_key="gw-demo-key")
 
 # 1 — The router picks the cheapest sufficient model
 r = client.chat.completions.create(
-    model="auto",   # virtual model; the gateway decides
+    model="auto",  # virtual model; the gateway decides
     messages=[{"role": "user", "content": "Explain the circuit breaker pattern."}],
 )
 # x-routing-tier:  standard      ← router decision (rule_fired is in the logs)
@@ -66,7 +66,12 @@ r = client.chat.completions.create(
 # 3 — A *similar* question with a different answer is never wrongly cached
 r = client.chat.completions.create(
     model="auto",
-    messages=[{"role": "user", "content": "Explain what a circuit breaker does in home electrical wiring."}],
+    messages=[
+        {
+            "role": "user",
+            "content": "Explain what a circuit breaker does in home electrical wiring.",
+        }
+    ],
 )
 # x-cache-hit:     false         ← similarity 0.87 < threshold 0.95 → live call
 ```

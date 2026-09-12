@@ -22,13 +22,17 @@ from llm_gateway.observability.logging import (
     configure_logging,
     get_logger,
 )
-from llm_gateway.providers.base import build_registry
+from llm_gateway.providers.base import ProviderRegistry, build_registry
 from llm_gateway.schemas.errors import install_exception_handlers
 
 logger = get_logger(__name__)
 
 
-def create_app(settings: Settings | None = None) -> FastAPI:
+def create_app(
+    settings: Settings | None = None, *, providers: ProviderRegistry | None = None
+) -> FastAPI:
+    """``providers`` injected wins over building from settings — that's how
+    integration tests construct multi-mock chains without env tricks."""
     settings = settings or get_settings()
 
     configure_logging(
@@ -38,10 +42,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
-        # Startup: assemble the world. Day 3 adds the redis pool + FAISS
-        # index here; shutdown will flush and close them.
         app.state.settings = settings
-        app.state.providers = build_registry(settings)
+        app.state.providers = providers or build_registry(settings)
         app.state.started_at = time.monotonic()
         logger.info(
             "gateway_started",
@@ -50,6 +52,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             providers=[p.name for p in app.state.providers.all()],
         )
         yield
+        await app.state.providers.close_all()  # real adapters close their HTTP pools
 
     app = FastAPI(
         title=settings.app.app_name,
