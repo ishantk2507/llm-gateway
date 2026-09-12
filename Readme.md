@@ -1,104 +1,7 @@
 
 ---
 
-## 1. Repository Map
 
-```
-llm-gateway/
-├── README.md                      # The front door — demo, results, quickstart
-├── LICENSE                        # MIT
-├── CHANGELOG.md                   # Phase-by-phase, shows build discipline
-├── CONTRIBUTING.md                # Dev setup + conventions (short)
-├── Makefile                       # run / test / lint / eval / load-test / chaos / demo
-├── docker-compose.yml             # gateway + redis + postgres + prometheus + grafana
-├── Dockerfile                     # multi-stage, embedding model pre-baked into image
-├── .env.example                   # every config knob, documented
-├── pyproject.toml
-├── .github/workflows/ci.yml       # lint + full test suite, no network needed
-│
-├── src/llm_gateway/
-│   ├── main.py                    # app factory, lifespan, route mounting
-│   ├── config.py                  # pydantic-settings — all env-driven
-│   ├── api/
-│   │   ├── routes_chat.py         # POST /v1/chat/completions
-│   │   ├── routes_embeddings.py   # POST /v1/embeddings
-│   │   ├── routes_admin.py        # /v1/cache/invalidate · /v1/health
-│   │   └── dependencies.py        # API-key auth + rate-limit dependencies
-│   ├── schemas/
-│   │   ├── openai_api.py          # OpenAI-compatible request/response models
-│   │   └── errors.py              # OpenAI-style error envelope
-│   ├── cache/
-│   │   ├── service.py             # two-layer lookup: exact → semantic
-│   │   ├── exact.py               # SHA-256 → Redis
-│   │   ├── semantic.py            # FAISS IndexIDMap2 + SQLite payload store
-│   │   ├── embedder.py            # MiniLM in a thread executor
-│   │   └── policy.py              # cacheability: temp, stream, tools, turn count
-│   ├── router/
-│   │   ├── classifier.py          # rule-based tier assignment
-│   │   ├── features.py            # token count, code detection, keywords
-│   │   └── mapping.py             # tier → ordered provider list
-│   ├── providers/
-│   │   ├── base.py                # ProviderAdapter protocol + registry
-│   │   ├── openai_adapter.py
-│   │   ├── anthropic_adapter.py
-│   │   ├── mock_adapter.py        # deterministic — powers tests/chaos/load/demo
-│   │   └── normalizer.py          # any provider → OpenAI schema
-│   ├── reliability/
-│   │   ├── circuit_breaker.py     # closed → open → half-open
-│   │   ├── retry.py               # backoff + jitter + timeout budgets
-│   │   ├── fallback.py            # ordered chain walker
-│   │   └── rate_limiter.py        # Redis token bucket
-│   └── observability/
-│       ├── logging.py             # structured JSON per request
-│       ├── metrics.py             # Prometheus counters/histograms
-│       ├── pricing.py             # pricing.yaml → cost estimation
-│       └── repository.py          # RequestLog / CostRecord persistence
-│
-├── tests/
-│   ├── unit/                      # router, cache policy, breaker, normalizer
-│   ├── contract/                  # respx-recorded fixtures per adapter
-│   ├── integration/               # end-to-end through the app (mock provider)
-│   └── chaos/                     # provider outage → fallback + breaker assertions
-│
-├── evals/
-│   ├── golden_set.jsonl           # ~150 labeled prompts
-│   ├── labeling_rubric.md         # how labels were assigned — makes it defensible
-│   └── run_router_eval.py         # confusion matrix, per-tier P/R
-│
-├── benchmarks/
-│   ├── locustfile.py              # workload mixes: repeat-heavy vs. diverse
-│   ├── threshold_sweep.py         # false-positive rate vs. similarity threshold
-│   └── results/                   # raw CSVs + plots — COMMITTED
-│
-├── dashboards/grafana_dashboard.json
-├── prometheus.yml
-├── scripts/
-│   ├── demo.sh                    # the 5-min demo as a runnable script
-│   ├── chaos.sh                   # kill provider under load
-│   └── seed_cache.py
-│
-└── docs/
-    ├── DESIGN.md
-    ├── API.md
-    ├── BENCHMARKS.md
-    ├── ROUTER_EVAL.md
-    ├── RUNBOOK.md
-    ├── DEMO.md
-    ├── img/                       # screenshots + demo GIF
-    └── adr/
-        ├── 0001-rule-based-router-over-learned.md
-        ├── 0002-two-layer-cache-exact-then-semantic.md
-        ├── 0003-single-turn-caching-only.md
-        ├── 0004-fail-loud-over-degraded-cache-serving.md
-        ├── 0005-faiss-flat-with-documented-upgrade-path.md
-        └── 0006-mock-provider-as-first-class-citizen.md
-```
-
----
-
-## 2. `README.md` — complete file
-
-````markdown
 <div align="center">
 
 # LLM Gateway
@@ -322,7 +225,100 @@ scripts/            demo.sh · chaos.sh · seed_cache.py
 
 **Ishant** — built as a systems-design exercise in treating LLM spend as an
 engineering problem: measurable, debuggable, reliable.
-````
+
+## Repository Map
+
+```
+llm-gateway/
+├── README.md                      # The front door — demo, results, quickstart
+├── LICENSE                        # MIT
+├── CHANGELOG.md                   # Phase-by-phase, shows build discipline
+├── CONTRIBUTING.md                # Dev setup + conventions (short)
+├── Makefile                       # run / test / lint / eval / load-test / chaos / demo
+├── docker-compose.yml             # gateway + redis + postgres + prometheus + grafana
+├── Dockerfile                     # multi-stage, embedding model pre-baked into image
+├── .env.example                   # every config knob, documented
+├── pyproject.toml
+├── .github/workflows/ci.yml       # lint + full test suite, no network needed
+│
+├── src/llm_gateway/
+│   ├── main.py                    # app factory, lifespan, route mounting
+│   ├── config.py                  # pydantic-settings — all env-driven
+│   ├── api/
+│   │   ├── routes_chat.py         # POST /v1/chat/completions
+│   │   ├── routes_embeddings.py   # POST /v1/embeddings
+│   │   ├── routes_admin.py        # /v1/cache/invalidate · /v1/health
+│   │   └── dependencies.py        # API-key auth + rate-limit dependencies
+│   ├── schemas/
+│   │   ├── openai_api.py          # OpenAI-compatible request/response models
+│   │   └── errors.py              # OpenAI-style error envelope
+│   ├── cache/
+│   │   ├── service.py             # two-layer lookup: exact → semantic
+│   │   ├── exact.py               # SHA-256 → Redis
+│   │   ├── semantic.py            # FAISS IndexIDMap2 + SQLite payload store
+│   │   ├── embedder.py            # MiniLM in a thread executor
+│   │   └── policy.py              # cacheability: temp, stream, tools, turn count
+│   ├── router/
+│   │   ├── classifier.py          # rule-based tier assignment
+│   │   ├── features.py            # token count, code detection, keywords
+│   │   └── mapping.py             # tier → ordered provider list
+│   ├── providers/
+│   │   ├── base.py                # ProviderAdapter protocol + registry
+│   │   ├── openai_adapter.py
+│   │   ├── anthropic_adapter.py
+│   │   ├── mock_adapter.py        # deterministic — powers tests/chaos/load/demo
+│   │   └── normalizer.py          # any provider → OpenAI schema
+│   ├── reliability/
+│   │   ├── circuit_breaker.py     # closed → open → half-open
+│   │   ├── retry.py               # backoff + jitter + timeout budgets
+│   │   ├── fallback.py            # ordered chain walker
+│   │   └── rate_limiter.py        # Redis token bucket
+│   └── observability/
+│       ├── logging.py             # structured JSON per request
+│       ├── metrics.py             # Prometheus counters/histograms
+│       ├── pricing.py             # pricing.yaml → cost estimation
+│       └── repository.py          # RequestLog / CostRecord persistence
+│
+├── tests/
+│   ├── unit/                      # router, cache policy, breaker, normalizer
+│   ├── contract/                  # respx-recorded fixtures per adapter
+│   ├── integration/               # end-to-end through the app (mock provider)
+│   └── chaos/                     # provider outage → fallback + breaker assertions
+│
+├── evals/
+│   ├── golden_set.jsonl           # ~150 labeled prompts
+│   ├── labeling_rubric.md         # how labels were assigned — makes it defensible
+│   └── run_router_eval.py         # confusion matrix, per-tier P/R
+│
+├── benchmarks/
+│   ├── locustfile.py              # workload mixes: repeat-heavy vs. diverse
+│   ├── threshold_sweep.py         # false-positive rate vs. similarity threshold
+│   └── results/                   # raw CSVs + plots — COMMITTED
+│
+├── dashboards/grafana_dashboard.json
+├── prometheus.yml
+├── scripts/
+│   ├── demo.sh                    # the 5-min demo as a runnable script
+│   ├── chaos.sh                   # kill provider under load
+│   └── seed_cache.py
+│
+└── docs/
+    ├── DESIGN.md
+    ├── API.md
+    ├── BENCHMARKS.md
+    ├── ROUTER_EVAL.md
+    ├── RUNBOOK.md
+    ├── DEMO.md
+    ├── img/                       # screenshots + demo GIF
+    └── adr/
+        ├── 0001-rule-based-router-over-learned.md
+        ├── 0002-two-layer-cache-exact-then-semantic.md
+        ├── 0003-single-turn-caching-only.md
+        ├── 0004-fail-loud-over-degraded-cache-serving.md
+        ├── 0005-faiss-flat-with-documented-upgrade-path.md
+        └── 0006-mock-provider-as-first-class-citizen.md
+```
+
 
 ---
 
