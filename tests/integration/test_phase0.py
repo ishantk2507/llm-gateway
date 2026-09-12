@@ -25,6 +25,7 @@ def make_settings(**mock_overrides) -> Settings:
         _env_file=None,
         app=AppSettings(environment=Environment.TEST),
         mock=MockSettings(latency_ms=1, **mock_overrides),
+        reliability=ReliabilitySettings(backoff_base_s=0.001, backoff_cap_s=0.002),  # NEW
     )
 
 
@@ -117,8 +118,11 @@ def test_timeout_budget_exceeded_is_a_504():
         app=AppSettings(environment=Environment.TEST),
         mock=MockSettings(latency_ms=200),
         reliability=ReliabilitySettings(
+            backoff_base_s=0.001,
+            backoff_cap_s=0.002,
             per_attempt_timeout_s=0.05,
-            request_timeout_budget_s=1.0,
+            request_timeout_budget_s=0.06,  # CHANGED (was 1.0): barely over one attempt slice,
+            # so the between-attempt budget check fires the 504
         ),
     )
     with client_for(settings) as client:

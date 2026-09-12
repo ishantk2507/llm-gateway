@@ -17,6 +17,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field
 
 Role = Literal["system", "user", "assistant", "tool"]
+VIRTUAL_MODELS: frozenset[str] = frozenset({"auto", "cheap", "standard", "premium", "mock"})
 
 
 class Message(BaseModel):

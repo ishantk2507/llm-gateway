@@ -32,7 +32,8 @@ _DETERMINISTIC_EPOCH_BASE = 1_700_000_000
 class MockProvider(ProviderAdapter):
     name = "mock"
 
-    def __init__(self, settings: MockSettings) -> None:
+    def __init__(self, settings: MockSettings, *, name: str = "mock") -> None:
+        self.name = name  # instance attr — lets one MockProvider class play many roles
         self._settings = settings
 
     async def complete(self, request: ChatCompletionRequest) -> ChatCompletionResponse:

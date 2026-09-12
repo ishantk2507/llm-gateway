@@ -47,6 +47,7 @@ class GatewayError(Exception):
     status_code: int = 500
     error_type: str = "api_error"
     default_message: str = "gateway error"
+    retryable: bool = True
 
     def __init__(
         self,
@@ -74,6 +75,14 @@ class ProviderFailure(GatewayError):
     status_code = 502
     error_type = "api_error"
     default_message = "provider errored after all retries and fallbacks"
+    retryable = True
+
+
+class ProviderRejected(GatewayError):
+    status_code = 502
+    error_type = "api_error"
+    default_message = "provider rejected the request"
+    retryable = False
 
 
 class AllProvidersDown(GatewayError):

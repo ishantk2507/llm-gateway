@@ -30,6 +30,11 @@ class ProviderAdapter(ABC):
     async def health_check(self) -> bool:
         """Used by /v1/health and (Day 6) the chaos tooling."""
 
+    async def aclose(self) -> None:  # noqa: B027
+        """Lifecycle hook — real adapters close their HTTP pools; the mock is
+        a no-op. Deliberately optional (not abstract): adapters without
+        resources inherit the default instead of being forced to spell it out."""
+
 
 class ProviderRegistry:
     """Mutable registry + ordered default chain. One instance per app."""
@@ -62,16 +67,30 @@ class ProviderRegistry:
     def __len__(self) -> int:
         return len(self._providers)
 
+    def names(self) -> list[str]:
+        return list(self._providers)
+
+    async def close_all(self) -> None:
+        for adapter in self._providers.values():
+            await adapter.aclose()
+
 
 def build_registry(settings: Settings) -> ProviderRegistry:
-    """Assemble the registry from settings.
+    """Assemble the registry — and the default chain order (ADR-0006 terminator).
 
-    The mock is always available (ADR-0006). Day 2 registers real adapters
-    ahead of it when their API keys are set — the mock stays the terminator.
+    Real providers register ahead of the mock ONLY when their API key is set;
+    the mock is always last, so every chain terminates somewhere that works.
+    Day 4's tier mapping replaces this ordering with cost-ordered per-tier lists.
     """
-    from llm_gateway.providers.mock_adapter import MockProvider  # breaks the import cycle
+    from llm_gateway.providers.anthropic_adapter import AnthropicAdapter
+    from llm_gateway.providers.mock_adapter import MockProvider
+    from llm_gateway.providers.openai_adapter import OpenAIAdapter
 
     registry = ProviderRegistry()
+    if settings.openai.api_key.get_secret_value():
+        registry.register(OpenAIAdapter(settings.openai))
+    if settings.anthropic.api_key.get_secret_value():
+        registry.register(AnthropicAdapter(settings.anthropic))
     if settings.mock.enabled:
         registry.register(MockProvider(settings.mock), in_default_chain=True)
     if not registry.default_chain():
