@@ -1,0 +1,95 @@
+# LLM Gateway — full local stack.
+#
+#   docker compose up -d                          # everything
+#   docker compose up -d redis postgres prometheus grafana   # infra only, Day 1
+#
+# Gateway knobs set below override the localhost defaults in .env so the
+# container talks to in-network service names instead.
+name: llm-gateway
+
+services:
+  gateway:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      GW_REDIS__URL: redis://redis:6379/0
+      GW_OBSERVABILITY__DATABASE_URL: postgresql://gateway:gateway@postgres:5432/gateway
+      # Standard provider credentials pass through from .env (empty → mock mode)
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      # slim images have no curl — python is always there
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://localhost:8000/v1/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 15s      # raise on Day 3+ (embedding model load)
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.4-alpine
+    ports:
+      - "6379:6379"
+    # No volume: cache + rate-limit state is ephemeral by design
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16.4-alpine
+    environment:
+      POSTGRES_USER: gateway
+      POSTGRES_PASSWORD: gateway        # local demo credentials only — never production
+      POSTGRES_DB: gateway
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gateway -d gateway"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention.time=7d
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:11.4.0
+    environment:
+      # Zero-login demo mode — open :3001 and the dashboard is just there.
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+      # Day 5's grafana_dashboard.json becomes the landing page the moment
+      # it lands in dashboards/ — directory mount means it's auto-loaded.
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /var/lib/grafana/dashboards/gateway.json
+    volumes:
+      - ./dashboards:/var/lib/grafana/dashboards:ro
+      - ./dashboards/provisioning/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml:ro
+      - ./dashboards/provisioning/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml:ro
+    ports:
+      - "3001:3000"
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+volumes:
+  pgdata:

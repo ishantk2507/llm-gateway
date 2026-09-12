@@ -1,0 +1,60 @@
+[project]
+name = "llm-gateway"
+version = "0.1.0"
+description = "One OpenAI-compatible endpoint; multiple providers; semantic caching; cost-aware routing."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12"
+dependencies = [
+    # Day 1 — the request path
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.6",
+    "httpx>=0.28",
+    "structlog>=24.4",       # structured JSON request logs
+    "pyyaml>=6.0",
+    # Day 3 — semantic cache (uncomment the day the feature lands, not before)
+    # "faiss-cpu>=1.9",
+    # "sentence-transformers>=3.2",
+    # "numpy>=2.1",
+    # "redis>=5.2",
+    # Day 5 — observability stores
+    # "prometheus-client>=0.21",
+    # "sqlalchemy>=2.0",
+    # "psycopg[binary]>=3.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "pytest-cov>=6.0",
+    "respx>=0.21",            # contract tests — recorded fixtures, zero live calls
+    "fakeredis>=2.26",
+    "locust>=2.32",           # Day 6 load tests
+    "ruff>=0.8",
+    "openai>=3.13.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/llm_gateway"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["pydantic.Field", "fastapi.Depends"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
