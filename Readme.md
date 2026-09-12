@@ -10,7 +10,7 @@
 eliminates redundant spend. Cost-aware routing. Circuit breakers with
 transparent fallback.**
 
-[![CI](https://github.com/YOUR_USERNAME/llm-gateway/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/llm-gateway/actions)
+[![CI](https://github.com/ishantk2507/llm-gateway/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/llm-gateway/actions)
 [![Python](https://img.shields.io/badge/python-3.12-%233776AB)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Code style: ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)]()
