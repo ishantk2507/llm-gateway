@@ -1,8 +1,8 @@
-"""POST /v1/chat/completions — request lifecycle (DESIGN.md §6), Day-2 edition.
+"""POST /v1/chat/completions — request lifecycle (DESIGN.md §6), Day-3 edition.
 
-validate → stream check → dropped-param warning → chain resolution → budgeted
-fallback walk → headers + structured log. Day 3 inserts the cache between the
-stream check and the walk; Day 4 replaces _resolve_chain with the router.
+validate → stream check → dropped-param warning → CACHE (exact → semantic) →
+chain resolution → budgeted fallback walk → write-through → headers + log.
+Day 4 replaces _resolve_chain with the router. Nothing else moves.
 """
 
 from __future__ import annotations
@@ -22,12 +22,7 @@ logger = get_logger(__name__)
 
 
 def _resolve_chain(model: str, registry: ProviderRegistry) -> list[ProviderAdapter]:
-    """Day-2 stand-in for the router (Day 4 replaces this function wholesale).
-
-    'mock' pins the mock; a real model name pins its provider by prefix — an
-    unconfigured pin falls through to the chain, loudly; anything virtual
-    ('auto', tier names) walks the full default chain.
-    """
+    """Day-2 stand-in for the router (Day 4 replaces this function wholesale)."""
     if model == "mock":
         return [registry.get("mock")]
     if model.startswith(("gpt-", "o1", "o3", "chatgpt")):
@@ -62,27 +57,51 @@ async def create_chat_completion(
 
     settings: Settings = http_request.app.state.settings
     registry: ProviderRegistry = http_request.app.state.providers
+    cache = getattr(http_request.app.state, "cache", None)
+    bypass = http_request.headers.get("x-cache", "").lower() == "bypass"
+
+    # ── cache lookup: hits never touch a provider, a budget, or a bill ──
+    cache_result = None
+    if cache is not None and not bypass:
+        cache_result = await cache.lookup(request)
+        if cache_result.hit:
+            usage = cache_result.response.usage
+            fields: dict = {
+                "model": request.model, "provider_used": "cache", "routing_tier": "cache",
+                "cache_hit": True, "cache_layer": cache_result.layer,
+                "tokens_in": usage.prompt_tokens, "tokens_out": usage.completion_tokens,
+                "cost_usd": 0.0,
+            }
+            if cache_result.similarity is not None:
+                fields["similarity_score"] = cache_result.similarity
+            bind_log_fields(**fields)
+            fastapi_response.headers["x-cache-hit"] = "true"
+            fastapi_response.headers["x-provider-used"] = "cache"
+            fastapi_response.headers["x-routing-tier"] = "cache"
+            fastapi_response.headers["x-cost-usd"] = "0.0000"
+            return cache_result.response
+
+    # ── miss: the full Day-2 provider path, unchanged ──
     chain = _resolve_chain(request.model, registry)
-
-    # One clock per request, shared by retry + fallback (§9).
     budget = TimeoutBudget(settings.reliability.request_timeout_budget_s)
-
     bind_log_fields(model=request.model, provider_chain=[p.name for p in chain])
+    if cache_result is not None and cache_result.near_miss:
+        # Calibration data (§5.2): close-but-not-cached, fed to Day 6's sweep
+        bind_log_fields(near_miss=True, similarity_score=cache_result.similarity)
+
     completion, provider_name = await execute_with_fallback(
         chain, request, budget=budget, settings=settings.reliability
     )
 
+    if cache is not None:  # write-through (ADR-0002) — after success only
+        await cache.store(request, completion)
+
     cost_usd = 0.0  # Day 5's pricing.py swaps in behind this exact line
     usage = completion.usage
     bind_log_fields(
-        routing_tier="auto",  # honest placeholder — the router lands Day 4
-        cache_hit=False,  # the cache lands Day 3
-        provider_used=provider_name,
-        tokens_in=usage.prompt_tokens,
-        tokens_out=usage.completion_tokens,
-        cost_usd=cost_usd,
+        routing_tier="auto", cache_hit=False, provider_used=provider_name,
+        tokens_in=usage.prompt_tokens, tokens_out=usage.completion_tokens, cost_usd=cost_usd,
     )
-
     fastapi_response.headers["x-cache-hit"] = "false"
     fastapi_response.headers["x-provider-used"] = provider_name
     fastapi_response.headers["x-routing-tier"] = "auto"

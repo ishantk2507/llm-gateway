@@ -1,8 +1,5 @@
-"""App factory + lifespan.
-
-``create_app(settings)`` exists so tests build isolated apps with their own
-registries; the module-level ``app`` is what uvicorn serves (``make run``).
-"""
+"""App factory + lifespan. Tests inject providers= and cache=; production
+builds from settings and fails loudly when infrastructure is missing."""
 
 from __future__ import annotations
 
@@ -16,6 +13,7 @@ from fastapi import FastAPI
 from llm_gateway import __version__
 from llm_gateway.api.routes_admin import router as admin_router
 from llm_gateway.api.routes_chat import router as chat_router
+from llm_gateway.cache.service import CacheService, build_cache
 from llm_gateway.config import Environment, Settings, get_settings
 from llm_gateway.observability.logging import (
     RequestLoggingMiddleware,
@@ -29,10 +27,11 @@ logger = get_logger(__name__)
 
 
 def create_app(
-    settings: Settings | None = None, *, providers: ProviderRegistry | None = None
+    settings: Settings | None = None,
+    *,
+    providers: ProviderRegistry | None = None,
+    cache: CacheService | None = None,
 ) -> FastAPI:
-    """``providers`` injected wins over building from settings — that's how
-    integration tests construct multi-mock chains without env tricks."""
     settings = settings or get_settings()
 
     configure_logging(
@@ -45,19 +44,35 @@ def create_app(
         app.state.settings = settings
         app.state.providers = providers or build_registry(settings)
         app.state.started_at = time.monotonic()
+
+        # Test apps inject their own cache (fakeredis + fake embedder); auto-
+        # building here would demand a live Redis in CI — that's a test
+        # concern, not a runtime one.
+        redis_client = None
+        app.state.cache = cache
+        if cache is None and settings.cache.enabled and settings.app.environment != Environment.TEST:
+            service, redis_client = await build_cache(settings)
+            app.state.cache = service
+
         logger.info(
             "gateway_started",
             version=__version__,
             environment=settings.app.environment.value,
             providers=[p.name for p in app.state.providers.all()],
+            cache_enabled=app.state.cache is not None,
         )
         yield
-        await app.state.providers.close_all()  # real adapters close their HTTP pools
+
+        if app.state.cache is not None:
+            await app.state.cache.aclose()
+        if redis_client is not None:
+            await redis_client.aclose()
+        await app.state.providers.close_all()
 
     app = FastAPI(
         title=settings.app.app_name,
         version=__version__,
-        lifespan=lifespan,  # OpenAPI docs at :8000/docs — the demo's first stop
+        lifespan=lifespan,
     )
     app.add_middleware(RequestLoggingMiddleware)
     install_exception_handlers(app)

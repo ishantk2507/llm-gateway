@@ -41,3 +41,9 @@ jobs:
 
       - name: Test
         run: uv run pytest --cov=llm_gateway --cov-report=term-missing
+
+      - name: Cache HuggingFace model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-${{ runner.os }}-minilm-l6-v2

@@ -5,3 +5,7 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .coverage
+*.index
+cache_payloads.db
+cache_vectors.index
+.python-version
