@@ -21,15 +21,19 @@ def test_single_turn_is_cacheable():
 
 def test_multi_turn_is_never_cacheable():
     assert not policy.is_cacheable(
-        r(messages=[
-            Message(role="user", content="hi"),
-            Message(role="assistant", content="hello"),
-            Message(role="user", content="again"),
-        ])
+        r(
+            messages=[
+                Message(role="user", content="hi"),
+                Message(role="assistant", content="hello"),
+                Message(role="user", content="again"),
+            ]
+        )
     )
 
 
-@pytest.mark.parametrize("temperature,expected", [(None, True), (0.0, True), (0.3, True), (0.4, False), (1.7, False)])
+@pytest.mark.parametrize(
+    "temperature,expected", [(None, True), (0.0, True), (0.3, True), (0.4, False), (1.7, False)]
+)
 def test_temperature_gate(temperature, expected):
     assert policy.is_cacheable(r(temperature=temperature)) is expected
 
@@ -50,8 +54,15 @@ def test_normalized_prompt_collapses_whitespace():
 
 @pytest.mark.parametrize(
     "model,family",
-    [("gpt-4o", "openai"), ("o3-mini", "openai"), ("claude-3-5-haiku-latest", "anthropic"),
-     ("auto", "routed"), ("premium", "routed"), ("mock", "mock"), ("llama-3", "other")],
+    [
+        ("gpt-4o", "openai"),
+        ("o3-mini", "openai"),
+        ("claude-3-5-haiku-latest", "anthropic"),
+        ("auto", "routed"),
+        ("premium", "routed"),
+        ("mock", "mock"),
+        ("llama-3", "other"),
+    ],
 )
 def test_model_family_mapping(model, family):
     assert policy.model_family(model) == family

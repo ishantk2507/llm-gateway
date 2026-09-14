@@ -50,7 +50,11 @@ def create_app(
         # concern, not a runtime one.
         redis_client = None
         app.state.cache = cache
-        if cache is None and settings.cache.enabled and settings.app.environment != Environment.TEST:
+        if (
+            cache is None
+            and settings.cache.enabled
+            and settings.app.environment != Environment.TEST
+        ):
             service, redis_client = await build_cache(settings)
             app.state.cache = service
 

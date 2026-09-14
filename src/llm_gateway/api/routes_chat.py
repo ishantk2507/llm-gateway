@@ -67,9 +67,13 @@ async def create_chat_completion(
         if cache_result.hit:
             usage = cache_result.response.usage
             fields: dict = {
-                "model": request.model, "provider_used": "cache", "routing_tier": "cache",
-                "cache_hit": True, "cache_layer": cache_result.layer,
-                "tokens_in": usage.prompt_tokens, "tokens_out": usage.completion_tokens,
+                "model": request.model,
+                "provider_used": "cache",
+                "routing_tier": "cache",
+                "cache_hit": True,
+                "cache_layer": cache_result.layer,
+                "tokens_in": usage.prompt_tokens,
+                "tokens_out": usage.completion_tokens,
                 "cost_usd": 0.0,
             }
             if cache_result.similarity is not None:
@@ -99,8 +103,12 @@ async def create_chat_completion(
     cost_usd = 0.0  # Day 5's pricing.py swaps in behind this exact line
     usage = completion.usage
     bind_log_fields(
-        routing_tier="auto", cache_hit=False, provider_used=provider_name,
-        tokens_in=usage.prompt_tokens, tokens_out=usage.completion_tokens, cost_usd=cost_usd,
+        routing_tier="auto",
+        cache_hit=False,
+        provider_used=provider_name,
+        tokens_in=usage.prompt_tokens,
+        tokens_out=usage.completion_tokens,
+        cost_usd=cost_usd,
     )
     fastapi_response.headers["x-cache-hit"] = "false"
     fastapi_response.headers["x-provider-used"] = provider_name
