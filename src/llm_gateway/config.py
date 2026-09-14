@@ -126,7 +126,8 @@ class CacheSettings(BaseModel):
 
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"  # 384-dim, CPU-viable
     embedder_threads: int = Field(default=4, ge=1)  # thread executor — never block the loop
-    payload_store_url: str = f"sqlite:///{REPO_ROOT / 'cache_payloads.db'}"
+    payload_store_path: Path = REPO_ROOT / "cache_payloads.db"
+    faiss_index_path: Path = REPO_ROOT / "cache_vectors.index"
 
     @model_validator(mode="after")
     def _near_miss_band_below_threshold(self) -> CacheSettings:

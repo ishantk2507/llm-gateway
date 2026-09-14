@@ -84,6 +84,12 @@ class ProviderRejected(GatewayError):
     default_message = "provider rejected the request"
     retryable = False
 
+class CacheDisabled(GatewayError):
+    status_code = 400
+    error_type = "invalid_request_error"
+    default_message = "cache is disabled (GW_CACHE__ENABLED=false)"
+
+
 
 class AllProvidersDown(GatewayError):
     """ADR-0004's fail-loud path. Nothing raises this on Day 1; Day 2's

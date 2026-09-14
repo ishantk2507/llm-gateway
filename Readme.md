@@ -10,7 +10,7 @@
 eliminates redundant spend. Cost-aware routing. Circuit breakers with
 transparent fallback.**
 
-[![CI](https://github.com/ishantk2507/llm-gateway/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/llm-gateway/actions)
+[![CI](https://github.com/ishantk2507/llm-gateway/actions/workflows/ci.yml/badge.svg)](https://github.com/ishantk2507/llm-gateway/actions)
 [![Python](https://img.shields.io/badge/python-3.12-%233776AB)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Code style: ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)]()
@@ -137,7 +137,7 @@ Full design: [`docs/DESIGN.md`](docs/DESIGN.md)
 ## Quickstart
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/llm-gateway
+git clone https://github.com/ishantk2507/llm-gateway
 cd llm-gateway
 cp .env.example .env
 docker compose up -d          # gateway + redis + postgres + prometheus + grafana
