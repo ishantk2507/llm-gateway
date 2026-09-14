@@ -49,8 +49,7 @@ async def health(request: Request) -> HealthResponse:
     adapters = registry.all()
     results = await asyncio.gather(*(a.health_check() for a in adapters))
     providers = [
-        ProviderHealth(name=a.name, healthy=ok)
-        for a, ok in zip(adapters, results, strict=True)
+        ProviderHealth(name=a.name, healthy=ok) for a, ok in zip(adapters, results, strict=True)
     ]
     return HealthResponse(
         status="ok" if any(p.healthy for p in providers) else "degraded",

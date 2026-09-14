@@ -99,11 +99,14 @@ def test_high_temperature_never_caches(tmp_path):
 
 
 def test_multi_turn_never_caches(tmp_path):
-    convo = {"model": "auto", "messages": [
-        {"role": "user", "content": "Hi"},
-        {"role": "assistant", "content": "Hello"},
-        {"role": "user", "content": "Continue"},
-    ]}
+    convo = {
+        "model": "auto",
+        "messages": [
+            {"role": "user", "content": "Hi"},
+            {"role": "assistant", "content": "Hello"},
+            {"role": "user", "content": "Continue"},
+        ],
+    }
     with client_for(make_settings(), make_cache(tmp_path)) as client:
         client.post("/v1/chat/completions", json=convo)
         second = client.post("/v1/chat/completions", json=convo)

@@ -29,8 +29,10 @@ from llm_gateway.schemas.openai_api import (
 )
 
 ADVERSARIAL_PAIRS = [
-    ("Explain the circuit breaker pattern in distributed systems.",
-     "Explain what a circuit breaker does in home electrical wiring."),
+    (
+        "Explain the circuit breaker pattern in distributed systems.",
+        "Explain what a circuit breaker does in home electrical wiring.",
+    ),
     ("What is the capital of France?", "What is the capital of Georgia?"),
     ("How do I restart a frozen computer?", "How do I restart a frozen Python program?"),
     ("How do I make a mint julep?", "How do I make a julep without mint?"),
@@ -40,15 +42,19 @@ ADVERSARIAL_PAIRS = [
     ("What language is spoken in Brazil?", "What language is spoken in Austria?"),
     ("What is the speed of light?", "What is the speed of sound?"),
     ("How do I tie a bowline knot?", "How do I tie a Windsor knot?"),
-    ("Write a function to reverse a list in Python.",
-     "Write a function to reverse a string in Python."),
+    (
+        "Write a function to reverse a list in Python.",
+        "Write a function to reverse a string in Python.",
+    ),
     ("What are the symptoms of a cold?", "What are the symptoms of the flu?"),
 ]
 
 PARAPHRASE_PAIRS = [
     ("What is the capital of France?", "What's the capital city of France?"),
-    ("Explain the circuit breaker pattern in distributed systems.",
-     "Can you explain how the circuit breaker pattern works in distributed systems?"),
+    (
+        "Explain the circuit breaker pattern in distributed systems.",
+        "Can you explain how the circuit breaker pattern works in distributed systems?",
+    ),
     ("How do I reverse a list in Python?", "In Python, how can I reverse a list?"),
     ("What are the health benefits of running?", "Tell me the health benefits of running."),
 ]
@@ -62,7 +68,6 @@ EXPECTED_NEAR_MISS_PAIRS = [
     ("What are the health benefits of running?", "What does running do for your health?"),
     ("Summarize the plot of Hamlet.", "Give me a summary of the plot of Hamlet."),
 ]
-
 
 
 @pytest.fixture(scope="session")
@@ -132,6 +137,7 @@ async def test_adversarial_pairs_never_cross_hit(embedder, tmp_path):
             await service.store(req(stored), response_for(stored))
             result = await service.lookup(req(queried))
             assert not result.hit, f"cross-hit: {stored!r} served for {queried!r}"
+
 
 async def test_word_order_rewrites_land_in_the_near_miss_band(embedder, tmp_path):
     for i, (a, b) in enumerate(EXPECTED_NEAR_MISS_PAIRS):

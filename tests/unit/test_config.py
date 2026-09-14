@@ -19,6 +19,7 @@ def test_misconfigured_near_miss_band_fails_loud():
     with pytest.raises(ValueError):
         CacheSettings(similarity_threshold=0.85, near_miss_floor=0.85)
 
+
 @pytest.mark.parametrize(
     "overrides",
     [

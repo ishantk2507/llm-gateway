@@ -21,8 +21,8 @@ from llm_gateway.schemas.openai_api import ChatCompletionRequest, ChatCompletion
 @dataclass
 class CacheResult:
     hit: bool
-    layer: str | None = None          # "exact" | "semantic"
-    similarity: float | None = None   # semantic hits and near-misses only (§5.5)
+    layer: str | None = None  # "exact" | "semantic"
+    similarity: float | None = None  # semantic hits and near-misses only (§5.5)
     response: ChatCompletionResponse | None = None
     near_miss: bool = False
 
@@ -68,7 +68,10 @@ class CacheService:
             await self._semantic.store(normalized, family, key_hash, response)
 
     async def invalidate(
-        self, *, prompt_hash: str | None = None, model_family: str | None = None,
+        self,
+        *,
+        prompt_hash: str | None = None,
+        model_family: str | None = None,
         flush: bool = False,
     ) -> int:
         """Counts of evicted entries. Note the deliberate asymmetry: by-family

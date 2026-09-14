@@ -121,8 +121,12 @@ class SemanticCache:
             now = time.time()
             await asyncio.to_thread(
                 self._insert_row,
-                faiss_id, prompt_hash, family,
-                response.model_dump_json(), now, now + self._settings.semantic_ttl_seconds,
+                faiss_id,
+                prompt_hash,
+                family,
+                response.model_dump_json(),
+                now,
+                now + self._settings.semantic_ttl_seconds,
             )
             # add_with_ids on a flat index is µs–ms at v1 scale — inline under the lock
             self._index.add_with_ids(
@@ -134,22 +138,22 @@ class SemanticCache:
 
     async def remove_by_prompt_hash(self, target: str) -> int:
         ids = await asyncio.to_thread(
-            self._ids_matching, "SELECT faiss_id FROM cache_entries WHERE prompt_hash = ?",
+            self._ids_matching,
+            "SELECT faiss_id FROM cache_entries WHERE prompt_hash = ?",
             (target,),
         )
         return await self._remove_ids_list(ids)
 
     async def remove_by_family(self, family: str) -> int:
         ids = await asyncio.to_thread(
-            self._ids_matching, "SELECT faiss_id FROM cache_entries WHERE model_family = ?",
+            self._ids_matching,
+            "SELECT faiss_id FROM cache_entries WHERE model_family = ?",
             (family,),
         )
         return await self._remove_ids_list(ids)
 
     async def flush_all(self) -> int:
-        ids = await asyncio.to_thread(
-            self._ids_matching, "SELECT faiss_id FROM cache_entries", ()
-        )
+        ids = await asyncio.to_thread(self._ids_matching, "SELECT faiss_id FROM cache_entries", ())
         return await self._remove_ids_list(ids)
 
     # ── internals ──────────────────────────────────────────────────────────
@@ -185,9 +189,7 @@ class SemanticCache:
         return self._index.search(np.reshape(vector, (1, -1)).astype(np.float32), k)
 
     def _max_id(self) -> int:
-        row = self._db.execute(
-            "SELECT COALESCE(MAX(faiss_id), -1) FROM cache_entries"
-        ).fetchone()
+        row = self._db.execute("SELECT COALESCE(MAX(faiss_id), -1) FROM cache_entries").fetchone()
         return int(row[0])
 
     def _fetch_row(self, faiss_id: int):
@@ -205,9 +207,7 @@ class SemanticCache:
         self._db.commit()
 
     def _delete_rows(self, ids: list[int]):
-        self._db.executemany(
-            "DELETE FROM cache_entries WHERE faiss_id = ?", [(i,) for i in ids]
-        )
+        self._db.executemany("DELETE FROM cache_entries WHERE faiss_id = ?", [(i,) for i in ids])
         self._db.commit()
 
     def _ids_matching(self, query: str, params: tuple) -> list[int]:
