@@ -42,11 +42,11 @@ class OpenAIAdapter(ProviderAdapter):
         body = build_openai_body(request, serving_model)
         try:
             response = await self._client.post("/chat/completions", json=body)
-        except httpx.HTTPError as exc:  # connect, read, timeout, DNS — transient by assumption
-            raise ProviderFailure(f"openai: {type(exc).__name__}: {exc}") from exc
+        except httpx.HTTPError as exc:
+            raise ProviderFailure(f"{self.name}: {type(exc).__name__}: {exc}") from exc
         if response.status_code != 200:
             classify_provider_error(
-                status_code=response.status_code, provider="openai", body=response.text
+                status_code=response.status_code, provider=self.name, body=response.text
             )
         return parse_openai_response(response.json())
 

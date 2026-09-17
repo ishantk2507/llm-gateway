@@ -30,6 +30,7 @@ COPY --from=builder /app/.venv /app/.venv
 
 COPY pyproject.toml uv.lock ./
 COPY src ./src
+COPY data ./data
 
 EXPOSE 8000
 # One worker BY DESIGN — in-memory FAISS index + breaker state (DESIGN.md §13).

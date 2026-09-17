@@ -45,6 +45,16 @@ def create_app(
         app.state.providers = providers or build_registry(settings)
         app.state.started_at = time.monotonic()
 
+        from llm_gateway.router.mapping import build_router
+
+        app.state.router = (
+            build_router(
+                app.state.providers, settings.router.keywords_path, settings.router.tiers_path
+            )
+            if settings.router.enabled
+            else None
+        )
+
         # Test apps inject their own cache (fakeredis + fake embedder); auto-
         # building here would demand a live Redis in CI — that's a test
         # concern, not a runtime one.
@@ -64,6 +74,7 @@ def create_app(
             environment=settings.app.environment.value,
             providers=[p.name for p in app.state.providers.all()],
             cache_enabled=app.state.cache is not None,
+            router_enabled=app.state.router is not None,
         )
         yield
 

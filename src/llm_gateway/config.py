@@ -139,11 +139,21 @@ class CacheSettings(BaseModel):
         return self
 
 
+class LocalSettings(BaseModel):
+    """Local SQLite for observability and cache payloads (DESIGN.md §12)."""
+
+    enabled: bool = False
+    base_url: str = "https://localhost:11434/v1"
+    model: str = "llama3.2:1b"
+    timeout_s: float = Field(default=120.0, gt=0)
+
+
 class RouterSettings(BaseModel):
     """Rule-based complexity router (ADR-0001). Rules are data, not code."""
 
     enabled: bool = True
     keywords_path: Path = REPO_ROOT / "data" / "keywords.yaml"
+    tiers_path: Path = REPO_ROOT / "data" / "tiers.yaml"
     default_tier: Tier = Tier.STANDARD
 
 
@@ -244,6 +254,7 @@ class Settings(BaseSettings):
     observability: ObservabilitySettings = Field(default_factory=ObservabilitySettings)
     openai: OpenAIProviderSettings = Field(default_factory=OpenAIProviderSettings)
     anthropic: AnthropicProviderSettings = Field(default_factory=AnthropicProviderSettings)
+    local: LocalSettings = Field(default_factory=LocalSettings)
 
     @model_validator(mode="after")
     def _fallback_chain_terminates(self) -> Settings:

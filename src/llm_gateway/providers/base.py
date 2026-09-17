@@ -91,6 +91,10 @@ def build_registry(settings: Settings) -> ProviderRegistry:
         registry.register(OpenAIAdapter(settings.openai))
     if settings.anthropic.api_key.get_secret_value():
         registry.register(AnthropicAdapter(settings.anthropic))
+    if settings.local.enabled:
+        from llm_gateway.providers.local_adapter import LocalAdapter
+
+        registry.register(LocalAdapter(settings.local))
     if settings.mock.enabled:
         registry.register(MockProvider(settings.mock), in_default_chain=True)
     if not registry.default_chain():
