@@ -1,0 +1,1154 @@
+{"prompt": "hi", "expected_tier": "cheap", "reasoning": "Greeting requires no reasoning or domain depth."}
+{"prompt": "What is the capital of France?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "Who wrote Pride and Prejudice?", "expected_tier": "cheap", "reasoning": "One-shot literary fact."}
+{"prompt": "What is the chemical symbol for gold?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "How many continents are there?", "expected_tier": "cheap", "reasoning": "Simple factual question."}
+{"prompt": "What is the largest planet in the solar system?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "Who was the first president of the United States?", "expected_tier": "cheap", "reasoning": "One-shot historical fact."}
+{"prompt": "Spell the word 'necessary'.", "expected_tier": "cheap", "reasoning": "Simple spelling task."}
+{"prompt": "Translate 'good morning' to Spanish.", "expected_tier": "cheap", "reasoning": "Single-sentence translation."}
+{"prompt": "What's 2+2?", "expected_tier": "cheap", "reasoning": "Trivial one-step arithmetic."}
+{"prompt": "What color do you get when you mix blue and yellow?", "expected_tier": "cheap", "reasoning": "Simple factual knowledge."}
+{"prompt": "How many days are in a leap year?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "What does 'serendipity' mean?", "expected_tier": "cheap", "reasoning": "Short vocabulary definition."}
+{"prompt": "What is the boiling point of water?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "What's the tallest mountain on Earth?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "Name three primary colors.", "expected_tier": "cheap", "reasoning": "Simple factual recall."}
+{"prompt": "What is the meaning of the word 'allegory'?", "expected_tier": "cheap", "reasoning": "Short vocabulary definition."}
+{"prompt": "What is the capital of Japan?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "What is the square root of 64?", "expected_tier": "cheap", "reasoning": "Simple arithmetic fact."}
+{"prompt": "What does JSON stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What is the HTTP status code for Not Found?", "expected_tier": "cheap", "reasoning": "One-line technical fact; no domain depth is needed."}
+{"prompt": "What is RAM?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Who painted the Mona Lisa?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "What language is primarily spoken in Brazil?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "How many sides does a hexagon have?", "expected_tier": "cheap", "reasoning": "Simple factual recall."}
+{"prompt": "What planet is known as the Red Planet?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "What is the chemical symbol for oxygen?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "What is the currency of India?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "What is the opposite of 'ancient'?", "expected_tier": "cheap", "reasoning": "Simple vocabulary question."}
+{"prompt": "How many minutes are in two hours?", "expected_tier": "cheap", "reasoning": "Simple arithmetic."}
+{"prompt": "What is the smallest prime number?", "expected_tier": "cheap", "reasoning": "One-shot mathematical fact."}
+{"prompt": "Translate 'thank you' to German.", "expected_tier": "cheap", "reasoning": "Single-phrase translation."}
+{"prompt": "What gas do humans need to breathe?", "expected_tier": "cheap", "reasoning": "Basic factual knowledge."}
+{"prompt": "What is the largest mammal?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "What is a database primary key?", "expected_tier": "cheap", "reasoning": "The prompt asks for a short definition, not a deep explanation."}
+{"prompt": "What does API stand for?", "expected_tier": "cheap", "reasoning": "One-shot technical fact."}
+{"prompt": "What is Git used for?", "expected_tier": "cheap", "reasoning": "Can be answered with a short general description."}
+{"prompt": "What is an IP address?", "expected_tier": "cheap", "reasoning": "Basic technical definition."}
+{"prompt": "What is the boiling point of water in Celsius?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "Who wrote Hamlet?", "expected_tier": "cheap", "reasoning": "One-shot literary fact."}
+{"prompt": "What is 15 multiplied by 8?", "expected_tier": "cheap", "reasoning": "Simple arithmetic."}
+{"prompt": "How many bytes are in a kilobyte?", "expected_tier": "cheap", "reasoning": "Simple factual lookup."}
+{"prompt": "What is a boolean value?", "expected_tier": "cheap", "reasoning": "Basic programming definition."}
+{"prompt": "What is the capital of Australia?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "When did the Berlin Wall fall?", "expected_tier": "cheap", "reasoning": "One-shot historical fact."}
+{"prompt": "What is the freezing point of water?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "How many hours are in a day?", "expected_tier": "cheap", "reasoning": "Simple factual recall."}
+{"prompt": "What is the difference between TCP and UDP?", "expected_tier": "standard", "reasoning": "Requires a concise concept comparison rather than a one-shot fact."}
+{"prompt": "Explain the circuit breaker pattern in distributed systems.", "expected_tier": "standard", "reasoning": "Concept explanation without requiring a multi-step solution."}
+{"prompt": "Explain how vaccines work.", "expected_tier": "standard", "reasoning": "General concept explanation."}
+{"prompt": "Describe the water cycle.", "expected_tier": "standard", "reasoning": "Conceptual explanation with several related stages but no required solution process."}
+{"prompt": "What caused World War I?", "expected_tier": "standard", "reasoning": "Requires a contextual historical explanation."}
+{"prompt": "Explain inflation in simple terms.", "expected_tier": "standard", "reasoning": "Concept explanation for a general audience."}
+{"prompt": "Draft a short email to my landlord about a leaky faucet.", "expected_tier": "standard", "reasoning": "Moderate writing task with no complex reasoning."}
+{"prompt": "Rewrite this sentence more formally: 'We gotta fix this ASAP.'", "expected_tier": "standard", "reasoning": "Moderate rewrite."}
+{"prompt": "Explain what an API is to a beginner.", "expected_tier": "standard", "reasoning": "Concept explanation rather than a one-line definition."}
+{"prompt": "What are the main differences between renewable and nonrenewable energy?", "expected_tier": "standard", "reasoning": "Requires a straightforward conceptual comparison."}
+{"prompt": "Describe the plot of The Great Gatsby.", "expected_tier": "standard", "reasoning": "Summarization of a known work."}
+{"prompt": "Outline the key events of the French Revolution.", "expected_tier": "standard", "reasoning": "Historical summarization."}
+{"prompt": "Why does the moon have phases?", "expected_tier": "standard", "reasoning": "Requires a basic conceptual explanation."}
+{"prompt": "How does photosynthesis work?", "expected_tier": "standard", "reasoning": "Single concept explanation."}
+{"prompt": "Summarize the theory of evolution.", "expected_tier": "standard", "reasoning": "Conceptual summarization."}
+{"prompt": "What are the symptoms of dehydration?", "expected_tier": "standard", "reasoning": "Requires a moderate explanatory response rather than a single fact."}
+{"prompt": "Explain the rules of chess to a beginner.", "expected_tier": "standard", "reasoning": "Conceptual explanation of a rule system."}
+{"prompt": "How does a refrigerator work?", "expected_tier": "standard", "reasoning": "Single how-does-X-work explanation."}
+{"prompt": "Describe the Great Barrier Reef.", "expected_tier": "standard", "reasoning": "General descriptive explanation."}
+{"prompt": "Explain the difference between a compiler and an interpreter.", "expected_tier": "standard", "reasoning": "Concept comparison without multi-step reasoning."}
+{"prompt": "Explain how DNS works.", "expected_tier": "standard", "reasoning": "General technical explanation; no requested step-by-step chain."}
+{"prompt": "What is object-oriented programming?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Explain the difference between a stack and a queue.", "expected_tier": "standard", "reasoning": "Straightforward conceptual comparison."}
+{"prompt": "How does HTTPS protect data in transit?", "expected_tier": "standard", "reasoning": "Moderate security concept explanation."}
+{"prompt": "Explain recursion with a simple example.", "expected_tier": "standard", "reasoning": "Concept explanation with one simple example, not a multi-step implementation."}
+{"prompt": "What is normalization in relational databases?", "expected_tier": "standard", "reasoning": "Database concept explanation."}
+{"prompt": "Explain what a hash table is.", "expected_tier": "standard", "reasoning": "Single concept explanation."}
+{"prompt": "What is the difference between a process and a thread?", "expected_tier": "standard", "reasoning": "Conceptual comparison."}
+{"prompt": "Explain client-server architecture.", "expected_tier": "standard", "reasoning": "General architecture explanation."}
+{"prompt": "How does garbage collection work?", "expected_tier": "standard", "reasoning": "General concept explanation."}
+{"prompt": "What is database indexing and why does it help?", "expected_tier": "standard", "reasoning": "Moderate database concept explanation."}
+{"prompt": "Explain virtual memory.", "expected_tier": "standard", "reasoning": "Operating-system concept explanation."}
+{"prompt": "What is the difference between symmetric and asymmetric encryption?", "expected_tier": "standard", "reasoning": "Conceptual comparison."}
+{"prompt": "Explain the producer-consumer problem.", "expected_tier": "standard", "reasoning": "Concept explanation without requesting an implementation."}
+{"prompt": "What is dependency injection?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Explain how a load balancer distributes requests.", "expected_tier": "standard", "reasoning": "Single architecture concept."}
+{"prompt": "What is eventual consistency?", "expected_tier": "standard", "reasoning": "Distributed-systems concept explanation."}
+{"prompt": "Explain horizontal versus vertical scaling.", "expected_tier": "standard", "reasoning": "Conceptual comparison."}
+{"prompt": "How does a CDN improve website performance?", "expected_tier": "standard", "reasoning": "Single how-does-X-work explanation."}
+{"prompt": "Summarize the main themes of 1984.", "expected_tier": "standard", "reasoning": "Literary summarization."}
+{"prompt": "Explain the difference between weather and climate.", "expected_tier": "standard", "reasoning": "Conceptual distinction."}
+{"prompt": "Why do seasons occur on Earth?", "expected_tier": "standard", "reasoning": "Single scientific concept explanation."}
+{"prompt": "Explain how earthquakes happen.", "expected_tier": "standard", "reasoning": "General scientific explanation."}
+{"prompt": "What causes tides?", "expected_tier": "standard", "reasoning": "Single scientific concept explanation."}
+{"prompt": "Explain the greenhouse effect.", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "What are the main causes of ocean pollution?", "expected_tier": "standard", "reasoning": "Moderate explanatory question."}
+{"prompt": "Explain how supply and demand affect prices.", "expected_tier": "standard", "reasoning": "Basic economics concept explanation."}
+{"prompt": "What is opportunity cost?", "expected_tier": "standard", "reasoning": "Although definitional, the economic concept benefits from a short explanatory answer."}
+{"prompt": "Explain correlation versus causation.", "expected_tier": "standard", "reasoning": "Conceptual distinction."}
+{"prompt": "What is OAuth?", "expected_tier": "standard", "reasoning": "Technical concept explanation rather than a one-line acronym lookup."}
+{"prompt": "What is Kubernetes?", "expected_tier": "standard", "reasoning": "Requires a short conceptual explanation of a technical platform."}
+{"prompt": "What is GraphQL?", "expected_tier": "standard", "reasoning": "Concept explanation rather than a single factual lookup."}
+{"prompt": "What is Raft?", "expected_tier": "standard", "reasoning": "Requires explaining a consensus algorithm at a conceptual level."}
+{"prompt": "What is JWT authentication?", "expected_tier": "standard", "reasoning": "Concept explanation without requesting implementation or a procedure."}
+{"prompt": "Explain Docker containers.", "expected_tier": "standard", "reasoning": "General technical concept explanation."}
+{"prompt": "Explain continuous integration.", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Explain unit tests versus integration tests.", "expected_tier": "standard", "reasoning": "Straightforward conceptual comparison."}
+{"prompt": "Explain public-key cryptography at a high level.", "expected_tier": "standard", "reasoning": "High-level concept explanation."}
+{"prompt": "Explain what an operating system does.", "expected_tier": "standard", "reasoning": "General concept explanation."}
+{"prompt": "What is a deadlock?", "expected_tier": "standard", "reasoning": "Concept definition with enough explanation to distinguish it from related concurrency issues."}
+{"prompt": "Explain synchronous versus asynchronous programming.", "expected_tier": "standard", "reasoning": "Conceptual comparison."}
+{"prompt": "Write a Python function that reverses a linked list.", "expected_tier": "premium", "reasoning": "Code triggers premium regardless of length."}
+{"prompt": "Fix this Python code: print('hello'", "expected_tier": "premium", "reasoning": "Code task triggers premium regardless of complexity."}
+{"prompt": "Write a SQL query to find users older than 18.", "expected_tier": "premium", "reasoning": "Code task triggers premium regardless of length."}
+{"prompt": "Write a regular expression that matches email addresses.", "expected_tier": "premium", "reasoning": "Code-like implementation task triggers premium."}
+{"prompt": "Implement binary search in Python.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "Refactor this JavaScript function for readability: function f(x){return x*2}", "expected_tier": "premium", "reasoning": "Code refactoring triggers premium."}
+{"prompt": "Write a Bash command that lists all files recursively.", "expected_tier": "premium", "reasoning": "Executable code triggers premium under the code rule."}
+{"prompt": "Write a SQL query that counts orders by customer.", "expected_tier": "premium", "reasoning": "Code task triggers premium."}
+{"prompt": "Implement a stack in Python using a list.", "expected_tier": "premium", "reasoning": "Code writing triggers premium."}
+{"prompt": "Fix this Java syntax error: int x = ;", "expected_tier": "premium", "reasoning": "Code debugging triggers premium."}
+{"prompt": "Prove that the square root of 2 is irrational.", "expected_tier": "premium", "reasoning": "Proof requires multi-step mathematical reasoning."}
+{"prompt": "Prove by induction that 1+2+...+n = n(n+1)/2.", "expected_tier": "premium", "reasoning": "Proof requires a multi-step reasoning chain."}
+{"prompt": "Derive the closed-form expression for the nth Fibonacci number.", "expected_tier": "premium", "reasoning": "Derivation requires multi-step mathematical reasoning."}
+{"prompt": "Derive the quadratic formula from the general quadratic equation.", "expected_tier": "premium", "reasoning": "Explicit derivation is multi-step reasoning."}
+{"prompt": "Calculate a $350,000 mortgage payment at 6% APR over 30 years, showing your work.", "expected_tier": "premium", "reasoning": "Showing the work requires a multi-step calculation."}
+{"prompt": "Create an eight-week study plan for linear algebra.", "expected_tier": "premium", "reasoning": "Plan creation is explicitly multi-step."}
+{"prompt": "Design a URL shortener service and describe its components.", "expected_tier": "premium", "reasoning": "System design requires architecture and trade-off reasoning."}
+{"prompt": "Design a rate limiter and compare token bucket with sliding window.", "expected_tier": "premium", "reasoning": "Requires system design plus trade-off analysis."}
+{"prompt": "Explain step by step how Raft handles leader election.", "expected_tier": "premium", "reasoning": "Explicit step-by-step explanation triggers the multi-step rule."}
+{"prompt": "Design a scalable notification service supporting email, SMS, and push.", "expected_tier": "premium", "reasoning": "Multi-component system design."}
+{"prompt": "Design a distributed job queue with retries and failure handling.", "expected_tier": "premium", "reasoning": "Requires multi-step architecture and failure analysis."}
+{"prompt": "Compare PostgreSQL, MySQL, and MongoDB for a high-scale application and recommend one.", "expected_tier": "premium", "reasoning": "Trade-off analysis and recommendation require deeper reasoning."}
+{"prompt": "Design an authentication system with access tokens, refresh tokens, and session revocation.", "expected_tier": "premium", "reasoning": "Security architecture requires multiple interacting design decisions."}
+{"prompt": "Design a real-time chat backend for millions of concurrent connections.", "expected_tier": "premium", "reasoning": "Large-scale system design requires multiple components and trade-offs."}
+{"prompt": "Analyze the time complexity of quicksort and explain when it becomes quadratic.", "expected_tier": "premium", "reasoning": "Requires algorithmic analysis and reasoning about worst-case behavior."}
+{"prompt": "Design a fault-tolerant payment system that prevents duplicate charges.", "expected_tier": "premium", "reasoning": "High-stakes system design with multiple correctness constraints."}
+{"prompt": "Explain how TLS performs a handshake and establishes session keys step by step.", "expected_tier": "premium", "reasoning": "Step-by-step protocol reasoning triggers premium."}
+{"prompt": "Implement a thread-safe producer-consumer queue in Python and explain the synchronization.", "expected_tier": "premium", "reasoning": "Code plus explanation triggers premium."}
+{"prompt": "Design a distributed file storage system with replication and recovery.", "expected_tier": "premium", "reasoning": "System design requires multiple interacting components."}
+{"prompt": "Explain B-trees and derive why their height is logarithmic in the number of keys.", "expected_tier": "premium", "reasoning": "The requested derivation requires multi-step reasoning."}
+{"prompt": "Design a URL shortener capable of handling 100 million new URLs per day.", "expected_tier": "premium", "reasoning": "Scale-aware system design requires capacity and architecture reasoning."}
+{"prompt": "Analyze SQL joins, denormalization, and application-side aggregation and recommend an approach.", "expected_tier": "premium", "reasoning": "Explicit trade-off analysis requires deeper reasoning."}
+{"prompt": "Implement a Redis rate limiter and explain its behavior under concurrency.", "expected_tier": "premium", "reasoning": "Code plus concurrency reasoning triggers premium."}
+{"prompt": "Explain how Kubernetes schedules pods and maintains desired state step by step.", "expected_tier": "premium", "reasoning": "Explicit step-by-step technical reasoning."}
+{"prompt": "Explain consistent hashing and analyze how node additions affect key distribution.", "expected_tier": "premium", "reasoning": "Requires conceptual analysis of multiple consequences."}
+{"prompt": "Design a globally distributed API with regional failover and data replication.", "expected_tier": "premium", "reasoning": "Multi-region system design with consistency and failure trade-offs."}
+{"prompt": "Build a miniature MapReduce framework in Python.", "expected_tier": "premium", "reasoning": "Code implementation triggers premium."}
+{"prompt": "Explain the difference between linearizability and serializability with examples.", "expected_tier": "premium", "reasoning": "Requires a nuanced comparison involving multiple concepts and examples."}
+{"prompt": "Design a large-scale search engine covering crawling, indexing, ranking, and query serving.", "expected_tier": "premium", "reasoning": "Long multi-component system design."}
+{"prompt": "Diagnose and optimize a slow PostgreSQL query involving millions of rows.", "expected_tier": "premium", "reasoning": "Debugging and optimization require multi-step analysis."}
+{"prompt": "Design a multi-region API with failover, replication, disaster recovery, and consistency trade-offs.", "expected_tier": "premium", "reasoning": "Explicit system design and trade-off analysis."}
+{"prompt": "Explain CPU out-of-order execution, caches, branch prediction, and pipelines and relate them to performance.", "expected_tier": "premium", "reasoning": "Multiple interacting low-level concepts require substantial reasoning."}
+{"prompt": "Design a collaborative document editing backend that supports offline edits and conflict resolution.", "expected_tier": "premium", "reasoning": "Complex distributed system design with conflict-resolution trade-offs."}
+{"prompt": "Compare polling, long polling, Server-Sent Events, and WebSockets for a real-time application.", "expected_tier": "premium", "reasoning": "Explicit trade-off analysis across several architectural approaches."}
+{"prompt": "Design an observability platform for logs, metrics, and traces with high-cardinality queries.", "expected_tier": "premium", "reasoning": "Multi-component system design with scalability considerations."}
+{"prompt": "Analyze Raft safety and liveness under node failures and network partitions.", "expected_tier": "premium", "reasoning": "Requires deep distributed-systems reasoning about multiple failure cases."}
+{"prompt": "Design a recommendation system including candidate generation, ranking, storage, and serving.", "expected_tier": "premium", "reasoning": "Multi-stage system design."}
+{"prompt": "Design a multi-tenant SaaS platform with tenant isolation, authentication, billing, and observability.", "expected_tier": "premium", "reasoning": "Multi-component architecture requires substantial reasoning."}
+{"prompt": "Explain the mathematical intuition behind gradient descent and backpropagation, including the chain rule.", "expected_tier": "premium", "reasoning": "Mathematical explanation involving multiple dependent concepts."}
+{"prompt": "Derive the time complexity of Dijkstra's algorithm using a binary heap.", "expected_tier": "premium", "reasoning": "Algorithmic derivation requires multi-step reasoning."}
+{"prompt": "Design a machine-learning inference service with batching, autoscaling, and model versioning.", "expected_tier": "premium", "reasoning": "System design with multiple operational trade-offs."}
+{"prompt": "Explain transformers mathematically and derive the scaled dot-product attention equation.", "expected_tier": "premium", "reasoning": "Explicit mathematical derivation triggers premium."}
+{"prompt": "Design a distributed rate limiter that works consistently across multiple regions.", "expected_tier": "premium", "reasoning": "Distributed system design with consistency and failure considerations."}
+{"prompt": "Write a robust async Python HTTP client with retries, timeouts, and circuit breaking.", "expected_tier": "premium", "reasoning": "Code plus multiple reliability requirements triggers premium."}
+{"prompt": "Analyze a microservices architecture and identify bottlenecks and failure modes.", "expected_tier": "premium", "reasoning": "Requires multi-factor architectural analysis."}
+{"prompt": "Design an end-to-end CI/CD platform with testing, deployments, rollbacks, and secrets management.", "expected_tier": "premium", "reasoning": "Multi-step platform design."}
+{"prompt": "Prove that there are infinitely many prime numbers and explain the proof intuitively.", "expected_tier": "premium", "reasoning": "Proof plus explanatory reasoning is multi-step."}
+{"prompt": "Derive a dynamic programming solution for the longest common subsequence problem.", "expected_tier": "premium", "reasoning": "Algorithm derivation is multi-step reasoning."}
+{"prompt": "Design a distributed scheduler with at-least-once execution and duplicate mitigation.", "expected_tier": "premium", "reasoning": "Requires system design and correctness trade-offs."}
+{"prompt": "Explain how a database query optimizer chooses an execution plan and how indexes affect it.", "expected_tier": "premium", "reasoning": "Requires analysis of multiple interacting mechanisms."}
+{"prompt": "Design a distributed lock service with leases and fencing tokens.", "expected_tier": "premium", "reasoning": "Distributed correctness and failure handling require deep reasoning."}
+{"prompt": "Design a video streaming platform covering upload, transcoding, storage, CDN delivery, and recommendations.", "expected_tier": "premium", "reasoning": "Large multi-component system design."}
+{"prompt": "Design a distributed object store with replication, erasure coding, and failure recovery.", "expected_tier": "premium", "reasoning": "Complex system design with multiple storage trade-offs."}
+{"prompt": "Compare Kafka-style logs with traditional message queues and analyze their trade-offs.", "expected_tier": "premium", "reasoning": "Explicit architecture trade-off analysis."}
+{"prompt": "Design a globally distributed feature-flag service with low-latency reads and safe rollouts.", "expected_tier": "premium", "reasoning": "Requires distributed architecture and operational trade-offs."}
+{"prompt": "Implement a concurrent connection pool in Python with timeouts and graceful shutdown.", "expected_tier": "premium", "reasoning": "Code implementation triggers premium."}
+{"prompt": "Design a scalable API gateway with authentication, rate limiting, routing, retries, and observability.", "expected_tier": "premium", "reasoning": "Complex multi-component system design."}
+{"prompt": "Explain garbage-collection pauses and propose strategies to reduce latency impact.", "expected_tier": "premium", "reasoning": "Requires analysis followed by multiple mitigation strategies."}
+{"prompt": "Design a distributed counter with high write throughput and eventual consistency.", "expected_tier": "premium", "reasoning": "Distributed design requires reasoning about concurrency and consistency."}
+{"prompt": "Analyze JWT security risks and propose mitigations for token theft, replay, and privilege escalation.", "expected_tier": "premium", "reasoning": "Security trade-off analysis with multiple failure modes."}
+{"prompt": "Design a streaming data pipeline that ingests events, transforms them, stores history, and supports analytics.", "expected_tier": "premium", "reasoning": "Multi-stage architecture design."}
+{"prompt": "Design a scalable API for collaborative editing and explain conflict resolution and synchronization.", "expected_tier": "premium", "reasoning": "Distributed collaboration requires complex reasoning."}
+{"prompt": "Explain OAuth.", "expected_tier": "standard", "reasoning": "Concept explanation is sufficient without implementation or procedure."}
+{"prompt": "Design an OAuth authentication system with PKCE, refresh-token rotation, and revocation.", "expected_tier": "premium", "reasoning": "Same topic but requires multi-step security system design; adversarial pair."}
+{"prompt": "Design a Kubernetes deployment strategy with autoscaling, rollback, and multi-region failover.", "expected_tier": "premium", "reasoning": "Same topic but requires multi-step architecture; adversarial pair."}
+{"prompt": "Explain recursion.", "expected_tier": "standard", "reasoning": "Basic concept explanation needs no implementation."}
+{"prompt": "Implement recursion to generate all permutations of a list in Python.", "expected_tier": "premium", "reasoning": "Same topic but code triggers premium; adversarial pair."}
+{"prompt": "What is a database index?", "expected_tier": "standard", "reasoning": "Concept explanation is sufficient."}
+{"prompt": "Design a database indexing strategy for a table with billions of rows and mixed query patterns.", "expected_tier": "premium", "reasoning": "Same topic but requires multi-step optimization and trade-off analysis; adversarial pair."}
+{"prompt": "What is JWT?", "expected_tier": "standard", "reasoning": "Concept explanation is sufficient."}
+{"prompt": "Implement JWT authentication with access-token expiry and refresh-token rotation.", "expected_tier": "premium", "reasoning": "Same topic but code and security design trigger premium; adversarial pair."}
+{"prompt": "What is a cache?", "expected_tier": "standard", "reasoning": "Simple concept explanation."}
+{"prompt": "Design a distributed cache with eviction, replication, invalidation, and failover.", "expected_tier": "premium", "reasoning": "Same topic but requires system design and multiple trade-offs; adversarial pair."}
+{"prompt": "What is TCP?", "expected_tier": "standard", "reasoning": "Concept explanation — ambiguous case (Edge Rule 3); consistent with the What-is-X vs What-does-X-stand-for pairing used for Kafka/GraphQL/OAuth/TLS/HTTP/CI-CD elsewhere in the set."}
+{"prompt": "Explain step by step how TCP establishes a connection and handles retransmissions.", "expected_tier": "premium", "reasoning": "Same topic but explicit step-by-step reasoning triggers premium; adversarial pair."}
+{"prompt": "Prove that Raft preserves safety during leader changes.", "expected_tier": "premium", "reasoning": "Same topic but asks for a proof requiring multi-step reasoning; adversarial pair."}
+{"prompt": "What is a load balancer?", "expected_tier": "standard", "reasoning": "Concept explanation is sufficient."}
+{"prompt": "Design a globally distributed load-balancing system with health checks and failover.", "expected_tier": "premium", "reasoning": "Same topic but requires distributed system design; adversarial pair."}
+{"prompt": "What is Docker?", "expected_tier": "standard", "reasoning": "Concept explanation is sufficient."}
+{"prompt": "Write a Dockerfile for a Python web service with a multi-stage build.", "expected_tier": "premium", "reasoning": "Same topic but code triggers premium; adversarial pair."}
+{"prompt": "What is SQL?", "expected_tier": "standard", "reasoning": "Concept explanation — ambiguous case (Edge Rule 3); consistent with the What-is-X vs What-does-X-stand-for pairing used for Kafka/GraphQL/OAuth/TLS/HTTP/CI-CD elsewhere in the set."}
+{"prompt": "Optimize this SQL query for a large production database.", "expected_tier": "premium", "reasoning": "Same topic but optimization requires multi-step reasoning; adversarial pair."}
+{"prompt": "What is machine learning?", "expected_tier": "standard", "reasoning": "Concept explanation is sufficient."}
+{"prompt": "Design an end-to-end machine-learning pipeline with training, evaluation, deployment, monitoring, and retraining.", "expected_tier": "premium", "reasoning": "Same topic but requires a multi-step plan and system design; adversarial pair."}
+{"prompt": "Explain caching.", "expected_tier": "standard", "reasoning": "General concept explanation."}
+{"prompt": "Explain caching in one short paragraph.", "expected_tier": "standard", "reasoning": "Explicitly constrained concept explanation remains standard."}
+{"prompt": "What is HTTP 404?", "expected_tier": "cheap", "reasoning": "One-line factual technical lookup."}
+{"prompt": "Design an HTTP API that handles errors, retries, idempotency, and rate limits.", "expected_tier": "premium", "reasoning": "Same protocol topic but requires multi-step API design; adversarial pair."}
+{"prompt": "What is a hash function?", "expected_tier": "standard", "reasoning": "Concept explanation is sufficient."}
+{"prompt": "Design a password-storage system using hashing, salts, peppering, and migration from a legacy scheme.", "expected_tier": "premium", "reasoning": "Same topic but requires security architecture and migration planning; adversarial pair."}
+{"prompt": "Translate 'The weather is nice today.' to French.", "expected_tier": "cheap", "reasoning": "Single-sentence translation."}
+{"prompt": "Translate this five-page legal contract into French while preserving every defined term and cross-reference.", "expected_tier": "standard", "reasoning": "Longer translation is still primarily a translation task and does not inherently require multi-step reasoning."}
+{"prompt": "Summarize this article in five bullet points.", "expected_tier": "standard", "reasoning": "Summarization is explicitly standard."}
+{"prompt": "Summarize this article, identify its three strongest claims, evaluate the evidence for each, and rank the claims by reliability.", "expected_tier": "premium", "reasoning": "Requires multi-step evaluation and ranking rather than simple summarization."}
+{"prompt": "Rewrite this paragraph to sound more professional.", "expected_tier": "standard", "reasoning": "Moderate rewrite."}
+{"prompt": "Rewrite this proposal, identify weaknesses, restructure the argument, and produce a stronger version.", "expected_tier": "premium", "reasoning": "Requires multiple analytical and rewriting steps."}
+{"prompt": "Explain how a refrigerator works.", "expected_tier": "standard", "reasoning": "Single concept explanation."}
+{"prompt": "Explain step by step how a refrigerator transfers heat from inside the compartment to the room.", "expected_tier": "premium", "reasoning": "Explicit step-by-step explanation triggers premium."}
+{"prompt": "What is encryption?", "expected_tier": "standard", "reasoning": "General concept explanation."}
+{"prompt": "Design an end-to-end encryption system for a messaging application with key rotation and device recovery.", "expected_tier": "premium", "reasoning": "Requires multi-step security architecture and trade-off analysis."}
+{"prompt": "What is normalization?", "expected_tier": "standard", "reasoning": "Database concept explanation."}
+{"prompt": "Normalize this database schema through 3NF and explain every decomposition.", "expected_tier": "premium", "reasoning": "Requires multi-step schema analysis and transformation."}
+{"prompt": "What is recursion in programming?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Write a recursive parser for nested expressions in Python and explain its complexity.", "expected_tier": "premium", "reasoning": "Code plus complexity analysis triggers premium."}
+{"prompt": "What is a mutex?", "expected_tier": "standard", "reasoning": "Concurrency concept explanation."}
+{"prompt": "Debug this deadlock, identify the lock-order cycle, and propose a corrected implementation.", "expected_tier": "premium", "reasoning": "Requires debugging, multi-step diagnosis, and code-level correction."}
+{"prompt": "What is inflation?", "expected_tier": "standard", "reasoning": "Economic concept explanation."}
+{"prompt": "Analyze inflation in a hypothetical economy, identify likely causes, compare policy responses, and recommend one.", "expected_tier": "premium", "reasoning": "Requires multi-step economic analysis and trade-off evaluation."}
+{"prompt": "Explain photosynthesis.", "expected_tier": "standard", "reasoning": "Single scientific concept explanation."}
+{"prompt": "Derive the simplified photosynthesis equation and explain the role of each reactant and product.", "expected_tier": "premium", "reasoning": "Explicit derivation requires multi-step reasoning."}
+{"prompt": "What is a primary key?", "expected_tier": "cheap", "reasoning": "Short technical definition."}
+{"prompt": "Choose primary keys for these four tables, identify possible foreign keys, and explain the resulting relationships.", "expected_tier": "premium", "reasoning": "Requires multi-step schema design."}
+{"prompt": "What is a CDN?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a CDN strategy for a global video platform and compare pull versus push caching.", "expected_tier": "premium", "reasoning": "Requires system design and explicit trade-off analysis."}
+{"prompt": "What is a queue?", "expected_tier": "standard", "reasoning": "Programming concept explanation."}
+{"prompt": "Design a durable distributed queue with ordering guarantees, retries, and consumer failover.", "expected_tier": "premium", "reasoning": "Requires distributed system design and failure analysis."}
+{"prompt": "What is an API gateway?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an API gateway architecture with authentication, rate limiting, retries, circuit breaking, and observability.", "expected_tier": "premium", "reasoning": "Multi-component system design."}
+{"prompt": "What is a transaction?", "expected_tier": "standard", "reasoning": "Database concept explanation."}
+{"prompt": "Design transaction handling for a payment workflow that spans three independent services.", "expected_tier": "premium", "reasoning": "Requires multi-step distributed transaction design and failure analysis."}
+{"prompt": "What is a thread?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt": "Design a thread-pool architecture for a high-throughput service and explain queueing, shutdown, and backpressure.", "expected_tier": "premium", "reasoning": "Requires multi-step concurrency design."}
+{"prompt": "What is DNS?", "expected_tier": "standard", "reasoning": "Concept explanation — ambiguous case (Edge Rule 3); consistent with the What-is-X vs What-does-X-stand-for pairing used for Kafka/GraphQL/OAuth/TLS/HTTP/CI-CD elsewhere in the set."}
+{"prompt": "Trace a DNS lookup from browser request through recursive resolver, root server, TLD server, and authoritative server.", "expected_tier": "premium", "reasoning": "Explicit multi-step tracing triggers premium."}
+{"prompt": "What is a compiler?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Design a compiler pipeline for a small programming language, including parsing, type checking, optimization, and code generation.", "expected_tier": "premium", "reasoning": "Requires multi-stage system design."}
+{"prompt": "What is a cache invalidation problem?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a cache invalidation strategy for a distributed product catalog with strict freshness requirements.", "expected_tier": "premium", "reasoning": "Requires architecture and consistency trade-offs."}
+{"prompt": "What is a proof by induction?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Use mathematical induction to prove that the sum of the first n odd numbers equals n squared.", "expected_tier": "premium", "reasoning": "Explicit proof is multi-step reasoning."}
+{"prompt": "What is gradient descent?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Derive gradient descent for linear regression and explain each mathematical step.", "expected_tier": "premium", "reasoning": "Explicit derivation is multi-step reasoning."}
+{"prompt": "What is a neural network?", "expected_tier": "standard", "reasoning": "General concept explanation."}
+{"prompt": "Design a neural-network training pipeline with data validation, batching, evaluation, checkpointing, and deployment.", "expected_tier": "premium", "reasoning": "Requires a multi-step plan and system design."}
+{"prompt": "What is a REST API?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a REST API for an e-commerce service and justify its resource model, pagination, idempotency, and error handling.", "expected_tier": "premium", "reasoning": "Requires system design and trade-off analysis."}
+{"prompt": "What is a message queue?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Compare message queues and event streams for a payment-processing architecture and recommend one.", "expected_tier": "premium", "reasoning": "Explicit trade-off analysis and recommendation."}
+{"prompt": "What is a database replica?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design database replication for a multi-region application and explain failover and consistency trade-offs.", "expected_tier": "premium", "reasoning": "Requires multi-region system design and trade-off analysis."}
+{"prompt": "What is a firewall?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a layered network security architecture using firewalls, segmentation, authentication, and monitoring.", "expected_tier": "premium", "reasoning": "Requires multi-step security architecture."}
+{"prompt": "What is an algorithm?", "expected_tier": "cheap", "reasoning": "Short factual definition."}
+{"prompt": "Compare three algorithms for this problem, analyze their complexity, and recommend the best one under memory constraints.", "expected_tier": "premium", "reasoning": "Requires multi-step algorithm analysis and trade-off reasoning."}
+{"prompt": "What is Big-O notation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Derive the time and space complexity of this recursive algorithm and explain the recurrence.", "expected_tier": "premium", "reasoning": "Requires multi-step complexity derivation."}
+{"prompt": "What is a regular expression?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Write and test a regular expression that validates IPv4 addresses while rejecting malformed octets.", "expected_tier": "premium", "reasoning": "Code/implementation task triggers premium."}
+{"prompt": "What is an index in a database?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Given these five queries and three candidate indexes, determine which indexes to create and justify the choice.", "expected_tier": "premium", "reasoning": "Requires multi-step workload analysis and optimization."}
+{"prompt": "What is a binary tree?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Implement an AVL tree with insertion and deletion and explain its balancing logic.", "expected_tier": "premium", "reasoning": "Code plus algorithmic reasoning triggers premium."}
+{"prompt": "What is a semaphore?", "expected_tier": "standard", "reasoning": "Concurrency concept explanation."}
+{"prompt": "Design a concurrency-control scheme using semaphores to prevent starvation and deadlock.", "expected_tier": "premium", "reasoning": "Requires multi-step synchronization design."}
+{"prompt": "What is a file system?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a file system for a distributed storage cluster with replication and recovery from node failure.", "expected_tier": "premium", "reasoning": "Requires complex system design."}
+{"prompt": "What is load balancing?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Choose between round-robin, least-connections, and consistent-hashing load balancing for three different workloads and justify each choice.", "expected_tier": "premium", "reasoning": "Requires multi-case trade-off analysis."}
+{"prompt": "What is machine translation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a production machine-translation service with batching, model routing, fallbacks, monitoring, and cost controls.", "expected_tier": "premium", "reasoning": "Multi-step system design and operational trade-offs."}
+{"prompt": "What is a vector database?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a retrieval-augmented generation system using a vector database, including chunking, indexing, retrieval, reranking, and evaluation.", "expected_tier": "premium", "reasoning": "Requires multi-stage system design and evaluation planning."}
+{"prompt": "What is an embedding?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an embedding pipeline for document search and explain chunking, indexing, retrieval, and update handling.", "expected_tier": "premium", "reasoning": "Requires multi-step architecture."}
+{"prompt": "What is a transformer?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Derive self-attention from query, key, and value matrices and explain the scaling factor.", "expected_tier": "premium", "reasoning": "Mathematical derivation requires multi-step reasoning."}
+{"prompt": "What is overfitting?", "expected_tier": "standard", "reasoning": "Machine-learning concept explanation."}
+{"prompt": "Diagnose overfitting in a hypothetical training pipeline and propose experiments to distinguish it from data leakage.", "expected_tier": "premium", "reasoning": "Requires multi-step diagnosis and experimental planning."}
+{"prompt": "What is cross-validation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a cross-validation strategy for an imbalanced time-dependent dataset and justify the split methodology.", "expected_tier": "premium", "reasoning": "Requires multi-step methodological reasoning."}
+{"prompt": "What is a confusion matrix?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Analyze this confusion matrix, calculate precision and recall, and determine which error type dominates.", "expected_tier": "premium", "reasoning": "Requires multiple calculations and interpretation steps."}
+{"prompt": "What is a REST endpoint?", "expected_tier": "cheap", "reasoning": "Short technical definition."}
+{"prompt": "Design REST endpoints for users, orders, payments, and refunds while ensuring idempotency and consistent resource semantics.", "expected_tier": "premium", "reasoning": "Requires multi-resource API design and trade-off reasoning."}
+{"prompt": "What is a mutex lock?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt": "Analyze a mutex deadlock scenario, identify the cycle, and redesign the locking strategy to prevent it.", "expected_tier": "premium", "reasoning": "Requires multi-step debugging and redesign."}
+{"prompt": "What is latency?", "expected_tier": "cheap", "reasoning": "Short factual definition."}
+{"prompt": "Design a latency-reduction plan for an API with slow database queries, cache misses, and network overhead.", "expected_tier": "premium", "reasoning": "Requires diagnosis, prioritization, and a multi-step optimization plan."}
+{"prompt": "What is throughput?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt": "Analyze a service whose throughput drops under concurrency and propose a benchmark-driven optimization strategy.", "expected_tier": "premium", "reasoning": "Requires multi-step performance analysis and planning."}
+{"prompt": "What is a timeout?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt": "Design timeout budgets across an API gateway, service calls, database queries, and retries.", "expected_tier": "premium", "reasoning": "Requires multi-layer reliability design."}
+{"prompt": "What is a retry?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt": "Design a retry policy for a distributed service while preventing retry storms and correlated failures.", "expected_tier": "premium", "reasoning": "Requires reliability design and trade-off analysis."}
+{"prompt": "What is a circuit breaker?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design circuit-breaker settings for several dependent services and explain how timeout, retry, and breaker policies interact.", "expected_tier": "premium", "reasoning": "Requires multi-component reliability reasoning."}
+{"prompt": "What is an idempotent request?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an idempotency mechanism for payment requests and analyze races, retries, expiration, and duplicate submissions.", "expected_tier": "premium", "reasoning": "Requires multi-step correctness and failure analysis."}
+{"prompt": "What is a database transaction?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a transaction workflow spanning payment authorization, inventory reservation, and order creation with failure recovery.", "expected_tier": "premium", "reasoning": "Requires distributed workflow design and failure handling."}
+{"prompt": "Choose consistency models for user profiles, inventory, and payments in a distributed application and justify each choice.", "expected_tier": "premium", "reasoning": "Requires multi-component trade-off analysis."}
+{"prompt": "What is horizontal scaling?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a horizontally scalable service and identify which state must move to external systems and why.", "expected_tier": "premium", "reasoning": "Requires architectural decomposition and reasoning."}
+{"prompt": "What is a microservice?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Plan a migration from a monolith to services while preserving availability and minimizing deployment risk.", "expected_tier": "premium", "reasoning": "Migration planning is explicitly multi-step."}
+{"prompt": "What is a monolith?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Analyze whether this monolith should be split into services and propose boundaries, migration stages, and rollback strategies.", "expected_tier": "premium", "reasoning": "Requires architectural analysis and a multi-step plan."}
+{"prompt": "What is observability?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an observability strategy covering logs, metrics, traces, alerting, sampling, and service-level objectives.", "expected_tier": "premium", "reasoning": "Requires multi-component design and prioritization."}
+{"prompt": "What is a health check?", "expected_tier": "cheap", "reasoning": "Short technical definition."}
+{"prompt": "Design health checks for a service with database, cache, and external API dependencies and explain readiness versus liveness.", "expected_tier": "premium", "reasoning": "Requires multi-dependency architecture reasoning."}
+{"prompt": "What is a deployment?", "expected_tier": "cheap", "reasoning": "Short factual definition."}
+{"prompt": "Design a zero-downtime deployment strategy using canaries, health checks, automated rollback, and database migration safety.", "expected_tier": "premium", "reasoning": "Requires a multi-step deployment plan."}
+{"prompt": "What is blue-green deployment?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Compare blue-green, canary, and rolling deployments for a high-traffic service and recommend an approach.", "expected_tier": "premium", "reasoning": "Explicit trade-off analysis requires deeper reasoning."}
+{"prompt": "What is a database migration?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Plan a zero-downtime migration that changes a large production table schema while old and new application versions coexist.", "expected_tier": "premium", "reasoning": "Requires multi-step migration planning and failure handling."}
+{"prompt": "What is a cache hit?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt": "Diagnose a falling cache hit rate and propose experiments to determine whether the cause is TTL, key design, or workload changes.", "expected_tier": "premium", "reasoning": "Requires multi-step diagnosis and experimental planning."}
+{"prompt": "What is a memory leak?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Diagnose a memory leak in a long-running service using hypothetical heap-growth observations and propose a debugging procedure.", "expected_tier": "premium", "reasoning": "Requires multi-step debugging."}
+{"prompt": "What is a race condition?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Debug a race condition in a concurrent application, identify the interleaving that causes it, and propose a safe fix.", "expected_tier": "premium", "reasoning": "Requires multi-step concurrency debugging."}
+{"prompt": "Given four locks and five threads, identify possible deadlocks and redesign the lock ordering.", "expected_tier": "premium", "reasoning": "Requires multi-step concurrency analysis."}
+{"prompt": "Design a priority queue for a scheduler that supports cancellation, fairness, and efficient retrieval.", "expected_tier": "premium", "reasoning": "Requires data-structure and scheduling design trade-offs."}
+{"prompt": "What is a linked list?", "expected_tier": "cheap", "reasoning": "Short factual definition."}
+{"prompt": "Implement a doubly linked list with insertion, deletion, iteration, and tests in Python.", "expected_tier": "premium", "reasoning": "Code and multiple implementation requirements trigger premium."}
+{"prompt": "What is binary search?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Derive binary search's logarithmic complexity and explain why the recurrence produces that bound.", "expected_tier": "premium", "reasoning": "Explicit derivation requires multi-step reasoning."}
+{"prompt": "What is quicksort?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Prove quicksort's average-case complexity under a random-pivot assumption and explain its worst case.", "expected_tier": "premium", "reasoning": "Proof and analysis require multi-step reasoning."}
+{"prompt": "What is dynamic programming?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Develop a dynamic programming solution for coin change, derive its recurrence, and analyze its complexity.", "expected_tier": "premium", "reasoning": "Requires multi-step algorithm design and analysis."}
+{"prompt": "What is a graph in computer science?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an algorithm to find the shortest path under changing edge weights and justify the data structure choices.", "expected_tier": "premium", "reasoning": "Requires algorithm design and trade-off reasoning."}
+{"prompt": "What is a binary heap?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Implement a binary heap and analyze the complexity of build, insert, delete, and heapify operations.", "expected_tier": "premium", "reasoning": "Code plus complexity analysis triggers premium."}
+{"prompt": "What is a stack overflow?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Diagnose a stack overflow caused by recursive calls and redesign the algorithm iteratively.", "expected_tier": "premium", "reasoning": "Requires diagnosis and algorithmic redesign."}
+{"prompt": "What is a compiler error?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Debug these compiler errors, explain their root causes, and provide corrected code.", "expected_tier": "premium", "reasoning": "Code debugging and multi-step diagnosis trigger premium."}
+{"prompt": "What is a unit test?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a unit-test strategy for a payment service covering edge cases, failures, and state transitions.", "expected_tier": "premium", "reasoning": "Requires multi-step test planning."}
+{"prompt": "What is integration testing?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an integration-test suite for a service using PostgreSQL, Redis, and an external API mock.", "expected_tier": "premium", "reasoning": "Requires multi-component test design."}
+{"prompt": "What is CI?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion can be answered factually."}
+{"prompt": "Design a CI pipeline with parallel tests, caching, artifact retention, flaky-test handling, and required checks.", "expected_tier": "premium", "reasoning": "Requires multi-step pipeline design."}
+{"prompt": "What is a Git branch?", "expected_tier": "cheap", "reasoning": "Short factual technical definition."}
+{"prompt": "Plan a Git branching strategy for three teams working on independent releases with hotfixes.", "expected_tier": "premium", "reasoning": "Requires a multi-step workflow plan."}
+{"prompt": "What is version control?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a version-control workflow for a large monorepo with protected branches, releases, and automated validation.", "expected_tier": "premium", "reasoning": "Requires multi-step process design."}
+{"prompt": "What is a pull request?", "expected_tier": "cheap", "reasoning": "Short factual definition."}
+{"prompt": "Design a pull-request workflow that enforces ownership, testing, security checks, and emergency changes.", "expected_tier": "premium", "reasoning": "Requires multi-step workflow design."}
+{"prompt": "What is a code review?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create a detailed code-review checklist for a security-sensitive distributed service and explain why each category matters.", "expected_tier": "premium", "reasoning": "Requires multi-step planning and domain-specific analysis."}
+{"prompt": "What is latency versus throughput?", "expected_tier": "standard", "reasoning": "Conceptual comparison."}
+{"prompt": "Given competing latency and throughput requirements, design an architecture and explain the trade-offs.", "expected_tier": "premium", "reasoning": "Explicit architecture and trade-off analysis."}
+{"prompt": "What is availability?", "expected_tier": "cheap", "reasoning": "Short factual definition."}
+{"prompt": "Design an availability strategy for a service targeting 99.99% uptime, including redundancy, failover, and recovery objectives.", "expected_tier": "premium", "reasoning": "Requires multi-step reliability planning."}
+{"prompt": "What is an SLA?", "expected_tier": "cheap", "reasoning": "One-shot acronym/technical definition."}
+{"prompt": "Design SLIs, SLOs, and an error-budget policy for a payment API and explain the operational trade-offs.", "expected_tier": "premium", "reasoning": "Requires multi-step reliability planning and trade-off analysis."}
+{"prompt": "What is a disaster recovery plan?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create a disaster-recovery plan for a multi-region database with defined RPO, RTO, failover, and restoration procedures.", "expected_tier": "premium", "reasoning": "Explicit plan and multiple operational steps trigger premium."}
+{"prompt": "What is encryption at rest?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design encryption-at-rest key management for a multi-tenant database, including rotation, access control, and recovery.", "expected_tier": "premium", "reasoning": "Requires security architecture and multiple design decisions."}
+{"prompt": "What is authentication?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design authentication for a multi-device application with password login, passkeys, recovery, sessions, and revocation.", "expected_tier": "premium", "reasoning": "Requires multi-step security system design."}
+{"prompt": "What is authorization?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a role-based authorization system for a multi-tenant SaaS application with hierarchical permissions.", "expected_tier": "premium", "reasoning": "Requires multi-step security and data-model design."}
+{"prompt": "What is a password hash?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a secure password-storage migration from plaintext legacy records to a modern password-hashing scheme.", "expected_tier": "premium", "reasoning": "Requires security planning and migration steps."}
+{"prompt": "What is a digital signature?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a document-signing workflow with key management, verification, revocation, and audit trails.", "expected_tier": "premium", "reasoning": "Requires multi-step security architecture."}
+{"prompt": "What is public-key cryptography?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a public-key infrastructure for an organization and explain certificate issuance, rotation, revocation, and trust.", "expected_tier": "premium", "reasoning": "Requires multi-step security architecture."}
+{"prompt": "What is an SSL certificate?", "expected_tier": "cheap", "reasoning": "Short factual technical definition."}
+{"prompt": "Troubleshoot a TLS certificate failure, identify possible causes, and propose a verification procedure.", "expected_tier": "premium", "reasoning": "Requires multi-step troubleshooting."}
+{"prompt": "What is a DNS record?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Plan a DNS migration between providers with low downtime, validation, rollback, and TTL management.", "expected_tier": "premium", "reasoning": "Requires a multi-step operational plan."}
+{"prompt": "What is a CDN cache?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design CDN caching rules for personalized and public content while preventing stale or private data from being served incorrectly.", "expected_tier": "premium", "reasoning": "Requires multi-step caching design and correctness analysis."}
+{"prompt": "What is a web socket?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a WebSocket service that handles authentication, reconnects, backpressure, presence, and millions of connections.", "expected_tier": "premium", "reasoning": "Requires complex real-time system design."}
+{"prompt": "What is polling?", "expected_tier": "cheap", "reasoning": "Short factual definition."}
+{"prompt": "Compare polling, long polling, SSE, and WebSockets for a real-time notification system and recommend one.", "expected_tier": "premium", "reasoning": "Explicit trade-off analysis across multiple approaches."}
+{"prompt": "What is a message broker?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a message-broker architecture with ordering, retries, dead-letter queues, and consumer failover.", "expected_tier": "premium", "reasoning": "Requires multi-step distributed architecture."}
+{"prompt": "What is Kafka?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a Kafka-based event pipeline with partitioning, consumer groups, ordering requirements, replay, and retention.", "expected_tier": "premium", "reasoning": "Requires multi-step architecture and trade-off analysis."}
+{"prompt": "What is Redis?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a Redis caching layer for a high-traffic application and determine invalidation, eviction, and failover strategies.", "expected_tier": "premium", "reasoning": "Requires system design and multiple trade-offs."}
+{"prompt": "What is PostgreSQL?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a PostgreSQL schema for an e-commerce platform and optimize it for the specified access patterns.", "expected_tier": "premium", "reasoning": "Requires schema design and query-optimization reasoning."}
+{"prompt": "What is MongoDB?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Choose between MongoDB and PostgreSQL for five workload scenarios and justify each decision.", "expected_tier": "premium", "reasoning": "Requires multi-case trade-off analysis."}
+{"prompt": "What is a NoSQL database?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a NoSQL data model for a globally distributed social feed and explain partition-key and consistency choices.", "expected_tier": "premium", "reasoning": "Requires multi-step data-model and distributed-system design."}
+{"prompt": "What is sharding?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a sharding strategy for a database with billions of users and explain rebalancing and hot-partition mitigation.", "expected_tier": "premium", "reasoning": "Requires multi-step distributed database design."}
+{"prompt": "What is replication?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a replication strategy for a globally distributed application and analyze synchronous versus asynchronous replication.", "expected_tier": "premium", "reasoning": "Requires architecture and explicit trade-off analysis."}
+{"prompt": "What is CAP theorem?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Use CAP theorem to evaluate three hypothetical distributed architectures and recommend consistency choices for each.", "expected_tier": "premium", "reasoning": "Requires multi-case analysis and recommendations."}
+{"prompt": "What is consensus?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Compare Raft and Paxos for a production coordination service and analyze their failure-handling trade-offs.", "expected_tier": "premium", "reasoning": "Requires deep comparative distributed-systems analysis."}
+{"prompt": "What is a leader election?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a leader-election mechanism for a distributed service and analyze split-brain and network-partition scenarios.", "expected_tier": "premium", "reasoning": "Requires multi-step distributed-system reasoning."}
+{"prompt": "What is eventual delivery?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a notification system that provides at-least-once delivery while minimizing duplicate notifications.", "expected_tier": "premium", "reasoning": "Requires multi-step reliability design."}
+{"prompt": "What is a retry storm?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Analyze a retry storm in a service mesh and design coordinated timeout, retry, and circuit-breaker policies to prevent recurrence.", "expected_tier": "premium", "reasoning": "Requires multi-step diagnosis and architecture changes."}
+{"prompt": "What is backpressure?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design backpressure handling for a streaming pipeline where producers can outpace consumers for extended periods.", "expected_tier": "premium", "reasoning": "Requires multi-step systems design."}
+{"prompt": "What is rate limiting?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a multi-region rate limiter and compare centralized, local, and eventually consistent approaches.", "expected_tier": "premium", "reasoning": "Requires system design and trade-off analysis."}
+{"prompt": "What is a token bucket?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Derive how a token-bucket rate limiter behaves under burst traffic and calculate its maximum sustained rate.", "expected_tier": "premium", "reasoning": "Requires multi-step reasoning and calculation."}
+{"prompt": "What is a sliding window?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Compare fixed-window, sliding-window, and token-bucket rate limiting and recommend one for an API.", "expected_tier": "premium", "reasoning": "Explicit trade-off analysis requires premium reasoning."}
+{"prompt": "What is a system design interview?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Solve a system-design interview problem for a globally scalable ride-sharing service from requirements through capacity planning and architecture.", "expected_tier": "premium", "reasoning": "Explicitly requires a multi-step system design."}
+{"prompt": "What is capacity planning?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Perform capacity planning for an API handling 10 million requests per second and recommend a scalable architecture.", "expected_tier": "premium", "reasoning": "Requires calculations plus multi-step architecture reasoning."}
+{"prompt": "What is horizontal partitioning?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a horizontally partitioned database and explain partition-key selection, rebalancing, and query routing.", "expected_tier": "premium", "reasoning": "Requires multi-step database architecture."}
+{"prompt": "What is a service dependency?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Map service dependencies for a hypothetical architecture, identify critical paths, and propose ways to reduce cascading failures.", "expected_tier": "premium", "reasoning": "Requires multi-step architectural analysis."}
+{"prompt": "What is a single point of failure?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Analyze a hypothetical architecture for single points of failure and redesign it to achieve high availability.", "expected_tier": "premium", "reasoning": "Requires multi-step analysis and redesign."}
+{"prompt": "What is graceful degradation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design graceful-degradation behavior for a service when its cache, database replica, and recommendation provider fail independently.", "expected_tier": "premium", "reasoning": "Requires multiple failure scenarios and architectural decisions."}
+{"prompt": "What is fault tolerance?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a fault-tolerant service that survives instance, zone, and regional failures and explain the recovery strategy.", "expected_tier": "premium", "reasoning": "Requires multi-level resilience planning."}
+{"prompt": "What is failover?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design automated database failover and explain health detection, promotion, client routing, and split-brain prevention.", "expected_tier": "premium", "reasoning": "Requires multi-step reliability design."}
+{"prompt": "What is disaster recovery?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create a disaster-recovery runbook for a production service, including detection, failover, restoration, validation, and rollback.", "expected_tier": "premium", "reasoning": "Explicit runbook is a multi-step plan."}
+{"prompt": "What is an SLO?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion and factual definition."}
+{"prompt": "Design SLOs for an API, choose meaningful SLIs, calculate an error budget, and define escalation policies.", "expected_tier": "premium", "reasoning": "Requires multi-step reliability planning."}
+{"prompt": "What is an error budget?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create an error-budget policy and determine how it should affect release velocity under repeated SLO violations.", "expected_tier": "premium", "reasoning": "Requires policy design and multi-step operational reasoning."}
+{"prompt": "What is canary deployment?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a canary deployment process with traffic progression, automated metrics evaluation, and rollback thresholds.", "expected_tier": "premium", "reasoning": "Requires a multi-step deployment plan."}
+{"prompt": "What is rollback?", "expected_tier": "cheap", "reasoning": "Short factual definition."}
+{"prompt": "Design a rollback strategy for application and database changes when two application versions must coexist.", "expected_tier": "premium", "reasoning": "Requires multi-step deployment and migration reasoning."}
+{"prompt": "What is feature flagging?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a globally distributed feature-flag system with low-latency reads, safe rollouts, and audit logging.", "expected_tier": "premium", "reasoning": "Requires distributed system design."}
+{"prompt": "What is a feature flag?", "expected_tier": "cheap", "reasoning": "Short factual definition."}
+{"prompt": "Plan a feature-flag rollout that gradually exposes a risky feature to users while defining automated rollback conditions.", "expected_tier": "premium", "reasoning": "Explicit rollout plan requires multiple steps."}
+{"prompt": "What is a health probe?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design readiness and liveness probes for a stateful service and explain how incorrect probes can cause cascading failures.", "expected_tier": "premium", "reasoning": "Requires multi-step operational reasoning."}
+{"prompt": "What is autoscaling?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design autoscaling rules for a latency-sensitive API and balance CPU, queue depth, latency, and scaling cost.", "expected_tier": "premium", "reasoning": "Requires trade-off analysis and multi-step design."}
+{"prompt": "What is queue depth?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt": "Use queue-depth behavior to diagnose consumer saturation and design an autoscaling strategy.", "expected_tier": "premium", "reasoning": "Requires multi-step diagnosis and planning."}
+{"prompt": "What is a memory page?", "expected_tier": "cheap", "reasoning": "One-shot operating-system fact."}
+{"prompt": "Explain step by step how a page fault is handled from CPU trap through disk read and page-table update.", "expected_tier": "premium", "reasoning": "Explicit step-by-step operating-system reasoning."}
+{"prompt": "What is a process?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt": "Design a process-supervision strategy for a service that must restart failed workers without losing jobs.", "expected_tier": "premium", "reasoning": "Requires multi-step reliability and job-state design."}
+{"prompt": "Compare thread pools, process pools, and async I/O for three workloads and recommend the appropriate model for each.", "expected_tier": "premium", "reasoning": "Requires multi-case trade-off analysis."}
+{"prompt": "What is async programming?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Refactor this synchronous Python service into async code and explain how concurrency, cancellation, and error handling change.", "expected_tier": "premium", "reasoning": "Code refactoring plus multi-step reasoning triggers premium."}
+{"prompt": "What is a coroutine?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Implement a coroutine-based worker pool with bounded concurrency, cancellation, retries, and graceful shutdown.", "expected_tier": "premium", "reasoning": "Code and multiple concurrency requirements trigger premium."}
+{"prompt": "What is an exception?", "expected_tier": "cheap", "reasoning": "Short programming definition."}
+{"prompt": "Design an exception-handling strategy for a distributed service and distinguish retryable, fatal, and user-facing failures.", "expected_tier": "premium", "reasoning": "Requires multi-category error-handling design."}
+{"prompt": "What is logging?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Design structured logging for a distributed application and define correlation IDs, privacy controls, retention, and alert integration.", "expected_tier": "premium", "reasoning": "Requires multi-step observability design."}
+{"prompt": "What is a metric?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Design a metrics strategy for a production API, including RED metrics, cardinality controls, dashboards, and alerts.", "expected_tier": "premium", "reasoning": "Requires multi-step observability planning."}
+{"prompt": "What is tracing?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design distributed tracing for a microservice architecture and explain sampling, propagation, storage, and troubleshooting workflows.", "expected_tier": "premium", "reasoning": "Requires multi-component observability design."}
+{"prompt": "What is a span in distributed tracing?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt": "Analyze a trace with several slow spans, identify the likely bottleneck, and propose a verification plan.", "expected_tier": "premium", "reasoning": "Requires multi-step performance diagnosis."}
+{"prompt": "What is a log level?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Design logging levels and retention policies for a high-volume production service while minimizing operational cost.", "expected_tier": "premium", "reasoning": "Requires multi-factor policy design."}
+{"prompt": "What is an alert?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Design alerting for a payment service that minimizes noise while detecting latency, error-rate, and availability failures.", "expected_tier": "premium", "reasoning": "Requires multi-step monitoring design and trade-offs."}
+{"prompt": "What is a dashboard?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Design a production operations dashboard for a distributed service and choose the metrics that belong on each section.", "expected_tier": "premium", "reasoning": "Requires multi-step observability planning."}
+{"prompt": "What is a benchmark?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a benchmark methodology to compare two database implementations while controlling for cache state, concurrency, and workload.", "expected_tier": "premium", "reasoning": "Requires experimental design and multiple controls."}
+{"prompt": "What is profiling?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create a profiling strategy to find CPU and memory bottlenecks in a production-like workload and interpret the results.", "expected_tier": "premium", "reasoning": "Requires multi-step performance analysis."}
+{"prompt": "What is a bottleneck?", "expected_tier": "cheap", "reasoning": "Short factual definition."}
+{"prompt": "Identify bottlenecks in a hypothetical request path and prioritize optimizations based on expected impact and engineering cost.", "expected_tier": "premium", "reasoning": "Requires multi-factor analysis and prioritization."}
+{"prompt": "What is technical debt?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create a technical-debt reduction plan that prioritizes risks, estimates impact, and sequences work across three teams.", "expected_tier": "premium", "reasoning": "Explicit multi-step planning and prioritization."}
+{"prompt": "What is a migration?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Plan a database migration with backward compatibility, dual writes, validation, cutover, and rollback.", "expected_tier": "premium", "reasoning": "Explicit multi-step migration plan."}
+{"prompt": "What is backward compatibility?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an API versioning strategy that preserves backward compatibility while allowing breaking changes over time.", "expected_tier": "premium", "reasoning": "Requires multi-step API evolution design."}
+{"prompt": "What is API versioning?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Plan an API version migration for thousands of clients, including deprecation, telemetry, communication, and rollback.", "expected_tier": "premium", "reasoning": "Requires a multi-step migration plan."}
+{"prompt": "What is semantic versioning?", "expected_tier": "cheap", "reasoning": "Can be answered with a short factual definition."}
+{"prompt": "Create a release-versioning policy for a large API ecosystem and define how breaking, additive, and patch changes should be handled.", "expected_tier": "premium", "reasoning": "Requires policy design and multiple cases."}
+{"prompt": "What is a dependency?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Create a dependency-management strategy for a large Python monorepo covering pinning, updates, vulnerabilities, and reproducibility.", "expected_tier": "premium", "reasoning": "Requires multi-step engineering planning."}
+{"prompt": "Refactor a service to use dependency injection and design the resulting testing and configuration architecture.", "expected_tier": "premium", "reasoning": "Code-oriented refactoring plus architecture design triggers premium."}
+{"prompt": "What is mocking?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a testing strategy using mocks, fakes, and integration fixtures and determine where each should be used.", "expected_tier": "premium", "reasoning": "Requires multi-step testing strategy and trade-off analysis."}
+{"prompt": "What is a fixture in testing?", "expected_tier": "cheap", "reasoning": "Short technical definition."}
+{"prompt": "Design reusable test fixtures for a service with PostgreSQL, Redis, and external HTTP dependencies.", "expected_tier": "premium", "reasoning": "Requires multi-component test architecture."}
+{"prompt": "What is a flaky test?", "expected_tier": "cheap", "reasoning": "Short factual definition."}
+{"prompt": "Diagnose a flaky test suite, classify likely causes, and design experiments to isolate environmental versus application failures.", "expected_tier": "premium", "reasoning": "Requires multi-step diagnosis and experimental planning."}
+{"prompt": "What is test coverage?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a test-coverage strategy that balances unit, integration, and end-to-end coverage for a critical service.", "expected_tier": "premium", "reasoning": "Requires multi-step testing strategy and trade-off reasoning."}
+{"prompt": "What is a mock API?", "expected_tier": "cheap", "reasoning": "Simple technical definition."}
+{"prompt": "Design a mock-API strategy for integration tests that remains faithful to a changing external provider contract.", "expected_tier": "premium", "reasoning": "Requires multi-step testing and contract-management design."}
+{"prompt": "What is contract testing?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design contract tests for ten microservices and explain how failures should block deployments without creating excessive coupling.", "expected_tier": "premium", "reasoning": "Requires multi-service testing architecture and trade-offs."}
+{"prompt": "What is a schema?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt": "Design an evolution strategy for a shared event schema used by dozens of independently deployed services.", "expected_tier": "premium", "reasoning": "Requires compatibility and migration planning."}
+{"prompt": "What is JSON Schema?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a JSON Schema evolution strategy that supports old and new clients during a rolling migration.", "expected_tier": "premium", "reasoning": "Requires multi-step compatibility planning."}
+{"prompt": "What is serialization?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Choose a serialization format for a high-throughput cross-language service and compare compatibility, performance, and operational trade-offs.", "expected_tier": "premium", "reasoning": "Explicit trade-off analysis."}
+{"prompt": "What is compression?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Choose compression settings for a latency-sensitive API and analyze CPU, bandwidth, payload size, and throughput trade-offs.", "expected_tier": "premium", "reasoning": "Requires multi-factor performance analysis."}
+{"prompt": "What is pagination?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design pagination for an API with billions of records and compare offset pagination with cursor pagination.", "expected_tier": "premium", "reasoning": "Requires system design and trade-off analysis."}
+{"prompt": "What is cursor pagination?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design cursor pagination that remains stable under concurrent inserts and deletes and explain the consistency implications.", "expected_tier": "premium", "reasoning": "Requires multi-step API and consistency reasoning."}
+{"prompt": "Implement rate limiting in Python using a token bucket.", "expected_tier": "premium", "reasoning": "Code triggers premium regardless of implementation length."}
+{"prompt": "What is a token?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Design a token-based authorization system with scopes, expiry, revocation, and delegated access.", "expected_tier": "premium", "reasoning": "Requires multi-step security design."}
+{"prompt": "What is a session?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design secure session management for a web application covering cookies, rotation, expiration, revocation, and concurrent devices.", "expected_tier": "premium", "reasoning": "Requires multi-step security architecture."}
+{"prompt": "What is CSRF?", "expected_tier": "standard", "reasoning": "Security concept explanation."}
+{"prompt": "Design a comprehensive CSRF defense strategy for a browser application and analyze how it interacts with cookies and authentication.", "expected_tier": "premium", "reasoning": "Requires multi-step security analysis."}
+{"prompt": "What is XSS?", "expected_tier": "standard", "reasoning": "Security concept explanation."}
+{"prompt": "Design an XSS mitigation strategy for a web application covering output encoding, CSP, sanitization, and testing.", "expected_tier": "premium", "reasoning": "Requires multiple mitigation layers and testing strategy."}
+{"prompt": "What is SQL injection?", "expected_tier": "standard", "reasoning": "Security concept explanation."}
+{"prompt": "Design a defense-in-depth strategy against SQL injection across application code, database permissions, validation, and monitoring.", "expected_tier": "premium", "reasoning": "Requires multi-layer security planning."}
+{"prompt": "What is input validation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an input-validation strategy for a public API and determine which checks belong at the client, gateway, and service layers.", "expected_tier": "premium", "reasoning": "Requires multi-layer architecture and trade-off analysis."}
+{"prompt": "Explain step by step how timeout propagation should work across five nested service calls.", "expected_tier": "premium", "reasoning": "Explicit multi-step distributed-systems reasoning."}
+{"prompt": "Explain how to choose retry counts, backoff, jitter, and retryable errors for a distributed API.", "expected_tier": "premium", "reasoning": "Requires multi-factor reliability planning."}
+{"prompt": "Configure a circuit breaker for a payment dependency and reason through open, half-open, and closed states under failures.", "expected_tier": "premium", "reasoning": "Requires multi-step failure-state analysis."}
+{"prompt": "What is idempotency?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Implement an idempotency-key mechanism for a payment API and handle concurrent duplicate requests.", "expected_tier": "premium", "reasoning": "Code and concurrency correctness trigger premium."}
+{"prompt": "What is caching?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Write code implementing an LRU cache and analyze its time and space complexity.", "expected_tier": "premium", "reasoning": "Code plus complexity analysis triggers premium."}
+{"prompt": "Write code for a thread-safe queue with blocking reads and graceful shutdown.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "What is a graph?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Write code implementing Dijkstra's algorithm and explain its complexity.", "expected_tier": "premium", "reasoning": "Code plus algorithm analysis triggers premium."}
+{"prompt": "What is recursion?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Write a one-line recursive Python function for factorial.", "expected_tier": "premium", "reasoning": "Code triggers premium regardless of length under Edge Rule 1."}
+{"prompt": "What is a SQL JOIN?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Write a SQL JOIN query for customers and orders.", "expected_tier": "premium", "reasoning": "SQL code triggers premium regardless of length."}
+{"prompt": "What is regular expression syntax?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Write a one-line regex for a valid IPv4 address.", "expected_tier": "premium", "reasoning": "Implementation/code task triggers premium regardless of length."}
+{"prompt": "What is a Python decorator?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Write a Python decorator that measures function execution time.", "expected_tier": "premium", "reasoning": "Code triggers premium regardless of length."}
+{"prompt": "What is a Git hook?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Write a Git hook that rejects commits containing secrets.", "expected_tier": "premium", "reasoning": "Code/configuration implementation triggers premium."}
+{"prompt": "What is YAML?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Write a GitHub Actions YAML workflow that runs tests and linting on pull requests.", "expected_tier": "premium", "reasoning": "Configuration code triggers premium."}
+{"prompt": "What is Docker Compose?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Write a Docker Compose file containing an API, PostgreSQL, and Redis services.", "expected_tier": "premium", "reasoning": "Configuration implementation triggers premium."}
+{"prompt": "Write a Kubernetes Deployment manifest for a Python API with three replicas.", "expected_tier": "premium", "reasoning": "Configuration code triggers premium."}
+{"prompt": "What is Terraform?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Write Terraform configuration for a basic virtual machine and network.", "expected_tier": "premium", "reasoning": "Infrastructure-as-code implementation triggers premium."}
+{"prompt": "What is JSON?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Write code that parses this JSON and groups records by user ID.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "Explain regular expressions using three simple examples without writing any code.", "expected_tier": "standard", "reasoning": "Concept explanation with examples, not implementation."}
+{"prompt": "Explain Docker containers in one short paragraph without commands or configuration.", "expected_tier": "standard", "reasoning": "Concept explanation remains standard despite the technical topic."}
+{"prompt": "What does the Kubernetes acronym stand for?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup despite the technical topic."}
+{"prompt": "What does JWT stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion despite the security topic."}
+{"prompt": "Who created the Raft consensus algorithm?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup despite the technical topic."}
+{"prompt": "Who originally developed PostgreSQL?", "expected_tier": "cheap", "reasoning": "One-shot historical fact."}
+{"prompt": "What programming language is Redis primarily implemented in?", "expected_tier": "cheap", "reasoning": "One-shot technical fact."}
+{"prompt": "What company originally created Apache Kafka?", "expected_tier": "cheap", "reasoning": "One-shot historical fact."}
+{"prompt": "What does GraphQL stand for?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "What does OAuth stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym lookup."}
+{"prompt": "What is TLS?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "What does TLS stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What is HTTP?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "What does HTTP stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What does TCP stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What does DNS stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What is CI/CD?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "What does CI stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What does SQL stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "Explain virtual memory, page tables, TLBs, and page faults and how they interact.", "expected_tier": "premium", "reasoning": "Multiple interacting concepts require a substantial reasoning chain."}
+{"prompt": "Explain cache coherence, cache invalidation, and consistency in a multicore system and compare the approaches.", "expected_tier": "premium", "reasoning": "Requires multi-concept analysis and trade-off reasoning."}
+{"prompt": "What is a CPU core?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Explain instruction pipelining, branch prediction, out-of-order execution, and their combined performance effects.", "expected_tier": "premium", "reasoning": "Multiple interacting low-level concepts require deep reasoning."}
+{"prompt": "What is a database?", "expected_tier": "cheap", "reasoning": "Short factual definition."}
+{"prompt": "Design a database architecture for a global application with read replicas, sharding, failover, and backup recovery.", "expected_tier": "premium", "reasoning": "Multi-component system design."}
+{"prompt": "What is a backup?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Design a backup and restore strategy with point-in-time recovery, cross-region copies, retention, and disaster testing.", "expected_tier": "premium", "reasoning": "Requires multi-step operational planning."}
+{"prompt": "What is replication lag?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Diagnose replication lag in a production database and design experiments to distinguish write pressure, network delay, and replica contention.", "expected_tier": "premium", "reasoning": "Requires multi-step diagnosis and experimental planning."}
+{"prompt": "What is a connection pool?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design database connection-pool sizing for a high-concurrency API and reason about saturation, timeouts, and queueing.", "expected_tier": "premium", "reasoning": "Requires multi-factor performance and architecture reasoning."}
+{"prompt": "What is a socket?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a socket server that handles connection limits, backpressure, timeouts, authentication, and graceful shutdown.", "expected_tier": "premium", "reasoning": "Requires multi-step network-system design."}
+{"prompt": "What is an HTTP request?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Trace an HTTP request through DNS, TLS, CDN, load balancer, application server, cache, and database.", "expected_tier": "premium", "reasoning": "Explicit multi-step request tracing."}
+{"prompt": "What is a response code?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Design an API error-handling taxonomy and decide how clients should react to each class of failure.", "expected_tier": "premium", "reasoning": "Requires multi-case design and reasoning."}
+{"prompt": "What is JSON serialization?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a versioned serialization format for events consumed by independently deployed services.", "expected_tier": "premium", "reasoning": "Requires schema evolution and compatibility design."}
+{"prompt": "What is an event?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Design an event-driven architecture for order processing and explain ordering, retries, idempotency, and failure recovery.", "expected_tier": "premium", "reasoning": "Requires multi-step distributed-system design."}
+{"prompt": "What is an event-driven architecture?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Plan the migration of a synchronous order-processing system to event-driven architecture without losing orders.", "expected_tier": "premium", "reasoning": "Requires a multi-step migration plan and correctness reasoning."}
+{"prompt": "What is a distributed system?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a distributed system that remains available during regional network partitions and explain the consistency trade-offs.", "expected_tier": "premium", "reasoning": "Requires complex distributed-system design and trade-off analysis."}
+{"prompt": "What is network partition?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Analyze how a distributed database should behave during a network partition and recommend a consistency strategy.", "expected_tier": "premium", "reasoning": "Requires failure analysis and architectural recommendation."}
+{"prompt": "What is a quorum?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Derive quorum requirements for a replicated system and analyze which failures can be tolerated under different replica counts.", "expected_tier": "premium", "reasoning": "Requires mathematical and distributed-systems reasoning."}
+{"prompt": "What is majority voting?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Design a consensus mechanism using majority voting and analyze safety under concurrent proposals.", "expected_tier": "premium", "reasoning": "Requires multi-step consensus design and safety analysis."}
+{"prompt": "What is a replica?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Design replica placement across three regions and optimize for latency, durability, and failover cost.", "expected_tier": "premium", "reasoning": "Requires multi-factor architecture trade-offs."}
+{"prompt": "What is durability?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design storage guarantees for a financial system that requires high durability and define backup, replication, and recovery mechanisms.", "expected_tier": "premium", "reasoning": "Requires multi-step storage architecture."}
+{"prompt": "What is consistency?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Choose consistency guarantees for payments, inventory, search results, and user profiles and justify each choice.", "expected_tier": "premium", "reasoning": "Requires multi-domain trade-off analysis."}
+{"prompt": "What is a transaction log?", "expected_tier": "standard", "reasoning": "Database concept explanation."}
+{"prompt": "Explain how a transaction log supports crash recovery and derive the sequence of recovery steps after a simulated failure.", "expected_tier": "premium", "reasoning": "Explicit derivation and step-by-step recovery reasoning."}
+{"prompt": "What is write-ahead logging?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a crash-recovery protocol using write-ahead logging and reason through failures at each stage.", "expected_tier": "premium", "reasoning": "Requires multi-step recovery design."}
+{"prompt": "What is a checkpoint?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a database checkpoint strategy that balances recovery time, write overhead, and storage pressure.", "expected_tier": "premium", "reasoning": "Requires explicit trade-off analysis."}
+{"prompt": "What is compaction?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an LSM-tree compaction strategy and analyze write amplification, read amplification, and space amplification.", "expected_tier": "premium", "reasoning": "Requires multi-factor storage-engine analysis."}
+{"prompt": "What is an LSM tree?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Compare B-trees and LSM trees for a write-heavy workload and recommend one based on workload characteristics.", "expected_tier": "premium", "reasoning": "Explicit trade-off analysis."}
+{"prompt": "What is a B-tree?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Derive the height bound of a B-tree and explain how minimum degree affects storage and lookup complexity.", "expected_tier": "premium", "reasoning": "Mathematical derivation and complexity analysis."}
+{"prompt": "What is an index scan?", "expected_tier": "standard", "reasoning": "Database concept explanation."}
+{"prompt": "Analyze when a database optimizer should prefer an index scan versus a sequential scan for a given workload.", "expected_tier": "premium", "reasoning": "Requires multi-factor query-planning analysis."}
+{"prompt": "What is a sequential scan?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt": "Given table size, selectivity, and index costs, determine whether an index scan or sequential scan is preferable and show the reasoning.", "expected_tier": "premium", "reasoning": "Requires multi-step quantitative analysis."}
+{"prompt": "What is selectivity?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Analyze query selectivity across several predicates and determine which composite index would provide the greatest benefit.", "expected_tier": "premium", "reasoning": "Requires multi-step database optimization."}
+{"prompt": "What is a composite index?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design composite indexes for a workload of five queries and explain column ordering and write-cost trade-offs.", "expected_tier": "premium", "reasoning": "Requires workload analysis and trade-off reasoning."}
+{"prompt": "What is a foreign key?", "expected_tier": "cheap", "reasoning": "Short factual definition."}
+{"prompt": "Design foreign-key relationships for a normalized e-commerce schema and explain cascade behavior for deletes and updates.", "expected_tier": "premium", "reasoning": "Requires multi-step schema design."}
+{"prompt": "What is database normalization?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Normalize a denormalized schema to 3NF, identify anomalies, and explain every decomposition.", "expected_tier": "premium", "reasoning": "Requires multi-step schema transformation and reasoning."}
+{"prompt": "What is denormalization?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Determine where to denormalize a high-traffic schema and analyze consistency, storage, and write-performance trade-offs.", "expected_tier": "premium", "reasoning": "Requires explicit trade-off analysis."}
+{"prompt": "What is an ORM?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an ORM usage strategy for a large application and identify queries that should bypass the ORM.", "expected_tier": "premium", "reasoning": "Requires architecture and performance trade-off analysis."}
+{"prompt": "What is connection pooling?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Calculate an appropriate database connection-pool size from concurrency and latency assumptions and explain the bottlenecks.", "expected_tier": "premium", "reasoning": "Requires calculation and multi-step performance reasoning."}
+{"prompt": "What is a database lock?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Compare optimistic and pessimistic locking for three workloads and recommend the appropriate approach for each.", "expected_tier": "premium", "reasoning": "Explicit multi-case trade-off analysis."}
+{"prompt": "What is optimistic locking?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design optimistic concurrency control for a payment workflow and handle conflicting updates and retries.", "expected_tier": "premium", "reasoning": "Requires multi-step correctness design."}
+{"prompt": "What is pessimistic locking?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a pessimistic-locking strategy for inventory reservation and analyze deadlock and contention risks.", "expected_tier": "premium", "reasoning": "Requires multi-step concurrency analysis."}
+{"prompt": "What is a database deadlock?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Given a set of transactions and locks, determine whether a deadlock exists and propose a prevention strategy.", "expected_tier": "premium", "reasoning": "Requires multi-step graph and concurrency reasoning."}
+{"prompt": "What is serializability?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Analyze a transaction schedule for serializability and identify a conflict ordering that proves or disproves it.", "expected_tier": "premium", "reasoning": "Requires multi-step formal reasoning."}
+{"prompt": "What is ACID?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Explain how a database can preserve all ACID properties during crashes and concurrent transactions.", "expected_tier": "premium", "reasoning": "Requires reasoning across multiple interacting mechanisms."}
+{"prompt": "What does ACID stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What does CAP stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion despite the technical topic."}
+{"prompt": "What does CRUD stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What does REST stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What does RAM stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What does CPU stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What does GPU stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What does UDP stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What does CDN stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What does SSH stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What does URL stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What does XML stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What does CD stand for in CI/CD?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "What is the capital of Germany?", "expected_tier": "cheap", "reasoning": "One-shot factual lookup."}
+{"prompt": "Summarize the causes and consequences of the French Revolution.", "expected_tier": "standard", "reasoning": "Moderate historical summarization."}
+{"prompt": "Analyze the causes of the French Revolution, rank their relative importance, and defend the ranking with evidence.", "expected_tier": "premium", "reasoning": "Requires multi-step analysis and ranking."}
+{"prompt": "Summarize Hamlet in five sentences.", "expected_tier": "standard", "reasoning": "Literary summarization."}
+{"prompt": "Analyze Hamlet's major themes, compare two interpretations, and defend which interpretation is stronger.", "expected_tier": "premium", "reasoning": "Requires comparative analysis and argumentation."}
+{"prompt": "What is photosynthesis?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Explain photosynthesis step by step from light absorption through glucose production.", "expected_tier": "premium", "reasoning": "Explicit step-by-step explanation triggers premium."}
+{"prompt": "Explain step by step how an unexpected increase in money supply can affect prices, wages, and demand.", "expected_tier": "premium", "reasoning": "Explicit multi-step causal chain triggers premium."}
+{"prompt": "What is the water cycle?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Describe the water cycle in one short paragraph.", "expected_tier": "standard", "reasoning": "Short concept explanation remains standard."}
+{"prompt": "What is evolution?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Prove mathematically that natural selection must increase fitness under a specified simplified model.", "expected_tier": "premium", "reasoning": "Proof requires multi-step reasoning."}
+{"prompt": "Translate 'Good morning' to Spanish.", "expected_tier": "cheap", "reasoning": "Single-sentence translation."}
+{"prompt": "Translate this paragraph to Spanish and preserve its tone and idiomatic meaning.", "expected_tier": "standard", "reasoning": "Moderate translation task without explicit multi-step reasoning."}
+{"prompt": "Translate this document to Spanish, identify ambiguous phrases, explain the alternatives, and choose the best translation for each.", "expected_tier": "premium", "reasoning": "Requires multiple analysis and translation decisions."}
+{"prompt": "Rewrite 'We need this fixed soon.' professionally.", "expected_tier": "standard", "reasoning": "Moderate rewrite."}
+{"prompt": "Rewrite this proposal, strengthen its argument, reorganize the sections, and produce a polished final version.", "expected_tier": "premium", "reasoning": "Multiple requested transformations make this a multi-step writing task."}
+{"prompt": "Summarize these meeting notes.", "expected_tier": "standard", "reasoning": "Summarization is standard."}
+{"prompt": "Summarize these meeting notes, extract decisions, identify unresolved issues, assign owners, and create next steps.", "expected_tier": "premium", "reasoning": "Requires multiple extraction, classification, and planning steps."}
+{"prompt": "Explain the circuit breaker pattern.", "expected_tier": "standard", "reasoning": "Single concept explanation."}
+{"prompt": "Explain step by step how a circuit breaker interacts with retries, timeouts, and load balancing during an outage.", "expected_tier": "premium", "reasoning": "Explicit multi-step interaction analysis."}
+{"prompt": "Explain step by step how a request moves through DNS, a CDN, a load balancer, and an application server.", "expected_tier": "premium", "reasoning": "Explicit multi-step request path."}
+{"prompt": "Explain step by step what happens on a cache miss, including lookup, origin fetch, storage, and response.", "expected_tier": "premium", "reasoning": "Explicit multi-step process."}
+{"prompt": "Explain step by step what happens when a database transaction commits and then the machine crashes.", "expected_tier": "premium", "reasoning": "Explicit step-by-step crash-recovery reasoning."}
+{"prompt": "Explain step by step how password authentication works from login request through verification and session creation.", "expected_tier": "premium", "reasoning": "Explicit multi-step authentication flow."}
+{"prompt": "Explain step by step how a public-key encrypted message can be sent securely and then decrypted.", "expected_tier": "premium", "reasoning": "Explicit multi-step cryptographic process."}
+{"prompt": "Explain step by step how source code becomes machine code through a typical compiler pipeline.", "expected_tier": "premium", "reasoning": "Explicit multi-step process."}
+{"prompt": "What is garbage collection?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Explain step by step how a tracing garbage collector identifies unreachable objects and reclaims memory.", "expected_tier": "premium", "reasoning": "Explicit multi-step algorithmic process."}
+{"prompt": "Explain step by step how DNS resolves a domain name when the answer is not cached.", "expected_tier": "premium", "reasoning": "Explicit multi-step network process."}
+{"prompt": "Explain step by step how TCP establishes a connection and acknowledges transmitted data.", "expected_tier": "premium", "reasoning": "Explicit multi-step protocol explanation."}
+{"prompt": "Explain step by step how to resolve a Git merge conflict and safely complete the merge.", "expected_tier": "premium", "reasoning": "Explicit multi-step procedure."}
+{"prompt": "Explain step by step how to containerize a Python application and deploy it.", "expected_tier": "premium", "reasoning": "Explicit multi-step procedure."}
+{"prompt": "Explain step by step how to deploy an application to Kubernetes with a Deployment and Service.", "expected_tier": "premium", "reasoning": "Explicit multi-step procedure."}
+{"prompt": "Explain step by step how a database uses an index to execute a query.", "expected_tier": "premium", "reasoning": "Explicit multi-step execution explanation."}
+{"prompt": "Explain step by step how a message moves from producer to queue to consumer with acknowledgment and retry.", "expected_tier": "premium", "reasoning": "Explicit multi-step message lifecycle."}
+{"prompt": "Explain step by step how a distributed system handles a node failure and redirects work to another node.", "expected_tier": "premium", "reasoning": "Explicit multi-step failure-handling explanation."}
+{"prompt": "Explain step by step how one failed dependency can cause a retry storm across multiple services.", "expected_tier": "premium", "reasoning": "Explicit multi-step causal analysis."}
+{"prompt": "Explain step by step how a write propagates through asynchronously replicated nodes and becomes eventually consistent.", "expected_tier": "premium", "reasoning": "Explicit multi-step distributed process."}
+{"prompt": "Explain step by step how a leader election proceeds after the current leader fails.", "expected_tier": "premium", "reasoning": "Explicit multi-step distributed algorithm explanation."}
+{"prompt": "What is a cache invalidation strategy?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design and execute a cache invalidation strategy for product updates, including write paths, TTLs, and stale-read handling.", "expected_tier": "premium", "reasoning": "Requires multi-step design and operational reasoning."}
+{"prompt": "What is a deployment pipeline?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create a deployment pipeline plan with build, test, security scan, staging, canary, production, and rollback stages.", "expected_tier": "premium", "reasoning": "Explicit multi-step plan."}
+{"prompt": "What is a study plan?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create a twelve-week study plan for distributed systems with weekly topics, exercises, projects, and review checkpoints.", "expected_tier": "premium", "reasoning": "Explicit multi-step planning."}
+{"prompt": "What is a project plan?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create a project plan for building a SaaS application, including milestones, dependencies, risks, owners, and sequencing.", "expected_tier": "premium", "reasoning": "Explicit multi-step planning."}
+{"prompt": "What is brainstorming?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Generate product ideas, cluster them by market, score them against five criteria, and recommend the top three.", "expected_tier": "premium", "reasoning": "Requires generation, clustering, scoring, and recommendation."}
+{"prompt": "What is prioritization?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Prioritize these ten features using impact, effort, risk, and strategic fit, then produce an implementation sequence.", "expected_tier": "premium", "reasoning": "Requires multi-factor evaluation and planning."}
+{"prompt": "What is a checklist?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Create a production-readiness checklist covering reliability, security, observability, performance, and deployment safety.", "expected_tier": "premium", "reasoning": "Requires multi-domain planning and structured synthesis."}
+{"prompt": "What is a risk?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Identify project risks, score probability and impact, propose mitigations, and prioritize the mitigation work.", "expected_tier": "premium", "reasoning": "Requires multi-step risk analysis and planning."}
+{"prompt": "What is a trade-off?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Evaluate latency, cost, consistency, and availability trade-offs for three architecture options and recommend one.", "expected_tier": "premium", "reasoning": "Explicit multi-dimensional trade-off analysis."}
+{"prompt": "What is a recommendation?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Compare these five architecture options and provide a recommendation supported by explicit criteria and trade-offs.", "expected_tier": "premium", "reasoning": "Requires structured comparison and reasoning."}
+{"prompt": "What is an architecture diagram?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an architecture for an e-commerce platform and explain the data flow, failure modes, and scaling strategy.", "expected_tier": "premium", "reasoning": "Complex system design with multiple reasoning steps."}
+{"prompt": "What is a data pipeline?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a data pipeline that ingests streaming events, validates them, handles late data, aggregates metrics, and stores results.", "expected_tier": "premium", "reasoning": "Multi-stage data-system design."}
+{"prompt": "What is ETL?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion and definition."}
+{"prompt": "Design an ETL pipeline with incremental extraction, schema evolution, validation, retries, and backfills.", "expected_tier": "premium", "reasoning": "Requires multi-step data pipeline design."}
+{"prompt": "What is a data warehouse?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a data warehouse architecture for analytics and explain ingestion, modeling, partitioning, and cost controls.", "expected_tier": "premium", "reasoning": "Requires multi-stage architecture and trade-offs."}
+{"prompt": "What is a data lake?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Compare a data lake and warehouse for an analytics platform and design an architecture combining both where appropriate.", "expected_tier": "premium", "reasoning": "Requires explicit trade-off analysis and architecture design."}
+{"prompt": "What is batch processing?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a batch-processing system for terabytes of daily data with retries, partitioning, checkpoints, and late-arriving records.", "expected_tier": "premium", "reasoning": "Requires multi-step distributed processing design."}
+{"prompt": "What is stream processing?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a stream-processing system with ordering, windowing, late events, state recovery, and exactly-once requirements.", "expected_tier": "premium", "reasoning": "Requires complex multi-step system design."}
+{"prompt": "What is a data partition?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt": "Design partitioning for a streaming workload and analyze hot partitions, skew, rebalancing, and ordering.", "expected_tier": "premium", "reasoning": "Requires multi-factor architecture analysis."}
+{"prompt": "What is a data pipeline retry?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Design retry and checkpoint behavior for a pipeline where some transformations are not idempotent.", "expected_tier": "premium", "reasoning": "Requires correctness reasoning across retries and state."}
+{"prompt": "What is schema evolution?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a schema-evolution policy for events consumed by old and new applications during independent deployments.", "expected_tier": "premium", "reasoning": "Requires compatibility strategy and migration planning."}
+{"prompt": "What is data validation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design data-quality validation for an ingestion pipeline and define handling for invalid, duplicate, late, and missing records.", "expected_tier": "premium", "reasoning": "Requires multi-case pipeline design."}
+{"prompt": "What is data deduplication?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a deduplication strategy for an event stream with retries, reordered messages, and multiple producers.", "expected_tier": "premium", "reasoning": "Requires distributed correctness reasoning."}
+{"prompt": "What is an idempotent operation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an idempotent event-processing pipeline and explain how deduplication state should be persisted and recovered.", "expected_tier": "premium", "reasoning": "Requires multi-step distributed processing design."}
+{"prompt": "What is machine learning inference?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a low-latency ML inference service with batching, model caching, autoscaling, fallbacks, and monitoring.", "expected_tier": "premium", "reasoning": "Requires multi-component system design."}
+{"prompt": "What is model training?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a reproducible ML training pipeline with data versioning, experiment tracking, checkpointing, evaluation, and deployment.", "expected_tier": "premium", "reasoning": "Requires multi-step ML workflow design."}
+{"prompt": "Given training and validation curves, diagnose overfitting and design experiments to test the diagnosis.", "expected_tier": "premium", "reasoning": "Requires interpretation plus experimental planning."}
+{"prompt": "What is precision?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Given predicted and actual labels, calculate precision, recall, F1, and accuracy and interpret the results.", "expected_tier": "premium", "reasoning": "Requires multiple calculations and interpretation steps."}
+{"prompt": "What is recall?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Given a confusion matrix, calculate recall for each class and determine which class requires the most attention.", "expected_tier": "premium", "reasoning": "Requires calculation and comparative interpretation."}
+{"prompt": "What is F1 score?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Compare two classifiers using precision, recall, F1, and business costs and recommend one.", "expected_tier": "premium", "reasoning": "Requires multi-metric trade-off analysis."}
+{"prompt": "Analyze a confusion matrix across five classes and propose a targeted error-reduction strategy.", "expected_tier": "premium", "reasoning": "Requires multi-class analysis and planning."}
+{"prompt": "What is a feature?", "expected_tier": "standard", "reasoning": "Concept explanation in machine learning context."}
+{"prompt": "Design a feature-engineering strategy for a tabular model and explain leakage risks, transformations, and validation.", "expected_tier": "premium", "reasoning": "Requires multi-step ML methodology."}
+{"prompt": "What is data leakage?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Audit a hypothetical ML pipeline for data leakage and propose tests to detect each possible leakage path.", "expected_tier": "premium", "reasoning": "Requires multi-step auditing and testing."}
+{"prompt": "Design cross-validation for grouped time-series data and justify how to prevent temporal leakage.", "expected_tier": "premium", "reasoning": "Requires methodological design and reasoning."}
+{"prompt": "What is hyperparameter tuning?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a hyperparameter-search strategy under a fixed compute budget and explain how to avoid validation-set overfitting.", "expected_tier": "premium", "reasoning": "Requires experimental planning and trade-off analysis."}
+{"prompt": "What is model drift?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a model-drift monitoring and retraining strategy with thresholds, evaluation gates, and rollback.", "expected_tier": "premium", "reasoning": "Requires multi-step operational ML planning."}
+{"prompt": "What is A/B testing?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an A/B test, determine sample-size requirements, define metrics, and specify decision criteria.", "expected_tier": "premium", "reasoning": "Requires multi-step experimental design."}
+{"prompt": "What is statistical significance?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Analyze an experiment result, calculate statistical significance, assess practical significance, and recommend whether to ship.", "expected_tier": "premium", "reasoning": "Requires multi-step statistical interpretation and decision-making."}
+{"prompt": "What is a confidence interval?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Calculate confidence intervals for several metrics and determine whether their differences support a product decision.", "expected_tier": "premium", "reasoning": "Requires multiple calculations and interpretation."}
+{"prompt": "What is a p-value?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Interpret p-values from a multi-group experiment and determine whether the evidence supports the stated hypothesis.", "expected_tier": "premium", "reasoning": "Requires multi-step statistical reasoning."}
+{"prompt": "What is regression?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Build a regression analysis plan, select variables, check assumptions, evaluate residuals, and interpret coefficients.", "expected_tier": "premium", "reasoning": "Explicit multi-step analytical workflow."}
+{"prompt": "What is correlation?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Analyze correlations among ten variables, identify potentially misleading relationships, and propose follow-up tests.", "expected_tier": "premium", "reasoning": "Requires multi-step analysis and experimental planning."}
+{"prompt": "What is causation?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Evaluate whether an observed relationship supports a causal claim and design experiments or controls to test it.", "expected_tier": "premium", "reasoning": "Requires causal reasoning and study design."}
+{"prompt": "What is linear regression?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Derive the ordinary least-squares estimator for linear regression and explain each mathematical step.", "expected_tier": "premium", "reasoning": "Explicit derivation requires multi-step mathematical reasoning."}
+{"prompt": "Implement gradient descent from scratch in Python and explain convergence behavior.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "What is backpropagation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Derive backpropagation for a two-layer neural network using the chain rule.", "expected_tier": "premium", "reasoning": "Mathematical derivation is multi-step."}
+{"prompt": "What is attention in transformers?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Implement scaled dot-product attention in Python and analyze its time and memory complexity.", "expected_tier": "premium", "reasoning": "Code plus complexity analysis triggers premium."}
+{"prompt": "What is a language model?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an LLM inference gateway that routes requests among models based on cost, latency, complexity, and fallback requirements.", "expected_tier": "premium", "reasoning": "Complex system design with explicit trade-offs."}
+{"prompt": "What is model routing?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a model router that classifies prompt complexity, selects tiers, handles uncertainty, and measures routing errors.", "expected_tier": "premium", "reasoning": "Requires multi-step system design and evaluation planning."}
+{"prompt": "What is prompt classification?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a prompt-classification benchmark with a golden set, adversarial pairs, metrics, and regression testing.", "expected_tier": "premium", "reasoning": "Requires multi-step benchmark and evaluation design."}
+{"prompt": "What is a golden set?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create a golden-set labeling methodology that handles ambiguity, adversarial examples, inter-rater disagreement, and regression tracking.", "expected_tier": "premium", "reasoning": "Requires multi-step evaluation methodology."}
+{"prompt": "What is model latency?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Design a model-routing strategy that optimizes latency and cost while maintaining a target answer-quality threshold.", "expected_tier": "premium", "reasoning": "Requires multi-objective optimization and system design."}
+{"prompt": "What is token usage?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Design a token-budgeting strategy for an LLM gateway that balances context length, latency, cost, and answer quality.", "expected_tier": "premium", "reasoning": "Requires multi-objective system design."}
+{"prompt": "What is a fallback model?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design fallback behavior for an LLM gateway when the selected provider times out, rate-limits, or returns an error.", "expected_tier": "premium", "reasoning": "Requires multi-case reliability design."}
+{"prompt": "What is provider failover?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design multi-provider LLM failover with health checks, retry budgets, circuit breakers, and request deduplication.", "expected_tier": "premium", "reasoning": "Requires multi-component reliability architecture."}
+{"prompt": "What is a model tier?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design three model tiers for an LLM gateway and define routing criteria, fallback rules, and evaluation metrics.", "expected_tier": "premium", "reasoning": "Requires multi-step architecture and policy design."}
+{"prompt": "What is prompt complexity?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create a prompt-complexity scoring system that distinguishes factual, explanatory, coding, reasoning, and system-design requests.", "expected_tier": "premium", "reasoning": "Requires multi-category classification design."}
+{"prompt": "What is a classifier?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a classifier evaluation strategy using precision, recall, confusion matrices, adversarial pairs, and threshold tuning.", "expected_tier": "premium", "reasoning": "Requires multi-step evaluation design."}
+{"prompt": "What is precision in classification?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Choose a classification threshold using precision, recall, false-positive cost, and false-negative cost and justify the choice.", "expected_tier": "premium", "reasoning": "Requires multi-factor decision analysis."}
+{"prompt": "What is recall in classification?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Optimize a router for premium-recall while controlling unnecessary premium usage and explain the resulting trade-off.", "expected_tier": "premium", "reasoning": "Requires metric trade-off analysis and optimization."}
+{"prompt": "What is a false positive?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Analyze the cost of false-positive versus false-negative routing decisions and determine an appropriate decision threshold.", "expected_tier": "premium", "reasoning": "Requires multi-factor cost analysis."}
+{"prompt": "What is a false negative?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Design a routing policy that minimizes costly false negatives without sending every ambiguous prompt to premium.", "expected_tier": "premium", "reasoning": "Requires multi-objective policy design."}
+{"prompt": "What is an adversarial example?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create adversarial routing examples that preserve topic while changing cognitive load and explain why each pair should receive different tiers.", "expected_tier": "premium", "reasoning": "Requires systematic dataset construction and reasoning."}
+{"prompt": "What is cognitive load?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a rubric for scoring cognitive load in user prompts and map the scores to three model tiers.", "expected_tier": "premium", "reasoning": "Requires multi-step rubric and policy design."}
+{"prompt": "What is an ambiguous prompt?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an ambiguity-handling policy for a model router and test it against cheap, standard, and premium boundary cases.", "expected_tier": "premium", "reasoning": "Requires policy design and multi-case evaluation."}
+{"prompt": "What is a routing error?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a routing-error analysis workflow that identifies systematic misclassification patterns and feeds them back into the golden set.", "expected_tier": "premium", "reasoning": "Requires multi-step evaluation and improvement planning."}
+{"prompt": "What is a regression test?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design regression tests for an LLM router that detect tier drift after model or prompt-classifier changes.", "expected_tier": "premium", "reasoning": "Requires evaluation architecture and test planning."}
+{"prompt": "What is benchmark accuracy?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a benchmark that measures tier accuracy, premium recall, unnecessary-premium rate, and cost-weighted routing quality.", "expected_tier": "premium", "reasoning": "Requires multi-metric benchmark design."}
+{"prompt": "What is cost-sensitive classification?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a cost-sensitive objective for routing among cheap, standard, and premium models and explain how errors should be weighted.", "expected_tier": "premium", "reasoning": "Requires multi-class objective design."}
+{"prompt": "What is model quality?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an evaluation framework that measures answer quality separately from routing correctness and combines them into a decision metric.", "expected_tier": "premium", "reasoning": "Requires multi-stage evaluation design."}
+{"prompt": "What is uncertainty?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an uncertainty policy that routes low-confidence prompts to a higher tier without causing excessive premium usage.", "expected_tier": "premium", "reasoning": "Requires multi-objective routing design."}
+{"prompt": "What is escalation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an escalation mechanism that upgrades a request when the initial model detects insufficient reasoning capability.", "expected_tier": "premium", "reasoning": "Requires multi-step routing architecture."}
+{"prompt": "What is a fallback?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a fallback chain for three model tiers while preventing infinite retries and unnecessary duplicate inference.", "expected_tier": "premium", "reasoning": "Requires multi-step reliability design."}
+{"prompt": "What is a timeout budget?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an end-to-end timeout budget for an LLM gateway including classification, provider calls, retries, and fallback inference.", "expected_tier": "premium", "reasoning": "Requires multi-stage latency-budget design."}
+{"prompt": "Implement a circuit breaker for an async Python LLM provider client.", "expected_tier": "premium", "reasoning": "Code triggers premium regardless of task length."}
+{"prompt": "Write Python code using Redis to implement distributed request deduplication.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "What is async/await?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Refactor this synchronous HTTP call into async/await Python code and handle timeout and retry behavior.", "expected_tier": "premium", "reasoning": "Code refactoring triggers premium."}
+{"prompt": "Explain Python decorators with two conceptual examples without writing code.", "expected_tier": "standard", "reasoning": "Concept explanation without implementation."}
+{"prompt": "Explain linked lists, arrays, and hash tables and compare their lookup and insertion trade-offs.", "expected_tier": "standard", "reasoning": "Conceptual comparison without implementation."}
+{"prompt": "What is a hash table?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a hash-table implementation strategy, including collision handling, resizing, and complexity guarantees.", "expected_tier": "premium", "reasoning": "Requires multi-step data-structure design."}
+{"prompt": "What is sorting?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Compare merge sort, quicksort, and heapsort and recommend one for a memory-constrained application.", "expected_tier": "premium", "reasoning": "Requires algorithm comparison and trade-off analysis."}
+{"prompt": "What is a sorting algorithm?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Derive the lower bound for comparison-based sorting and explain why it applies.", "expected_tier": "premium", "reasoning": "Mathematical derivation requires multi-step reasoning."}
+{"prompt": "What is a prime number?", "expected_tier": "cheap", "reasoning": "One-shot mathematical definition."}
+{"prompt": "Prove that there are infinitely many primes.", "expected_tier": "premium", "reasoning": "Proof requires multi-step mathematical reasoning."}
+{"prompt": "What is a derivative?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Derive the derivative of sin(x) from first principles using the limit definition.", "expected_tier": "premium", "reasoning": "Explicit derivation requires multi-step mathematics."}
+{"prompt": "What is an integral?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Derive the integral of x squared from the definition and explain each step.", "expected_tier": "premium", "reasoning": "Explicit derivation requires multi-step mathematics."}
+{"prompt": "What is a matrix?", "expected_tier": "cheap", "reasoning": "One-shot mathematical definition."}
+{"prompt": "Explain matrix multiplication and work through a complete example step by step.", "expected_tier": "premium", "reasoning": "Explicit step-by-step mathematical procedure."}
+{"prompt": "What is a vector?", "expected_tier": "cheap", "reasoning": "One-shot mathematical definition."}
+{"prompt": "Explain how to solve a system of linear equations using Gaussian elimination step by step.", "expected_tier": "premium", "reasoning": "Explicit multi-step mathematical procedure."}
+{"prompt": "What is probability?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Solve a multi-stage probability problem involving conditional probability and Bayes' theorem and show all steps.", "expected_tier": "premium", "reasoning": "Multi-step mathematical reasoning."}
+{"prompt": "What is Bayes' theorem?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Derive Bayes' theorem from the definition of conditional probability.", "expected_tier": "premium", "reasoning": "Explicit derivation requires multi-step reasoning."}
+{"prompt": "Derive a confidence interval for a population mean under stated distributional assumptions.", "expected_tier": "premium", "reasoning": "Mathematical derivation requires multi-step reasoning."}
+{"prompt": "What is a hypothesis test?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design and execute a hypothesis test for a product experiment, including assumptions, statistic, p-value, and conclusion.", "expected_tier": "premium", "reasoning": "Requires a multi-step statistical workflow."}
+{"prompt": "What is a sample?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Design a sampling strategy for a biased population and explain how to reduce selection bias.", "expected_tier": "premium", "reasoning": "Requires methodological design and trade-off reasoning."}
+{"prompt": "What is an outlier?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Develop a robust outlier-detection strategy for a dataset and determine when outliers should be removed versus retained.", "expected_tier": "premium", "reasoning": "Requires multi-step analysis and decision criteria."}
+{"prompt": "What is normalization in machine learning?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a preprocessing pipeline that avoids normalization leakage between training and validation sets.", "expected_tier": "premium", "reasoning": "Requires multi-step ML pipeline reasoning."}
+{"prompt": "What is standardization?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Compare normalization and standardization for several model types and recommend preprocessing choices.", "expected_tier": "premium", "reasoning": "Requires multi-case trade-off analysis."}
+{"prompt": "What is a learning rate?", "expected_tier": "cheap", "reasoning": "Short factual definition."}
+{"prompt": "Design a learning-rate schedule and explain how you would tune it based on observed training behavior.", "expected_tier": "premium", "reasoning": "Requires multi-step experimental planning."}
+{"prompt": "What is an epoch?", "expected_tier": "cheap", "reasoning": "One-shot ML definition."}
+{"prompt": "Design a training schedule including epochs, early stopping, checkpointing, and validation-based model selection.", "expected_tier": "premium", "reasoning": "Requires multi-step training-plan design."}
+{"prompt": "What is batch size?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Choose a batch size under GPU-memory and latency constraints and explain the optimization trade-offs.", "expected_tier": "premium", "reasoning": "Requires constraint-based reasoning."}
+{"prompt": "What is inference latency?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Optimize inference latency by comparing batching, quantization, caching, model size, and hardware choices.", "expected_tier": "premium", "reasoning": "Requires multi-factor optimization and trade-off analysis."}
+{"prompt": "What is quantization?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a model-quantization strategy and evaluate its expected effects on latency, memory, cost, and accuracy.", "expected_tier": "premium", "reasoning": "Requires multi-objective technical analysis."}
+{"prompt": "What is model distillation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a knowledge-distillation pipeline and specify teacher, student, loss terms, evaluation, and deployment criteria.", "expected_tier": "premium", "reasoning": "Requires multi-step ML system design."}
+{"prompt": "What is fine-tuning?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a fine-tuning pipeline for an LLM including dataset preparation, evaluation, hyperparameters, safety checks, and deployment.", "expected_tier": "premium", "reasoning": "Requires multi-step ML planning."}
+{"prompt": "What is retrieval-augmented generation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a production RAG system with ingestion, chunking, retrieval, reranking, citations, evaluation, and fallback behavior.", "expected_tier": "premium", "reasoning": "Complex multi-stage system design."}
+{"prompt": "What is semantic search?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a semantic-search system and compare vector retrieval, keyword retrieval, hybrid search, and reranking.", "expected_tier": "premium", "reasoning": "Requires architecture and trade-off analysis."}
+{"prompt": "What is a vector embedding?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an embedding-index update strategy for frequently changing documents while preserving search quality.", "expected_tier": "premium", "reasoning": "Requires multi-step indexing and consistency design."}
+{"prompt": "What is tokenization?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Analyze how tokenization affects context limits, latency, cost, and multilingual inputs and propose routing safeguards.", "expected_tier": "premium", "reasoning": "Requires multi-factor analysis and policy design."}
+{"prompt": "What is a context window?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design context-window management for an LLM gateway that handles long documents while controlling cost and latency.", "expected_tier": "premium", "reasoning": "Requires multi-step architecture and optimization."}
+{"prompt": "What is prompt truncation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a prompt-truncation strategy that preserves important instructions and relevant evidence under strict token limits.", "expected_tier": "premium", "reasoning": "Requires multi-step prioritization and policy design."}
+{"prompt": "What is summarization?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a hierarchical summarization pipeline for documents longer than the model context window.", "expected_tier": "premium", "reasoning": "Requires multi-stage processing design."}
+{"prompt": "What is a prompt template?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Design a prompt-template system with versioning, validation, rollback, experimentation, and per-model variants.", "expected_tier": "premium", "reasoning": "Requires multi-step system and workflow design."}
+{"prompt": "What is prompt injection?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design defenses against prompt injection for an LLM application that can call external tools and access private data.", "expected_tier": "premium", "reasoning": "Requires complex security architecture."}
+{"prompt": "What is tool calling?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a secure tool-calling architecture for an LLM agent with permissions, validation, retries, audit logs, and sandboxing.", "expected_tier": "premium", "reasoning": "Requires multi-step agent and security design."}
+{"prompt": "What is an LLM agent?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an LLM agent architecture with planning, tool execution, state management, retries, and human escalation.", "expected_tier": "premium", "reasoning": "Complex multi-component architecture."}
+{"prompt": "What is function calling?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design function-calling validation that prevents malformed arguments, unauthorized actions, and unsafe retries.", "expected_tier": "premium", "reasoning": "Requires multi-step safety and reliability design."}
+{"prompt": "What is structured output?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a structured-output validation and recovery pipeline for an LLM that must return strict JSON.", "expected_tier": "premium", "reasoning": "Requires multi-step validation and fallback design."}
+{"prompt": "What is JSON validation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Implement JSON validation and automatic retry logic for malformed LLM responses.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "What is model fallback?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a fallback strategy that upgrades a request from cheap to standard to premium only when necessary.", "expected_tier": "premium", "reasoning": "Requires multi-stage routing policy design."}
+{"prompt": "What is prompt routing?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an LLM prompt router using cheap, standard, and premium tiers and define how it should handle ambiguous requests.", "expected_tier": "premium", "reasoning": "Requires multi-tier policy design and ambiguity handling."}
+{"prompt": "What is an LLM router?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Build a golden-set evaluation strategy for an LLM router with tier accuracy, premium recall, adversarial pairs, and cost analysis.", "expected_tier": "premium", "reasoning": "Requires multi-step evaluation design."}
+{"prompt": "What is a golden-set label?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create labeling rules for 500 prompts and resolve disagreements between annotators using a minimum-sufficient-tier principle.", "expected_tier": "premium", "reasoning": "Requires multi-step dataset methodology."}
+{"prompt": "What is minimum sufficient capability?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Apply a minimum-sufficient-tier rubric to a set of boundary prompts and explain each classification decision.", "expected_tier": "premium", "reasoning": "Applying the rubric across cases requires multi-step analysis."}
+{"prompt": "What is an adversarial pair?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Generate 20 adversarial prompt pairs where the topic remains constant but cognitive load changes the required tier.", "expected_tier": "premium", "reasoning": "Requires systematic multi-example dataset generation and classification."}
+{"prompt": "What is a boundary case?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Construct boundary cases between cheap and standard and between standard and premium, then explain the distinguishing cognitive-load features.", "expected_tier": "premium", "reasoning": "Requires multi-case analysis and dataset construction."}
+{"prompt": "What is a routing benchmark?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a routing benchmark with stratified samples, adversarial pairs, confidence intervals, cost metrics, and regression thresholds.", "expected_tier": "premium", "reasoning": "Requires comprehensive benchmark design."}
+{"prompt": "What is precision-recall trade-off?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Choose a routing threshold by balancing premium recall against unnecessary premium usage and quantify the trade-off.", "expected_tier": "premium", "reasoning": "Requires multi-objective quantitative reasoning."}
+{"prompt": "What is an evaluation metric?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Define a cost-weighted routing metric that penalizes premium overuse and under-routing difficult requests differently.", "expected_tier": "premium", "reasoning": "Requires metric design and asymmetric cost reasoning."}
+{"prompt": "What is model capability?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Develop a capability matrix mapping prompt types to model tiers and identify cases where a lower tier is minimally sufficient.", "expected_tier": "premium", "reasoning": "Requires multi-category policy construction."}
+{"prompt": "What is prompt difficulty?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a prompt-difficulty taxonomy based on reasoning depth, domain expertise, output structure, and error cost.", "expected_tier": "premium", "reasoning": "Requires multi-dimensional taxonomy design."}
+{"prompt": "What is error cost?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create an error-cost framework for routing decisions and determine which prompt categories should receive conservative escalation.", "expected_tier": "premium", "reasoning": "Requires multi-category risk analysis."}
+{"prompt": "Given three models with different costs and capabilities, design a routing policy that minimizes cost subject to quality constraints.", "expected_tier": "premium", "reasoning": "Requires constrained optimization and policy design."}
+{"prompt": "What is a quality threshold?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a quality threshold for routing and explain how to calibrate it using a labeled golden set and human evaluations.", "expected_tier": "premium", "reasoning": "Requires multi-step evaluation methodology."}
+{"prompt": "What is calibration?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Calibrate routing confidence scores using validation data and determine thresholds for escalation.", "expected_tier": "premium", "reasoning": "Requires multi-step statistical and routing analysis."}
+{"prompt": "What is confidence scoring?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a confidence-scoring mechanism for a router and evaluate whether low-confidence cases should escalate.", "expected_tier": "premium", "reasoning": "Requires multi-step routing and evaluation design."}
+{"prompt": "What is an escalation threshold?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Tune escalation thresholds to minimize cost while maintaining a specified premium-recall target.", "expected_tier": "premium", "reasoning": "Requires constrained optimization."}
+{"prompt": "Use a three-class routing confusion matrix to calculate per-tier precision and recall and identify the most costly failure mode.", "expected_tier": "premium", "reasoning": "Requires multiple calculations and cost-sensitive interpretation."}
+{"prompt": "What is a false positive in routing?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Analyze false-positive premium routing across prompt categories and propose targeted changes to reduce unnecessary escalation.", "expected_tier": "premium", "reasoning": "Requires multi-category analysis and remediation planning."}
+{"prompt": "What is a false negative in routing?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Analyze premium false negatives, identify the likely causes, and propose new adversarial examples to prevent regression.", "expected_tier": "premium", "reasoning": "Requires diagnosis plus dataset construction."}
+{"prompt": "What is cost per request?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Optimize model selection to minimize average request cost while preserving quality across a heterogeneous workload.", "expected_tier": "premium", "reasoning": "Requires multi-objective optimization."}
+{"prompt": "Design a router architecture that maximizes throughput while handling provider rate limits, retries, and fallback models.", "expected_tier": "premium", "reasoning": "Requires multi-component performance and reliability design."}
+{"prompt": "What is concurrency?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design concurrency limits for a multi-provider LLM gateway and explain how limits should interact with queues and retries.", "expected_tier": "premium", "reasoning": "Requires multi-step gateway design."}
+{"prompt": "Implement an async semaphore-based concurrency limiter for an LLM provider in Python.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "Design request queues for three LLM tiers and explain prioritization, starvation prevention, and backpressure.", "expected_tier": "premium", "reasoning": "Requires multi-step queueing-system design."}
+{"prompt": "Implement backpressure in an async Python request pipeline with bounded queues and cancellation.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "Design provider-specific rate limits for an LLM gateway and explain how requests should be queued or rerouted when limits are reached.", "expected_tier": "premium", "reasoning": "Requires multi-provider routing and queueing design."}
+{"prompt": "What is provider latency?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Design a provider-selection policy that accounts for latency, cost, reliability, and model capability.", "expected_tier": "premium", "reasoning": "Requires multi-objective routing design."}
+{"prompt": "What is provider reliability?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a provider-health scoring system that influences routing and failover decisions.", "expected_tier": "premium", "reasoning": "Requires multi-factor system design."}
+{"prompt": "What is a health score?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Design a health score from error rate, latency, timeouts, and availability and explain how it should affect routing.", "expected_tier": "premium", "reasoning": "Requires metric construction and routing policy design."}
+{"prompt": "What is exponential backoff?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an exponential-backoff policy with jitter for an LLM gateway and analyze retry-storm behavior.", "expected_tier": "premium", "reasoning": "Requires reliability design and failure analysis."}
+{"prompt": "What is jitter?", "expected_tier": "cheap", "reasoning": "Short factual definition."}
+{"prompt": "Compare full jitter, equal jitter, and decorrelated jitter and recommend one for provider retries.", "expected_tier": "premium", "reasoning": "Requires trade-off analysis."}
+{"prompt": "What is a retry budget?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design retry budgets across nested services so that total retry amplification remains bounded.", "expected_tier": "premium", "reasoning": "Requires multi-layer reliability reasoning."}
+{"prompt": "Design timeout values for classification, cheap inference, standard inference, premium inference, and fallback while meeting an end-to-end SLA.", "expected_tier": "premium", "reasoning": "Requires multi-stage latency-budget design."}
+{"prompt": "Design an SLA-aware routing policy that selects models based on remaining request time and expected provider latency.", "expected_tier": "premium", "reasoning": "Requires dynamic routing and latency reasoning."}
+{"prompt": "What is a cache key?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt": "Design cache keys for an LLM gateway that correctly account for model, prompt, parameters, and relevant context.", "expected_tier": "premium", "reasoning": "Requires multi-factor cache design."}
+{"prompt": "What is cache poisoning?", "expected_tier": "standard", "reasoning": "Security concept explanation."}
+{"prompt": "Design defenses against cache poisoning in an LLM response cache and explain validation and isolation requirements.", "expected_tier": "premium", "reasoning": "Requires multi-step security architecture."}
+{"prompt": "What is request deduplication?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design request deduplication for concurrent identical LLM requests while ensuring different users' private context cannot collide.", "expected_tier": "premium", "reasoning": "Requires multi-step correctness and privacy-aware cache design."}
+{"prompt": "What is streaming?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design token streaming from an LLM provider through an API gateway while handling disconnects, retries, buffering, and partial responses.", "expected_tier": "premium", "reasoning": "Requires multi-step streaming architecture."}
+{"prompt": "What is Server-Sent Events?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an SSE-based LLM streaming API with reconnect behavior, event IDs, buffering, and authentication.", "expected_tier": "premium", "reasoning": "Requires multi-step real-time API design."}
+{"prompt": "What is WebSocket?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a WebSocket-based LLM streaming service with connection limits, authentication, reconnects, and backpressure.", "expected_tier": "premium", "reasoning": "Requires multi-component real-time system design."}
+{"prompt": "What is an API response?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Design an API response schema for an LLM gateway that includes model metadata, usage, errors, fallback information, and streaming status.", "expected_tier": "premium", "reasoning": "Requires multi-field API design."}
+{"prompt": "What is an API error?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Design a standardized error taxonomy for an LLM gateway covering validation, provider, timeout, rate-limit, and routing failures.", "expected_tier": "premium", "reasoning": "Requires multi-case API and reliability design."}
+{"prompt": "What is HTTP 429?", "expected_tier": "cheap", "reasoning": "One-shot factual technical lookup."}
+{"prompt": "Design gateway behavior for provider HTTP 429 responses, including backoff, queueing, alternate providers, and retry limits.", "expected_tier": "premium", "reasoning": "Requires multi-step reliability and routing design."}
+{"prompt": "What is HTTP 500?", "expected_tier": "cheap", "reasoning": "One-shot factual technical lookup."}
+{"prompt": "Design gateway behavior for provider HTTP 500 responses, including classification of transient failures and fallback decisions.", "expected_tier": "premium", "reasoning": "Requires multi-case failure handling."}
+{"prompt": "What is HTTP 408?", "expected_tier": "cheap", "reasoning": "One-shot factual technical lookup."}
+{"prompt": "Design timeout handling for HTTP 408 and equivalent provider timeouts while preventing duplicate inference.", "expected_tier": "premium", "reasoning": "Requires multi-step reliability and deduplication reasoning."}
+{"prompt": "What is an API key?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Design API-key management for a multi-tenant LLM gateway including storage, rotation, revocation, and auditability.", "expected_tier": "premium", "reasoning": "Requires multi-step security architecture."}
+{"prompt": "What is a secret?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Design secret management for an LLM gateway deployed across multiple environments and providers.", "expected_tier": "premium", "reasoning": "Requires multi-environment security design."}
+{"prompt": "What is least privilege?", "expected_tier": "standard", "reasoning": "Security concept explanation."}
+{"prompt": "Apply least privilege to an LLM gateway's provider credentials, database access, and tool permissions and propose an architecture.", "expected_tier": "premium", "reasoning": "Requires multi-component security design."}
+{"prompt": "What is audit logging?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design audit logging for an LLM gateway that tracks routing decisions, provider calls, administrative changes, and sensitive-data exposure.", "expected_tier": "premium", "reasoning": "Requires multi-component security and observability design."}
+{"prompt": "What is PII?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Design a PII-handling strategy for an LLM gateway including detection, redaction, retention, logging, and provider boundaries.", "expected_tier": "premium", "reasoning": "Requires multi-step privacy architecture."}
+{"prompt": "What is data retention?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design retention policies for prompts, responses, logs, metrics, and audit records while balancing debugging needs and privacy.", "expected_tier": "premium", "reasoning": "Requires multi-category policy design."}
+{"prompt": "What is encryption in transit?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design encryption-in-transit requirements for an LLM gateway communicating with users, internal services, and external providers.", "expected_tier": "premium", "reasoning": "Requires multi-hop security architecture."}
+{"prompt": "Implement authentication middleware in Python for an API gateway and validate authorization scopes.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "Write code implementing role-based authorization for three user roles.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "Write code validating an LLM request payload against a schema.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "Write a JSON Schema for an LLM completion request with model, messages, and temperature fields.", "expected_tier": "premium", "reasoning": "Schema implementation triggers premium."}
+{"prompt": "Write YAML configuration for three LLM providers with timeouts, retry limits, and model tiers.", "expected_tier": "premium", "reasoning": "Configuration implementation triggers premium."}
+{"prompt": "What is environment configuration?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design environment configuration for development, testing, staging, and production while preventing secrets from being committed.", "expected_tier": "premium", "reasoning": "Requires multi-environment configuration design."}
+{"prompt": "What is a configuration file?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Design a configuration hierarchy that supports defaults, environment overrides, validation, and secret injection.", "expected_tier": "premium", "reasoning": "Requires multi-step configuration design."}
+{"prompt": "What is dependency management?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design dependency-management rules for a production Python service, including pinning, lockfiles, security scanning, and upgrades.", "expected_tier": "premium", "reasoning": "Requires multi-step engineering policy design."}
+{"prompt": "What is a virtual environment?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt": "Write a Python setup script that creates a virtual environment, installs dependencies, and runs tests.", "expected_tier": "premium", "reasoning": "Code/script implementation triggers premium."}
+{"prompt": "What is pytest?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Write pytest tests for an async LLM router including provider failures and fallback behavior.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "What is a fixture in pytest?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Write pytest fixtures for a fake Redis cache and mocked HTTP provider responses.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "What is mocking HTTP requests?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Implement HTTP request mocks for provider tests using Python and pytest.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "What is a test double?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a testing strategy using mocks, stubs, fakes, and recorded responses and determine where each belongs.", "expected_tier": "premium", "reasoning": "Requires multi-step testing strategy."}
+{"prompt": "Implement contract tests between an LLM gateway and a provider adapter.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "What is a provider adapter?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design provider adapters for three LLM vendors behind a common interface and explain capability differences and fallbacks.", "expected_tier": "premium", "reasoning": "Requires multi-provider architecture and trade-off reasoning."}
+{"prompt": "What is an interface?", "expected_tier": "cheap", "reasoning": "Short factual programming definition."}
+{"prompt": "Design a provider interface that supports streaming, retries, usage accounting, and provider-specific capabilities.", "expected_tier": "premium", "reasoning": "Requires multi-feature interface design."}
+{"prompt": "What is dependency inversion?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Refactor an LLM gateway around dependency inversion and explain the testing and provider-isolation benefits.", "expected_tier": "premium", "reasoning": "Code-oriented refactoring plus architecture reasoning triggers premium."}
+{"prompt": "What is clean architecture?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a clean architecture for an LLM gateway and map domain, application, infrastructure, and interface layers.", "expected_tier": "premium", "reasoning": "Requires multi-layer architecture design."}
+{"prompt": "What is hexagonal architecture?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a hexagonal architecture for an LLM gateway with provider adapters, caching, routing, and observability.", "expected_tier": "premium", "reasoning": "Requires multi-component architecture design."}
+{"prompt": "What is separation of concerns?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Refactor a tightly coupled LLM gateway into separate routing, provider, caching, and observability components.", "expected_tier": "premium", "reasoning": "Requires code-oriented refactoring and architectural decomposition."}
+{"prompt": "Implement dependency injection for provider adapters in Python and write tests using fake providers.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "What is an interface contract?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design and validate an interface contract for LLM providers that supports sync, async, and streaming responses.", "expected_tier": "premium", "reasoning": "Requires multi-mode interface design."}
+{"prompt": "What is an adapter pattern?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design an adapter layer that normalizes three providers with incompatible request and response formats.", "expected_tier": "premium", "reasoning": "Requires multi-provider architecture and normalization logic."}
+{"prompt": "What is a factory pattern?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Implement a factory that selects an LLM provider based on model tier and runtime configuration.", "expected_tier": "premium", "reasoning": "Code triggers premium."}
+{"prompt": "Explain dependency inversion with a simple conceptual example without code.", "expected_tier": "standard", "reasoning": "Concept explanation only; no implementation."}
+{"prompt": "What is a cache stampede?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a cache-stampede prevention strategy using request coalescing, jittered expiration, and stale-while-revalidate.", "expected_tier": "premium", "reasoning": "Requires multi-strategy system design."}
+{"prompt": "What is stale-while-revalidate?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Compare stale-while-revalidate, request coalescing, and probabilistic early refresh for preventing cache stampedes.", "expected_tier": "premium", "reasoning": "Explicit trade-off analysis."}
+{"prompt": "What is cache warming?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a cache-warming strategy after deployment and analyze its effect on load, latency, and cold-start behavior.", "expected_tier": "premium", "reasoning": "Requires multi-factor architecture analysis."}
+{"prompt": "What is TTL?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt": "Choose TTL values for different LLM response classes based on freshness, cost, and expected request frequency.", "expected_tier": "premium", "reasoning": "Requires multi-factor optimization."}
+{"prompt": "What does TTL stand for?", "expected_tier": "cheap", "reasoning": "One-shot acronym expansion."}
+{"prompt": "Design TTL behavior for cached LLM responses with user-specific context and model-version changes.", "expected_tier": "premium", "reasoning": "Requires cache correctness and versioning design."}
+{"prompt": "What is cache invalidation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design cache invalidation for model upgrades so that old responses cannot incorrectly satisfy requests intended for the new model.", "expected_tier": "premium", "reasoning": "Requires multi-factor cache correctness design."}
+{"prompt": "What is model versioning?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design model-version-aware caching and evaluation so that model upgrades can be rolled out and rolled back safely.", "expected_tier": "premium", "reasoning": "Requires multi-step deployment and cache design."}
+{"prompt": "Design an A/B test comparing two LLM routing policies while controlling for prompt category and workload mix.", "expected_tier": "premium", "reasoning": "Requires experimental design and confound control."}
+{"prompt": "What is a control group?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Design control and treatment groups for a model-routing experiment and explain how to prevent workload imbalance.", "expected_tier": "premium", "reasoning": "Requires experimental design."}
+{"prompt": "What is randomization?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a randomization strategy for an LLM-routing experiment that accounts for repeated users and prompt-category imbalance.", "expected_tier": "premium", "reasoning": "Requires multi-factor experimental design."}
+{"prompt": "Compare confidence intervals for routing accuracy across two model versions and determine whether the observed improvement is meaningful.", "expected_tier": "premium", "reasoning": "Requires statistical comparison and interpretation."}
+{"prompt": "What is statistical power?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Calculate the sample size needed to detect a specified improvement in premium recall with a given statistical power.", "expected_tier": "premium", "reasoning": "Requires multi-step statistical calculation."}
+{"prompt": "What is sample size?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt": "Design a golden-set sample-size strategy that covers rare premium-worthy prompts and boundary cases.", "expected_tier": "premium", "reasoning": "Requires sampling and coverage planning."}
+{"prompt": "What is stratified sampling?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design a stratified sampling scheme for a router golden set with balanced tiers, topics, and adversarial pairs.", "expected_tier": "premium", "reasoning": "Requires multi-dimensional sampling design."}
+{"prompt": "What is dataset imbalance?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Analyze tier imbalance in a routing dataset and design a rebalancing strategy without distorting the production workload distribution.", "expected_tier": "premium", "reasoning": "Requires multi-objective dataset design."}
+{"prompt": "What is data augmentation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design adversarial prompt augmentation for an LLM router while preserving intent and changing cognitive load.", "expected_tier": "premium", "reasoning": "Requires systematic dataset generation."}
+{"prompt": "What is paraphrasing?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Generate paraphrases of routing examples while preserving expected tier labels and identify cases where paraphrasing changes cognitive load.", "expected_tier": "premium", "reasoning": "Requires generation plus classification analysis."}
+{"prompt": "What is prompt length?", "expected_tier": "cheap", "reasoning": "Simple factual definition."}
+{"prompt": "Analyze whether prompt length predicts routing difficulty and design an experiment to separate length from reasoning complexity.", "expected_tier": "premium", "reasoning": "Requires causal analysis and experiment design."}
+{"prompt": "What is a long prompt?", "expected_tier": "cheap", "reasoning": "Simple definitional question."}
+{"prompt": "Create adversarial long prompts that require only cheap answers and short prompts that require premium reasoning.", "expected_tier": "premium", "reasoning": "Requires systematic adversarial dataset construction."}
+{"prompt": "What is a technical keyword?", "expected_tier": "cheap", "reasoning": "Simple definition."}
+{"prompt": "Create keyword-bait adversarial prompts where technical terms appear but the actual task remains cheap, and pair them with genuinely premium tasks.", "expected_tier": "premium", "reasoning": "Requires adversarial dataset construction and contrastive reasoning."}
+{"prompt": "What is prompt formatting?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Design formatting adversaries that test whether a router relies incorrectly on markdown, JSON, headings, or capitalization.", "expected_tier": "premium", "reasoning": "Requires systematic adversarial evaluation design."}
+{"prompt": "What is ambiguity?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Construct ambiguous prompts and define a policy that always routes them to standard unless explicit evidence requires premium.", "expected_tier": "premium", "reasoning": "Requires multi-case policy construction."}
+{"prompt": "What is a one-shot factual question?", "expected_tier": "standard", "reasoning": "Concept explanation of a routing category."}
+{"prompt": "Create a taxonomy of one-shot factual prompts that should remain cheap even when they mention complex technical systems.", "expected_tier": "premium", "reasoning": "Requires systematic taxonomy construction."}
+{"prompt": "What is a multi-step prompt?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Generate examples of multi-step tasks across writing, mathematics, coding, planning, and analysis and label their tiers.", "expected_tier": "premium", "reasoning": "Requires multi-domain dataset generation and classification."}
+{"prompt": "What is code generation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create adversarial code prompts where implementation length varies from one line to hundreds of lines while all remain premium.", "expected_tier": "premium", "reasoning": "Requires systematic adversarial dataset construction based on the code edge rule."}
+{"prompt": "What is a proof?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Create mathematical prompts ranging from factual definitions to multi-step proofs and derive the correct tier boundaries.", "expected_tier": "premium", "reasoning": "Requires multi-example classification and boundary analysis."}
+{"prompt": "What is a derivation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Generate adversarial pairs where the first prompt asks for a formula and the second asks for its derivation.", "expected_tier": "premium", "reasoning": "Requires systematic contrastive dataset construction."}
+{"prompt": "What is a plan?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Generate prompts where a single recommendation is standard but a request to sequence actions, dependencies, and milestones is premium.", "expected_tier": "premium", "reasoning": "Requires multi-example construction around the multi-step edge rule."}
+{"prompt": "What is trade-off analysis?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Generate adversarial pairs where one prompt asks for a definition and the other asks to compare alternatives and recommend one.", "expected_tier": "premium", "reasoning": "Requires systematic contrastive construction."}
+{"prompt": "Generate adversarial pairs where one prompt only summarizes and the other summarizes, evaluates claims, and recommends an action.", "expected_tier": "premium", "reasoning": "The second task adds multi-step analysis and recommendation."}
+{"prompt": "What is rewriting?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Generate adversarial pairs where one prompt requests a moderate rewrite and the other requests rewriting plus structural critique and argument improvement.", "expected_tier": "premium", "reasoning": "The second task requires analysis in addition to rewriting."}
+{"prompt": "What is translation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Generate adversarial pairs where one prompt asks for direct translation and the other asks for translation plus ambiguity analysis and terminology decisions.", "expected_tier": "premium", "reasoning": "The second task requires additional multi-step analysis."}
+{"prompt": "What is explanation?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Generate adversarial pairs where one prompt asks for a general explanation and the other explicitly asks for a step-by-step derivation.", "expected_tier": "premium", "reasoning": "The second task triggers the multi-step rule."}
+{"prompt": "What is factual lookup?", "expected_tier": "cheap", "reasoning": "The prompt asks for a simple category definition."}
+{"prompt": "Generate adversarial pairs where a technical noun is identical but one prompt asks for a fact and the other asks for system design.", "expected_tier": "premium", "reasoning": "Requires systematic contrastive dataset generation."}
+{"prompt": "What is a model capability?", "expected_tier": "standard", "reasoning": "Concept explanation."}
+{"prompt": "Given a prompt, determine the minimum model tier required to answer it well and explain the classification.", "expected_tier": "premium", "reasoning": "Applying the rubric to arbitrary prompts requires multi-step classification reasoning."}

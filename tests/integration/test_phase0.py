@@ -10,6 +10,7 @@ from fastapi.testclient import TestClient
 from llm_gateway.config import (
     AppSettings,
     Environment,
+    LocalSettings,
     MockSettings,
     ReliabilitySettings,
     Settings,
@@ -24,6 +25,7 @@ def make_settings(**mock_overrides) -> Settings:
     return Settings(
         _env_file=None,
         app=AppSettings(environment=Environment.TEST),
+        local=LocalSettings(enabled=False),
         mock=MockSettings(latency_ms=1, **mock_overrides),
         reliability=ReliabilitySettings(backoff_base_s=0.001, backoff_cap_s=0.002),  # NEW
     )
@@ -47,7 +49,7 @@ def test_completion_matches_openai_schema_with_contract_headers():
 
     assert response.headers["x-provider-used"] == "mock"
     assert response.headers["x-cache-hit"] == "false"
-    assert response.headers["x-routing-tier"] == "auto"
+    assert response.headers["x-routing-tier"] in {"cheap", "standard", "premium"}
     assert response.headers["x-cost-usd"] == "0.0000"
 
 

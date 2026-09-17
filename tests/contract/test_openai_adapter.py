@@ -66,3 +66,10 @@ async def test_400_is_embedded_in_the_rejection():
         await adapter().complete(req())
     assert "context length exceeded" in str(exc_info.value)  # provider's own words preserved
     assert exc_info.value.retryable is False
+
+
+@respx.mock
+async def test_failure_messages_name_the_provider():
+    respx.post(URL).respond(500, json={"error": {"message": "melted"}})
+    with pytest.raises(ProviderFailure, match="^openai"):
+        await adapter().complete(req())
