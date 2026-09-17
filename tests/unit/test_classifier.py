@@ -37,8 +37,14 @@ def test_short_factual_routes_cheap():
     assert classify("What is the capital of France?").rule_fired == "simple_factual"
 
 
-def test_not_keywords_block_the_trivial_rule():
-    # 2 tokens, but 'explain' blocks trivially_short → falls to explain_concept
+def test_domain_guard_blocks_simple_factual_for_concepts():
+    # "What is OAuth?" is 3 tokens and starts with "what is" — the DOMAIN
+    # guard is what keeps it out of cheap (rubric edge rule 6).
+    d = classify("What is OAuth?")
+    assert d.tier is Tier.STANDARD
+
+
+def test_explain_gravity_stays_standard():
     d = classify("Explain gravity.")
     assert d.tier is Tier.STANDARD
 

@@ -236,11 +236,11 @@
 {"prompt": "Design an API gateway architecture with authentication, rate limiting, retries, circuit breaking, and observability.", "expected_tier": "premium", "reasoning": "Multi-component system design."}
 {"prompt": "What is a transaction?", "expected_tier": "standard", "reasoning": "Database concept explanation."}
 {"prompt": "Design transaction handling for a payment workflow that spans three independent services.", "expected_tier": "premium", "reasoning": "Requires multi-step distributed transaction design and failure analysis."}
-{"prompt": "What is a thread?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
+{"prompt":"What is a thread?","expected_tier":"standard","reasoning":"Concurrency concept explanation — same family as mutex/deadlock/process, all standard."}
 {"prompt": "Design a thread-pool architecture for a high-throughput service and explain queueing, shutdown, and backpressure.", "expected_tier": "premium", "reasoning": "Requires multi-step concurrency design."}
 {"prompt": "What is DNS?", "expected_tier": "standard", "reasoning": "Concept explanation — ambiguous case (Edge Rule 3); consistent with the What-is-X vs What-does-X-stand-for pairing used for Kafka/GraphQL/OAuth/TLS/HTTP/CI-CD elsewhere in the set."}
 {"prompt": "Trace a DNS lookup from browser request through recursive resolver, root server, TLD server, and authoritative server.", "expected_tier": "premium", "reasoning": "Explicit multi-step tracing triggers premium."}
-{"prompt": "What is a compiler?", "expected_tier": "cheap", "reasoning": "One-shot factual definition."}
+{"prompt":"What is a compiler?","expected_tier":"standard","reasoning":"Same depth as compiler-vs-interpreter (standard); pairs with the premium pipeline-design prompt."}
 {"prompt": "Design a compiler pipeline for a small programming language, including parsing, type checking, optimization, and code generation.", "expected_tier": "premium", "reasoning": "Requires multi-stage system design."}
 {"prompt": "What is a cache invalidation problem?", "expected_tier": "standard", "reasoning": "Concept explanation."}
 {"prompt": "Design a cache invalidation strategy for a distributed product catalog with strict freshness requirements.", "expected_tier": "premium", "reasoning": "Requires architecture and consistency trade-offs."}
@@ -288,7 +288,7 @@
 {"prompt": "Design a cross-validation strategy for an imbalanced time-dependent dataset and justify the split methodology.", "expected_tier": "premium", "reasoning": "Requires multi-step methodological reasoning."}
 {"prompt": "What is a confusion matrix?", "expected_tier": "standard", "reasoning": "Concept explanation."}
 {"prompt": "Analyze this confusion matrix, calculate precision and recall, and determine which error type dominates.", "expected_tier": "premium", "reasoning": "Requires multiple calculations and interpretation steps."}
-{"prompt": "What is a REST endpoint?", "expected_tier": "cheap", "reasoning": "Short technical definition."}
+{"prompt":"What is a REST endpoint?","expected_tier":"standard","reasoning":"Same depth as 'What is a REST API?' — standard."}
 {"prompt": "Design REST endpoints for users, orders, payments, and refunds while ensuring idempotency and consistent resource semantics.", "expected_tier": "premium", "reasoning": "Requires multi-resource API design and trade-off reasoning."}
 {"prompt": "What is a mutex lock?", "expected_tier": "cheap", "reasoning": "One-shot technical definition."}
 {"prompt": "Analyze a mutex deadlock scenario, identify the cycle, and redesign the locking strategy to prevent it.", "expected_tier": "premium", "reasoning": "Requires multi-step debugging and redesign."}
