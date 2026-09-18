@@ -62,6 +62,7 @@ def test_normalized_prompt_collapses_whitespace():
         ("premium", "routed"),
         ("mock", "mock"),
         ("llama-3", "other"),
+        ("gemini-2.0-flash", "gemini"),
     ],
 )
 def test_model_family_mapping(model, family):

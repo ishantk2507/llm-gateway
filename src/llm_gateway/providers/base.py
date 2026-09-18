@@ -80,21 +80,27 @@ def build_registry(settings: Settings) -> ProviderRegistry:
 
     Real providers register ahead of the mock ONLY when their API key is set;
     the mock is always last, so every chain terminates somewhere that works.
-    Day 4's tier mapping replaces this ordering with cost-ordered per-tier lists.
+    Tier ordering comes from data/tiers.yaml — dormant entries (e.g. openai,
+    anthropic without keys) activate the moment credentials exist.
     """
     from llm_gateway.providers.anthropic_adapter import AnthropicAdapter
+    from llm_gateway.providers.gemini_adapter import GeminiAdapter
+    from llm_gateway.providers.local_adapter import LocalAdapter
     from llm_gateway.providers.mock_adapter import MockProvider
     from llm_gateway.providers.openai_adapter import OpenAIAdapter
+    from llm_gateway.providers.groq_adapter import GroqAdapter
 
     registry = ProviderRegistry()
     if settings.openai.api_key.get_secret_value():
         registry.register(OpenAIAdapter(settings.openai))
     if settings.anthropic.api_key.get_secret_value():
         registry.register(AnthropicAdapter(settings.anthropic))
+    if settings.gemini.api_key.get_secret_value():
+        registry.register(GeminiAdapter(settings.gemini))
     if settings.local.enabled:
-        from llm_gateway.providers.local_adapter import LocalAdapter
-
         registry.register(LocalAdapter(settings.local))
+    if settings.grok.api_key.get_secret_value():
+        registry.register(GroqAdapter(settings.grok))
     if settings.mock.enabled:
         registry.register(MockProvider(settings.mock), in_default_chain=True)
     if not registry.default_chain():

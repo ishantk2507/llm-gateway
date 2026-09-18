@@ -229,6 +229,29 @@ class AnthropicProviderSettings(BaseSettings):
     timeout_s: float = Field(default=10.0, gt=0)
 
 
+class GeminiProviderSettings(BaseSettings):
+    """Native Gemini API (generativelanguage.googleapis.com). Free tier via
+    AI Studio — aistudio.google.com, no credit card. Free-tier rate limits
+    are genuinely reachable (~15 RPM), which is a feature here: real 429s
+    exercising the retry layer for free."""
+
+    model_config = SettingsConfigDict(env_prefix="GEMINI_", env_file=".env", extra="ignore")
+
+    api_key: SecretStr = SecretStr("")  # empty → adapter not registered
+    base_url: str = "https://generativelanguage.googleapis.com"
+    model: str = "gemini-2.0-flash"  # free-tier friendly; override via GEMINI_MODEL
+    timeout_s: float = Field(default=10.0, gt=0)
+
+class GroqProviderSettings(BaseSettings):
+    """Groq — OpenAI-compatible endpoint hosting open-weights models
+    (gpt-oss, Llama) at very high tokens/sec. Free tier with rate limits."""
+
+    model_config = SettingsConfigDict(env_prefix="GROQ_", env_file=".env", extra="ignore")
+
+    api_key: SecretStr = SecretStr("")
+    base_url: str = "https://api.groq.com/openai/v1"
+    model: str = "openai/gpt-oss-120b"
+    timeout_s: float = Field(default=30.0, gt=0)  # gpt-oss is a reasoning model — generations run long
 # ───────────────────────────── root settings ─────────────────────────────
 
 
@@ -254,6 +277,8 @@ class Settings(BaseSettings):
     observability: ObservabilitySettings = Field(default_factory=ObservabilitySettings)
     openai: OpenAIProviderSettings = Field(default_factory=OpenAIProviderSettings)
     anthropic: AnthropicProviderSettings = Field(default_factory=AnthropicProviderSettings)
+    gemini: GeminiProviderSettings = Field(default_factory=GeminiProviderSettings)
+    grok: GroqProviderSettings = Field(default_factory=GroqProviderSettings)
     local: LocalSettings = Field(default_factory=LocalSettings)
 
     @model_validator(mode="after")

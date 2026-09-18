@@ -18,6 +18,7 @@ services:
       # Standard provider credentials pass through from .env (empty → mock mode)
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
     depends_on:
       redis:
         condition: service_healthy
