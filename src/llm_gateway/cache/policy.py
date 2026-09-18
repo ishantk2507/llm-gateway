@@ -48,6 +48,10 @@ def model_family(model: str) -> str:
         return "openai"
     if model.startswith("claude-"):
         return "anthropic"
+    if model.startswith("gemini-"):
+        return "gemini"
+    if model.startswith("gpt-oss"):
+        return "groq"
     return "other"
 
 

@@ -5,9 +5,11 @@ import pytest
 
 from llm_gateway.providers.normalizer import (
     build_anthropic_body,
+    build_gemini_body,
     build_openai_body,
     classify_provider_error,
     parse_anthropic_response,
+    parse_gemini_response,
 )
 from llm_gateway.schemas.errors import ProviderFailure, ProviderRejected
 from llm_gateway.schemas.openai_api import ChatCompletionRequest, Message
@@ -83,3 +85,51 @@ def test_error_classification():
 
     with pytest.raises(ProviderFailure):
         classify_provider_error(status_code=503, provider="openai", body="down")
+
+
+def test_gemini_body_extracts_system_maps_roles_and_wraps_stop():
+    body = build_gemini_body(
+        req(
+            messages=[
+                Message(role="system", content="Be terse."),
+                Message(role="user", content="hi"),
+                Message(role="assistant", content="hello"),
+                Message(role="user", content="continue"),
+            ],
+            stop="END",
+        )
+    )
+    assert body["systemInstruction"] == {"parts": [{"text": "Be terse."}]}
+    assert [c["role"] for c in body["contents"]] == ["user", "model", "user"]
+    assert "model" not in body
+    assert body["generationConfig"]["stopSequences"] == ["END"]
+
+
+def test_gemini_body_omits_unset_params():
+    body = build_gemini_body(req())
+    assert "generationConfig" not in body  # nothing set → nothing sent
+
+
+def test_gemini_system_only_conversation_is_rejected():
+    with pytest.raises(ProviderRejected):
+        build_gemini_body(req(messages=[Message(role="system", content="s")]))
+
+
+def test_gemini_response_parsing():
+    payload = {
+        "candidates": [
+            {"content": {"parts": [{"text": "a"}, {"text": "b"}]}, "finishReason": "MAX_TOKENS"}
+        ],
+        "usageMetadata": {"promptTokenCount": 3, "candidatesTokenCount": 4},
+        "modelVersion": "gemini-2.0-flash",
+    }
+    r = parse_gemini_response(payload, "fallback")
+    assert r.choices[0].message.content == "ab"
+    assert r.choices[0].finish_reason == "length"  # MAX_TOKENS → length
+    assert (r.usage.prompt_tokens, r.usage.completion_tokens, r.usage.total_tokens) == (3, 4, 7)
+
+
+def test_gemini_safety_finish_reason_maps_to_content_filter():
+    payload = {"candidates": [{"content": {"parts": [{"text": ""}]}, "finishReason": "SAFETY"}]}
+    r = parse_gemini_response(payload, "m")
+    assert r.choices[0].finish_reason == "content_filter"

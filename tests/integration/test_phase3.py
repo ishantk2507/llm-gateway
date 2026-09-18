@@ -91,3 +91,14 @@ def test_unconfigured_pin_routes_instead_of_failing():
         r = client.post("/v1/chat/completions", json={**HELLO, "model": "gpt-4o"})
     assert r.status_code == 200  # warned, then routed
     assert r.headers["x-provider-used"] == "mock"
+
+
+def test_gemini_model_pin_routes_to_gemini_provider():
+    registry = ProviderRegistry()
+    registry.register(MockProvider(MockSettings(latency_ms=1), name="gemini"))
+    registry.register(MockProvider(MockSettings(latency_ms=1)))
+    with client_for(make_settings(), providers=registry) as client:
+        r = client.post("/v1/chat/completions", json={**HELLO, "model": "gemini-2.0-flash"})
+    assert r.status_code == 200
+    assert r.headers["x-provider-used"] == "gemini"
+    assert r.headers["x-routing-tier"] == "pinned"

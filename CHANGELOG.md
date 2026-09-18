@@ -1,3 +1,11 @@
+0.4.1 — Gemini adapter (third dialect)
+Native Gemini adapter behind the same ProviderAdapter seam — no route,router, or tier-mapping changes; the registry and data/tiers.yaml (whichalready listed gemini rows) activate it the moment GEMINI_API_KEY is set.
+Dialect translation in normalizer.py: system → systemInstruction,assistant → model role, parts structure, generationConfig mapping,finishReason/usageMetadata remapping. Model lives in the URL path.
+Safety-blocked responses (200 with no candidates) surface asProviderRejected — not retried, but the fallback chain can still serve.
+Zero routing-layer changes — the adapter pattern's payoff, third time.
+Demo moment: a real cloud provider behind the gateway at zero cost; killthe key and watch requests fall through to local/mock transparently.
+
+
 0.4.0 — Phase 3: cost-aware routing
 Rule-based tier classifier (ADR-0001): features → first-match rules indata/keywords.yaml (word-boundary keyword matching, token bounds, codeand structured-data signals). Every decision logs rule_fired.
 Tier→provider mapping in data/tiers.yaml: cost-ordered chains, emptytiers escalate up silently, total absence falls back loudly; dormantentries activate when keys/models register.
