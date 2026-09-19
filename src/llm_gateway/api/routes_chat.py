@@ -1,11 +1,11 @@
-"""POST /v1/chat/completions — request lifecycle (DESIGN.md §6), Day-4 edition.
+"""POST /v1/chat/completions — request lifecycle (DESIGN.md §6), Day-5 edition.
 
-validate → stream check → CACHE (exact → semantic) → ROUTE (header pin >
-model pin > classifier) → budgeted fallback walk → write-through → headers.
+validate → stream check → dropped-param warning → CACHE (exact → semantic) →
+ROUTE (header pin > model pin > classifier) → budgeted fallback walk →
+write-through → COST (pricing table, provider-reported usage) → headers.
 
-Routing resolution order (§5.3): X-Routing-Strategy header pin, then explicit
-model pin, then the rule-based classifier. Cache stays BEFORE routing on
-purpose: a cache hit never consults the router — free answers skip deliberation.
+The middleware handles metrics + persistence from the bound fields; this
+route's only new job is computing cost_usd / cost_saved_usd and binding them.
 """
 
 from __future__ import annotations
@@ -30,8 +30,7 @@ _HEADER_TIERS = {"cheap": Tier.CHEAP, "standard": Tier.STANDARD, "premium": Tier
 def _resolve_route(
     request: ChatCompletionRequest, http_request: Request, router_svc: RouterService | None
 ) -> tuple[list[ProviderAdapter], str, str]:
-    """→ (chain, routing_tier_label, rule_fired). The Day-2 _resolve_chain
-    stand-in is gone; this is the real thing, per DESIGN.md §5.3."""
+    """→ (chain, routing_tier_label, rule_fired), per DESIGN.md §5.3."""
     header_tier = http_request.headers.get("x-routing-strategy", "").lower().strip()
 
     if router_svc is not None and header_tier in _HEADER_TIERS:
@@ -57,7 +56,6 @@ def _resolve_route(
         decision = router_svc.classify(request)
         return router_svc.chain_for(decision.tier), decision.tier.value, decision.rule_fired
 
-    # Router disabled (GW_ROUTER__ENABLED=false) — Day-2 behavior.
     return http_request.app.state.providers.default_chain(), "auto", "router_disabled"
 
 
@@ -81,10 +79,12 @@ async def create_chat_completion(
         )
 
     settings: Settings = http_request.app.state.settings
+    # registry: ProviderRegistry = http_request.app.state.providers
     router_svc: RouterService | None = getattr(http_request.app.state, "router", None)
     if router_svc is None or not settings.router.enabled:
         router_svc = None
     cache = getattr(http_request.app.state, "cache", None)
+    pricing = getattr(http_request.app.state, "pricing", None)
     bypass = http_request.headers.get("x-cache", "").lower() == "bypass"
 
     # ── cache lookup: hits never touch a provider, a router, or a bill ──
@@ -92,6 +92,14 @@ async def create_chat_completion(
     if cache is not None and not bypass:
         cache_result = await cache.lookup(request)
         if cache_result.hit:
+            # A hit costs nothing — and SAVES what the stored response would
+            # have cost: the cached entry carries the model + usage it was
+            # served with, so price exactly what you didn't spend.
+            saved_usd = 0.0
+            if pricing is not None:
+                saved_usd = pricing.estimate(
+                    cache_result.response.model, cache_result.response.usage
+                ).cost_usd
             usage = cache_result.response.usage
             fields: dict = {
                 "model": request.model,
@@ -102,6 +110,7 @@ async def create_chat_completion(
                 "tokens_in": usage.prompt_tokens,
                 "tokens_out": usage.completion_tokens,
                 "cost_usd": 0.0,
+                "cost_saved_usd": saved_usd,
             }
             if cache_result.similarity is not None:
                 fields["similarity_score"] = cache_result.similarity
@@ -133,7 +142,14 @@ async def create_chat_completion(
     if cache is not None:  # write-through — after success only
         await cache.store(request, completion)
 
-    cost_usd = 0.0  # Day 5's pricing.py swaps in behind this exact line
+    # ── cost: published rates × provider-reported usage. Never estimated. ──
+    cost_usd = 0.0
+    if pricing is not None:
+        estimate = pricing.estimate(completion.model, completion.usage)
+        cost_usd = estimate.cost_usd
+        if not estimate.priced:
+            bind_log_fields(priced=False)  # never a silent zero (ADR-0008 rule)
+
     usage = completion.usage
     bind_log_fields(
         cache_hit=False,

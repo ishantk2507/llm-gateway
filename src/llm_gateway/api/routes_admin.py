@@ -1,4 +1,4 @@
-"""Admin endpoints — /v1/health + /v1/cache/invalidate (DESIGN.md §7)."""
+"""Admin endpoints — /v1/health, /v1/cache/invalidate, /v1/metrics (DESIGN.md §7)."""
 
 from __future__ import annotations
 
@@ -6,7 +6,8 @@ import asyncio
 import time
 from typing import Literal
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Response
+from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
 from pydantic import BaseModel, model_validator
 
 from llm_gateway import __version__
@@ -69,3 +70,9 @@ async def invalidate_cache(body: InvalidateRequest, request: Request) -> dict:
         prompt_hash=body.prompt_hash, model_family=body.model_family, flush=body.flush
     )
     return {"evicted": evicted}
+
+
+@router.get("/v1/metrics", summary="Prometheus scrape endpoint")
+async def prometheus_metrics() -> Response:
+    """The path prometheus.yml has been scraping since Day 1 — now it answers."""
+    return Response(content=generate_latest(), media_type=CONTENT_TYPE_LATEST)

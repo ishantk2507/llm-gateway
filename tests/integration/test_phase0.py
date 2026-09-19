@@ -6,11 +6,11 @@ OpenAI-schema compatibility, determinism, error-envelope shape.
 """
 
 from fastapi.testclient import TestClient
+from tests.helpers import hermetic_settings
 
 from llm_gateway.config import (
     AppSettings,
     Environment,
-    LocalSettings,
     MockSettings,
     ReliabilitySettings,
     Settings,
@@ -22,12 +22,10 @@ HELLO = {"model": "auto", "messages": [{"role": "user", "content": "Hello, gatew
 
 
 def make_settings(**mock_overrides) -> Settings:
-    return Settings(
-        _env_file=None,
+    return hermetic_settings(
         app=AppSettings(environment=Environment.TEST),
-        local=LocalSettings(enabled=False),
         mock=MockSettings(latency_ms=1, **mock_overrides),
-        reliability=ReliabilitySettings(backoff_base_s=0.001, backoff_cap_s=0.002),  # NEW
+        reliability=ReliabilitySettings(backoff_base_s=0.001, backoff_cap_s=0.002),
     )
 
 
@@ -115,16 +113,14 @@ def test_provider_failure_is_a_502_envelope():
 
 
 def test_timeout_budget_exceeded_is_a_504():
-    settings = Settings(
-        _env_file=None,
+    settings = hermetic_settings(
         app=AppSettings(environment=Environment.TEST),
         mock=MockSettings(latency_ms=200),
         reliability=ReliabilitySettings(
             backoff_base_s=0.001,
             backoff_cap_s=0.002,
             per_attempt_timeout_s=0.05,
-            request_timeout_budget_s=0.06,  # CHANGED (was 1.0): barely over one attempt slice,
-            # so the between-attempt budget check fires the 504
+            request_timeout_budget_s=0.06,
         ),
     )
     with client_for(settings) as client:

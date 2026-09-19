@@ -12,13 +12,21 @@ import time
 import numpy as np
 from fakeredis.aioredis import FakeRedis
 from fastapi.testclient import TestClient
+from tests.helpers import hermetic_settings
 
 from llm_gateway.cache import policy
 from llm_gateway.cache.embedder import FakeEmbedder
 from llm_gateway.cache.exact import ExactCache
 from llm_gateway.cache.semantic import SemanticCache
 from llm_gateway.cache.service import CacheService
-from llm_gateway.config import AppSettings, CacheSettings, Environment, MockSettings, Settings
+from llm_gateway.config import (
+    AppSettings,
+    CacheSettings,
+    Environment,
+    MockSettings,
+    ReliabilitySettings,
+    Settings,
+)
 from llm_gateway.main import create_app
 
 HELLO = {"model": "auto", "messages": [{"role": "user", "content": "Hello, gateway."}]}
@@ -36,11 +44,11 @@ class ConstantEmbedder:
         pass
 
 
-def make_settings() -> Settings:
-    return Settings(
-        _env_file=None,
+def make_settings(**mock_overrides) -> Settings:
+    return hermetic_settings(
         app=AppSettings(environment=Environment.TEST),
-        mock=MockSettings(latency_ms=50),
+        mock=MockSettings(latency_ms=1, **mock_overrides),
+        reliability=ReliabilitySettings(backoff_base_s=0.001, backoff_cap_s=0.002),
     )
 
 

@@ -2,11 +2,13 @@
 the real app with the committed rule/mapping data (deterministic, no network)."""
 
 from fastapi.testclient import TestClient
+from tests.helpers import hermetic_settings
 
 from llm_gateway.config import (
     AppSettings,
     Environment,
     MockSettings,
+    ReliabilitySettings,
     Settings,
 )
 from llm_gateway.main import create_app
@@ -28,11 +30,11 @@ CODE = {
 }
 
 
-def make_settings() -> Settings:
-    return Settings(
-        _env_file=None,
+def make_settings(**mock_overrides) -> Settings:
+    return hermetic_settings(
         app=AppSettings(environment=Environment.TEST),
-        mock=MockSettings(latency_ms=1),
+        mock=MockSettings(latency_ms=1, **mock_overrides),
+        reliability=ReliabilitySettings(backoff_base_s=0.001, backoff_cap_s=0.002),
     )
 
 

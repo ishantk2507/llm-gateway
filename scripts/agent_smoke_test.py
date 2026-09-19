@@ -22,8 +22,14 @@ BASE_URL = "http://localhost:8000/v1"
 
 # model="auto" — the virtual model: the harness doesn't pick a model at all,
 # the gateway's router does. Any harness that can set a model name can do this.
-llm = ChatOpenAI(base_url=BASE_URL, api_key="gw-demo-key", model="auto",
-                 temperature=0.0, max_retries=0, streaming=False)
+llm = ChatOpenAI(
+    base_url=BASE_URL,
+    api_key="gw-demo-key",
+    model="auto",
+    temperature=0.0,
+    max_retries=0,
+    streaming=False,
+)
 
 PROMPTS = [
     "Hello!",  # → cheap / greeting
@@ -41,10 +47,12 @@ for prompt in PROMPTS:
     print(f"{prompt[:52]:<52} → tier={tier or '<check server log>'}")
 
 print("\n── multi-turn: an agent-shaped conversation ────")
-llm.invoke([
-    ("human", "Explain the circuit breaker pattern."),
-    ("ai", "Sure — it wraps failing calls and trips open after failures..."),
-    ("human", "And how does the half-open state work?"),
-])
+llm.invoke(
+    [
+        ("human", "Explain the circuit breaker pattern."),
+        ("ai", "Sure — it wraps failing calls and trips open after failures..."),
+        ("human", "And how does the half-open state work?"),
+    ]
+)
 print("multi-turn served — cache correctly bypassed (ADR-0003), router still on")
 print("Check the gateway console: rule_fired, routing_tier, cache_hit=False on every call")
