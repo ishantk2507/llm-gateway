@@ -1,5 +1,5 @@
-"""App factory + lifespan. Tests inject providers= and cache=; production
-builds from settings and fails loudly when infrastructure is missing."""
+"""App factory + lifespan. Tests inject providers=/cache=/pricing=/repository=;
+production builds from settings and fails loudly when infrastructure is missing."""
 
 from __future__ import annotations
 
@@ -20,6 +20,8 @@ from llm_gateway.observability.logging import (
     configure_logging,
     get_logger,
 )
+from llm_gateway.observability.pricing import PricingService
+from llm_gateway.observability.repository import RequestRepository
 from llm_gateway.providers.base import ProviderRegistry, build_registry
 from llm_gateway.schemas.errors import install_exception_handlers
 
@@ -31,6 +33,8 @@ def create_app(
     *,
     providers: ProviderRegistry | None = None,
     cache: CacheService | None = None,
+    pricing: PricingService | None = None,
+    repository: RequestRepository | None = None,
 ) -> FastAPI:
     settings = settings or get_settings()
 
@@ -55,9 +59,9 @@ def create_app(
             else None
         )
 
-        # Test apps inject their own cache (fakeredis + fake embedder); auto-
-        # building here would demand a live Redis in CI — that's a test
-        # concern, not a runtime one.
+        # Test apps inject their own cache/pricing/repository (fakeredis, tmp
+        # paths, round-number tables); auto-building in TEST would demand a
+        # live Redis and write to the repo — test concerns, not runtime ones.
         redis_client = None
         app.state.cache = cache
         if (
@@ -68,6 +72,16 @@ def create_app(
             service, redis_client = await build_cache(settings)
             app.state.cache = service
 
+        app.state.pricing = pricing
+        app.state.repository = repository
+        if settings.app.environment != Environment.TEST:
+            if pricing is None:
+                # Committed data — a missing table is a loud boot failure,
+                # same rule as the router's YAML files.
+                app.state.pricing = PricingService(settings.observability.pricing_path)
+            if repository is None:
+                app.state.repository = RequestRepository(settings.observability.database_url)
+
         logger.info(
             "gateway_started",
             version=__version__,
@@ -75,6 +89,7 @@ def create_app(
             providers=[p.name for p in app.state.providers.all()],
             cache_enabled=app.state.cache is not None,
             router_enabled=app.state.router is not None,
+            observability_enabled=app.state.repository is not None,
         )
         yield
 
@@ -82,21 +97,13 @@ def create_app(
             await app.state.cache.aclose()
         if redis_client is not None:
             await redis_client.aclose()
+        if app.state.repository is not None:
+            await app.state.repository.aclose()
         await app.state.providers.close_all()
 
-    app = FastAPI(
-        title=settings.app.app_name,
-        version=__version__,
-        lifespan=lifespan,
-    )
+    app = FastAPI(title=settings.app.app_name, version=__version__, lifespan=lifespan)
     app.add_middleware(RequestLoggingMiddleware)
     install_exception_handlers(app)
     app.include_router(chat_router)
     app.include_router(admin_router)
     return app
-
-
-# No module-level app. uvicorn runs `llm_gateway.main:create_app --factory`
-# (tasks.py, Dockerfile): settings are read when the server decides to read
-# them, never as an import side effect — an import that builds an app from
-# whatever env it finds was the amplifier of the GW_LOCAL__ENABLED leak.

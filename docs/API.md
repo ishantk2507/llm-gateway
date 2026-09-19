@@ -4,8 +4,7 @@ The gateway is a drop-in proxy for any harness whose model client accepts a
 custom base URL (LangChain, LlamaIndex, AutoGen, the raw OpenAI SDK):
 
 ```python
-llm = ChatOpenAI(base_url="http://localhost:8000/v1",
-                 api_key="gw-demo-key", model="auto")
+llm = ChatOpenAI(base_url="http://localhost:8000/v1", api_key="gw-demo-key", model="auto")
 ```
 
 Contract with agent frameworks:
