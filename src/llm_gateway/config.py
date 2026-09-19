@@ -242,6 +242,7 @@ class GeminiProviderSettings(BaseSettings):
     model: str = "gemini-2.0-flash"  # free-tier friendly; override via GEMINI_MODEL
     timeout_s: float = Field(default=10.0, gt=0)
 
+
 class GroqProviderSettings(BaseSettings):
     """Groq — OpenAI-compatible endpoint hosting open-weights models
     (gpt-oss, Llama) at very high tokens/sec. Free tier with rate limits."""
@@ -251,7 +252,9 @@ class GroqProviderSettings(BaseSettings):
     api_key: SecretStr = SecretStr("")
     base_url: str = "https://api.groq.com/openai/v1"
     model: str = "openai/gpt-oss-120b"
-    timeout_s: float = Field(default=30.0, gt=0)  # gpt-oss is a reasoning model — generations run long
+    timeout_s: float = Field(default=30.0, gt=0)
+
+
 # ───────────────────────────── root settings ─────────────────────────────
 
 
