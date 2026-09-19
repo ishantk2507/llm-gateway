@@ -9,3 +9,6 @@ __pycache__/
 cache_payloads.db
 cache_vectors.index
 .python-version
+.zcodeignore
+HANDOFF.md
+.zcode/
