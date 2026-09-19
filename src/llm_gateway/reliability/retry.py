@@ -17,7 +17,12 @@ import time
 from collections.abc import Awaitable, Callable
 
 from llm_gateway.config import ReliabilitySettings
-from llm_gateway.schemas.errors import ProviderFailure, ProviderRejected, RequestTimedOut
+from llm_gateway.schemas.errors import (
+    AttemptTimedOut,
+    ProviderFailure,
+    ProviderRejected,
+    RequestTimedOut,
+)
 
 
 class TimeoutBudget:
@@ -67,7 +72,16 @@ async def with_retries[T](
             return await asyncio.wait_for(fn(), timeout=slice_s)
         except ProviderRejected:
             raise  # retrying an identical rejected request is pointless
-        except (ProviderFailure, TimeoutError) as exc:
+        except TimeoutError as exc:
+            # not retried; yielding to fallback. A per-attempt timeout is not
+            # evidence the next slice will land, and re-slicing the same
+            # provider is how a slow-but-alive upstream once burned the whole
+            # budget while healthy fallbacks never ran (budget starvation,
+            # DESIGN.md §9). Raise; the walker spends what's left on the chain.
+            raise AttemptTimedOut(
+                f"attempt {attempt} exceeded its {slice_s:.2f}s timeout slice"
+            ) from exc
+        except ProviderFailure as exc:
             last_error = exc
             if attempt == total_attempts:
                 break

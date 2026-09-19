@@ -34,4 +34,4 @@ COPY data ./data
 
 EXPOSE 8000
 # One worker BY DESIGN — in-memory FAISS index + breaker state (DESIGN.md §13).
-CMD ["uvicorn", "llm_gateway.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "llm_gateway.main:create_app", "--factory", "--host", "0.0.0.0", "--port", "8000"]

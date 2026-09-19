@@ -18,6 +18,7 @@ from llm_gateway.providers.base import ProviderAdapter
 from llm_gateway.reliability.retry import TimeoutBudget, with_retries
 from llm_gateway.schemas.errors import (
     AllProvidersDown,
+    AttemptTimedOut,
     ProviderFailure,
     ProviderRejected,
     RequestTimedOut,
@@ -38,7 +39,7 @@ async def execute_with_fallback(
     if not chain:
         raise AllProvidersDown("empty provider chain")  # defensive; config forbids this
 
-    last_error: ProviderFailure | ProviderRejected | None = None
+    last_error: ProviderFailure | ProviderRejected | AttemptTimedOut | None = None
     for index, provider in enumerate(chain):
         if budget.expired:
             # No point starting provider #3 with negative time left (§9).
@@ -49,6 +50,23 @@ async def execute_with_fallback(
                 budget=budget,
                 settings=settings,
             )
+        except AttemptTimedOut as exc:
+            # One attempt slice expired but the budget may still be alive —
+            # that IS a "try the next provider" signal (the budget-starvation
+            # fix). A dead budget re-raises: RequestTimedOut is never a
+            # move-on signal. Plain RequestTimedOut is deliberately not
+            # caught here at all.
+            if budget.expired:
+                raise
+            last_error = exc
+            logger.warning(
+                "provider_timed_out_moving_on",
+                provider=provider.name,
+                error=str(exc),
+                providers_remaining=len(chain) - index - 1,
+                budget_remaining_s=round(budget.remaining_s, 3),
+            )
+            continue
         except (ProviderFailure, ProviderRejected) as exc:
             # RequestTimedOut deliberately NOT caught — a dead budget is a 504,
             # not a "try the next provider" signal.
@@ -64,6 +82,13 @@ async def execute_with_fallback(
 
     if len(chain) == 1 and last_error is not None:
         # Pinned provider: the client chose this one; its failure is a plain
-        # upstream error (502), not an availability claim (503).
+        # upstream error (502), its slowness a plain timeout (504).
         raise last_error
+    if isinstance(last_error, AttemptTimedOut):
+        # The clock killed the chain, not the providers — the client waited,
+        # so 504, never a 503 availability claim. Checked by type, not by
+        # budget.expired: the last slice can expire with timer epsilon left.
+        raise RequestTimedOut(
+            f"all {len(chain)} providers exceeded their per-attempt timeout slices"
+        ) from last_error
     raise AllProvidersDown(f"all {len(chain)} providers failed: {', '.join(p.name for p in chain)}")
