@@ -108,6 +108,18 @@ class RequestTimedOut(GatewayError):
     default_message = "request exceeded its timeout budget"
 
 
+class AttemptTimedOut(RequestTimedOut):
+    """ONE provider's attempt slice expired — distinct from a dead request
+    budget. Not retried on the same provider (a timeout is not evidence the
+    next slice will land; re-slicing is how a slow-but-alive upstream once
+    burned the whole 30s budget while healthy fallbacks never ran — the
+    budget-starvation incident, DESIGN.md §9). The fallback walker catches
+    it and spends the remaining budget on the next provider; it reaches the
+    client as a 504 only when it escapes the chain."""
+
+    default_message = "provider attempt exceeded its timeout slice"
+
+
 # ── handlers ──────────────────────────────────────────────────────────────
 
 

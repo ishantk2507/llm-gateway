@@ -96,4 +96,7 @@ def create_app(
     return app
 
 
-app = create_app()
+# No module-level app. uvicorn runs `llm_gateway.main:create_app --factory`
+# (tasks.py, Dockerfile): settings are read when the server decides to read
+# them, never as an import side effect — an import that builds an app from
+# whatever env it finds was the amplifier of the GW_LOCAL__ENABLED leak.

@@ -1,6 +1,8 @@
 """Phase 1 acceptance: failover, exhaustion, pinned failure, budgets, retries —
 through the real app, all offline (ADR-0006)."""
 
+import asyncio
+
 from fastapi.testclient import TestClient
 
 from llm_gateway.config import (
@@ -143,3 +145,48 @@ def test_retries_actually_happen_through_the_app():
 
     assert response.status_code == 200
     assert flaky.calls == 3  # failed twice, third attempt served it
+
+
+class CountingMock(ProviderAdapter):
+    """Slow-but-alive upstream: counts calls, and every call takes longer
+    than the attempt slice. The stand-in for the budget-starvation incident's
+    Ollama: healthy enough to accept, too slow to answer in time."""
+
+    def __init__(self, name: str, latency_s: float) -> None:
+        self.name = name
+        self.latency_s = latency_s
+        self.calls = 0
+
+    async def complete(self, request: ChatCompletionRequest) -> ChatCompletionResponse:
+        self.calls += 1
+        await asyncio.sleep(self.latency_s)
+        return ChatCompletionResponse(
+            id="chatcmpl-slow",
+            created=1,
+            model="slow",
+            choices=[Choice(message=Message(role="assistant", content="finally"))],
+            usage=Usage(prompt_tokens=1, completion_tokens=1, total_tokens=2),
+        )
+
+    async def health_check(self) -> bool:
+        return True
+
+
+def test_attempt_timeout_yields_budget_to_fallback_instead_of_retrying():
+    """Budget-starvation regression (DESIGN.md §9): a slow primary used to
+    burn every attempt slice itself (3 × per_attempt) so the healthy fallback
+    never ran and the client got a 504. A per-attempt timeout must NOT be
+    retried on the same provider — the remaining budget belongs to the chain."""
+    settings = make_settings(
+        max_retries=3,  # the old behavior would have used all three on `slow`
+        per_attempt_timeout_s=0.05,
+        request_timeout_budget_s=1.0,
+    )
+    slow = CountingMock("slow", latency_s=0.5)  # 10× the attempt slice
+    fast = MockProvider(MockSettings(latency_ms=1), name="fast")
+    with client_for(settings, registry_with(slow, fast)) as client:
+        response = client.post("/v1/chat/completions", json=HELLO)
+
+    assert response.status_code == 200
+    assert response.headers["x-provider-used"] == "fast"
+    assert slow.calls == 1  # one slice, then the chain moves on — no retry
