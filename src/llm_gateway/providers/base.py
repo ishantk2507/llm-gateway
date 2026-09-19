@@ -85,10 +85,10 @@ def build_registry(settings: Settings) -> ProviderRegistry:
     """
     from llm_gateway.providers.anthropic_adapter import AnthropicAdapter
     from llm_gateway.providers.gemini_adapter import GeminiAdapter
+    from llm_gateway.providers.groq_adapter import GroqAdapter
     from llm_gateway.providers.local_adapter import LocalAdapter
     from llm_gateway.providers.mock_adapter import MockProvider
     from llm_gateway.providers.openai_adapter import OpenAIAdapter
-    from llm_gateway.providers.groq_adapter import GroqAdapter
 
     registry = ProviderRegistry()
     if settings.openai.api_key.get_secret_value():

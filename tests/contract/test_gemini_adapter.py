@@ -13,9 +13,7 @@ from llm_gateway.providers.gemini_adapter import GeminiAdapter
 from llm_gateway.schemas.errors import ProviderFailure, ProviderRejected
 from llm_gateway.schemas.openai_api import ChatCompletionRequest, Message
 
-FIXTURE = json.loads(
-    (Path(__file__).parent / "fixtures" / "gemini_response.json").read_text()
-)
+FIXTURE = json.loads((Path(__file__).parent / "fixtures" / "gemini_response.json").read_text())
 BASE = "https://generativelanguage.googleapis.com/v1beta/models"
 
 
@@ -40,13 +38,11 @@ def req(**overrides) -> ChatCompletionRequest:
 @respx.mock
 async def test_happy_path_dialect_and_parsing():
     route = respx.post(f"{BASE}/gemini-2.0-flash:generateContent").respond(200, json=FIXTURE)
-    response = await adapter().complete(
-        req(max_tokens=100, top_p=0.9, stop="END")
-    )
+    response = await adapter().complete(req(max_tokens=100, top_p=0.9, stop="END"))
 
     # ── the sent side: the dialect contract ──
     sent = json.loads(route.calls.last.request.content)
-    assert "model" not in sent                       # model lives in the URL, not the body
+    assert "model" not in sent  # model lives in the URL, not the body
     assert sent["systemInstruction"] == {"parts": [{"text": "Be terse."}]}
     assert [c["role"] for c in sent["contents"]] == ["user", "model", "user"]  # assistant → model
     assert sent["contents"][0]["parts"] == [{"text": "hi"}]
@@ -57,8 +53,8 @@ async def test_happy_path_dialect_and_parsing():
 
     # ── the returned side: normalized to OpenAI schema ──
     assert response.choices[0].message.content == "Hi there! How can I help?"  # parts joined
-    assert response.choices[0].finish_reason == "stop"      # STOP → stop
-    assert response.usage.prompt_tokens == 8                # promptTokenCount → prompt_tokens
+    assert response.choices[0].finish_reason == "stop"  # STOP → stop
+    assert response.usage.prompt_tokens == 8  # promptTokenCount → prompt_tokens
     assert response.usage.total_tokens == 14
     assert response.model == "gemini-2.0-flash"
 
@@ -74,8 +70,13 @@ async def test_real_model_name_passes_through_in_the_url():
 async def test_400_invalid_key_is_an_embedded_rejection():
     respx.post(f"{BASE}/gemini-2.0-flash:generateContent").respond(
         400,
-        json={"error": {"code": 400, "message": "API key not valid. Please pass a valid API key.",
-                        "status": "INVALID_ARGUMENT"}},
+        json={
+            "error": {
+                "code": 400,
+                "message": "API key not valid. Please pass a valid API key.",
+                "status": "INVALID_ARGUMENT",
+            }
+        },
     )
     with pytest.raises(ProviderRejected) as exc_info:
         await adapter().complete(req())
@@ -88,8 +89,13 @@ async def test_429_rate_limit_is_retryable():
     # the free tier will produce these for real — the retry layer eats them
     respx.post(f"{BASE}/gemini-2.0-flash:generateContent").respond(
         429,
-        json={"error": {"code": 429, "message": "Resource has been exhausted.",
-                        "status": "RESOURCE_EXHAUSTED"}},
+        json={
+            "error": {
+                "code": 429,
+                "message": "Resource has been exhausted.",
+                "status": "RESOURCE_EXHAUSTED",
+            }
+        },
     )
     with pytest.raises(ProviderFailure) as exc_info:
         await adapter().complete(req())

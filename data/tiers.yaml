@@ -11,16 +11,18 @@ tiers:
   cheap:
     - local
     - gemini
+    - groq
   standard:
     - gemini
+    - groq
     - openai
     - local
   premium:
     - anthropic
     - openai
     - gemini
+    - groq
     - local
-
 # Explicit model pins: the request names a model, the router is skipped
 # entirely and the request goes to that provider (502 semantics on failure).
 model_pins:
