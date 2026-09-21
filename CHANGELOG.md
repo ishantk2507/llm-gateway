@@ -1,5 +1,25 @@
+## Phase 5: hardening
+
+- Circuit breakers per provider (closed → open at ≥50% of a full 20-outcome
+  window → 30s cooldown → half-open probes), epoch-based stale-outcome
+  dropping, wired into the fallback walker: open circuits are skipped, not
+  hammered — the fix for the live "gemini tax" finding.
+- API-key auth (SHA-256 hash compare, fail-closed) + Redis token-bucket rate
+  limiting (fail-open on Redis loss) on /v1/chat/completions; 401/429
+  OpenAI-style envelopes with Retry-After.
+- Outcome semantics: one breaker sample per with_retries conclusion;
+  ProviderRejected counts as success (coherent rejection = alive provider —
+  an invalid key never trips, documented).
+- /v1/health reports per-provider breaker state — request-outcome truth, not
+  endpoint truth. /v1/chaos/providers/{name}/kill|revive (mock targets only,
+  dev/test only). Chaos suite: kill → trip → transparent failover → cooldown
+  → probe close, all-dead → fail-loud 503.
+- Grafana breaker panel live; RUNBOOK seeded with the hardening failure modes.
+- Demo moment: `make chaos` — watch 502s become 503 "circuits open" become
+  200s as the breaker protects, fails loud, and recovers.
+
 ### 0.5.0 — Phase 4: observability
-- data/pricing.yaml + pricing.py: published per-Mtok rates (source-dated,provider-tagged, dormant openai/anthropic rows) × provider-reported usage.Unmatched models are never a silent zero — priced=false + a warning.
+- data/pricing.yaml + pricing.py: published per-Mtok rates (source-date,provider-tagged, dormant openai/anthropic rows) × provider-reported usage. Unmatched models are never a silent zero — priced=false + a warning.
 - Prometheus layer at /v1/metrics: requests by provider/tier/status/cache,cache hits by layer, spend, spend saved by cache, latency histogram.Instruments registered at module import (single-worker design — no multiproc).
 - Request/cost persistence (SQLAlchemy, SQLite local / Postgres in compose):one row per request INCLUDING error rows, plus daily aggregates keyed(date, provider, tier). request_id correlates log line ↔ DB row ↔ metric.Observability failures never break the request path — enforced and tested.
 - Middleware is the single observation point: one shared field dict →log line + metric + DB row, three projections of one record.

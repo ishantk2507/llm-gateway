@@ -42,24 +42,19 @@ class ErrorEnvelope(BaseModel):
 
 
 class GatewayError(Exception):
-    """Base for every deliberate gateway failure. Knows its own HTTP mapping."""
-
     status_code: int = 500
     error_type: str = "api_error"
     default_message: str = "gateway error"
-    retryable: bool = True
+    default_code: str | None = None
+    retryable: bool = False
 
     def __init__(
-        self,
-        message: str | None = None,
-        *,
-        param: str | None = None,
-        code: str | None = None,
+        self, message: str | None = None, *, param: str | None = None, code: str | None = None
     ) -> None:
         super().__init__(message or self.default_message)
         self.message = message or self.default_message
         self.param = param
-        self.code = code
+        self.code = code or self.default_code
 
 
 class StreamNotSupported(GatewayError):
@@ -109,15 +104,47 @@ class RequestTimedOut(GatewayError):
 
 
 class AttemptTimedOut(RequestTimedOut):
-    """ONE provider's attempt slice expired — distinct from a dead request
-    budget. Not retried on the same provider (a timeout is not evidence the
-    next slice will land; re-slicing is how a slow-but-alive upstream once
-    burned the whole 30s budget while healthy fallbacks never ran — the
-    budget-starvation incident, DESIGN.md §9). The fallback walker catches
-    it and spends the remaining budget on the next provider; it reaches the
-    client as a 504 only when it escapes the chain."""
+    """One provider's attempt exceeded its timeout slice. NOT retried on the
+    same provider (restarting the same slow work just burns the budget — the
+    live Day-4 finding); the fallback walker catches it and spends the
+    remaining budget on the next provider. A chain that dies entirely of
+    timeouts is a 504, not a 503."""
 
-    default_message = "provider attempt exceeded its timeout slice"
+    default_message = "provider attempt exceeded its timeout slice — yielding to fallback"
+
+
+class AuthError(GatewayError):
+    status_code = 401
+    error_type = "invalid_request_error"
+    default_message = "missing or invalid API key"
+    default_code = "invalid_api_key"
+
+
+class RateLimited(GatewayError):
+    status_code = 429
+    error_type = "rate_limit_error"
+    default_message = "rate limit exceeded for this API key"
+    default_code = "rate_limit_exceeded"
+
+    def __init__(
+        self, message: str | None = None, *, retry_after: float | None = None
+    ) -> None:
+        super().__init__(message)
+        self.retry_after = retry_after
+
+
+class ChaosDisabled(GatewayError):
+    status_code = 403
+    error_type = "invalid_request_error"
+    default_message = "chaos endpoints are available in development/test only"
+    default_code = "chaos_disabled"
+
+
+class ChaosTargetError(GatewayError):
+    status_code = 400
+    error_type = "invalid_request_error"
+    default_message = "chaos targets must be mock providers"
+    default_code = "chaos_target_invalid"
 
 
 # ── handlers ──────────────────────────────────────────────────────────────
@@ -137,13 +164,13 @@ def _envelope_response(
 
 async def _gateway_error_handler(request: Request, exc: GatewayError) -> JSONResponse:
     bind_log_fields(error=f"{type(exc).__name__}: {exc.message}")
-    return _envelope_response(
-        status_code=exc.status_code,
-        message=exc.message,
-        error_type=exc.error_type,
-        param=exc.param,
-        code=exc.code,
+    headers: dict[str, str] = {}
+    if getattr(exc, "retry_after", None):
+        headers["Retry-After"] = str(max(1, int(exc.retry_after)))
+    body = ErrorEnvelope(
+        error=ErrorBody(message=exc.message, type=exc.error_type, param=exc.param, code=exc.code)
     )
+    return JSONResponse(status_code=exc.status_code, content=body.model_dump(), headers=headers)
 
 
 def _format_validation_error(err: dict[str, Any]) -> str:

@@ -35,8 +35,13 @@ class MockProvider(ProviderAdapter):
     def __init__(self, settings: MockSettings, *, name: str = "mock") -> None:
         self.name = name  # instance attr — lets one MockProvider class play many roles
         self._settings = settings
+        self._killed = False
+        self.calls = 0  # chaos assertions: a skipped provider must freeze this
 
     async def complete(self, request: ChatCompletionRequest) -> ChatCompletionResponse:
+        self.calls += 1
+        if self._killed:  # killed = dead: no latency, immediate failure
+            raise ProviderFailure("mock: killed (chaos tooling)")
         # Simulated network/model latency — slow enough that cache wins are
         # visible in the Day-3+ demos (default 800ms).
         await asyncio.sleep(self._settings.latency_ms / 1000.0)
@@ -65,6 +70,13 @@ class MockProvider(ProviderAdapter):
         )
 
     async def health_check(self) -> bool:
-        # Day 6's chaos script wants a kill switch here (force-unhealthy);
-        # noted in ADR-0006's future-work list, not built today.
-        return True
+        return not self._killed
+
+    def kill(self) -> None:
+        """Chaos tooling (Day 6) — the kill switch ADR-0006 noted as future
+        work, now real. Instance flag, not shared settings: each MockProvider
+        is independently killable."""
+        self._killed = True
+
+    def revive(self) -> None:
+        self._killed = False

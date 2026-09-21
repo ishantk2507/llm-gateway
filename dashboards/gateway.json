@@ -153,11 +153,40 @@
       "type": "timeseries"
     },
     {
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "min": 0,
+          "max": 2,
+          "decimals": 0,
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {"text": "closed", "color": "green"},
+                "1": {"text": "open", "color": "red"},
+                "2": {"text": "half-open", "color": "orange"}
+              }
+            }
+          ]
+        },
+        "overrides": []
+      },
       "gridPos": {"h": 4, "w": 24, "x": 0, "y": 24},
       "id": 9,
-      "options": {"content": "Circuit-breaker state per provider lands with Phase 5 hardening (Day 6) — panel reserved by design.", "mode": "markdown"},
-      "title": "Breaker state (reserved — Day 6)",
-      "type": "text"
+      "options": {"colorMode": "value", "graphMode": "none", "justifyMode": "auto", "orientation": "auto", "textMode": "auto"},
+      "targets": [
+        {
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
+          "expr": "gateway_breaker_state",
+          "legendFormat": "{{provider}}",
+          "refId": "A",
+          "instant": true
+        }
+      ],
+      "title": "Circuit breaker state (0 closed / 1 open / 2 half-open)",
+      "type": "stat"
     }
   ],
   "refresh": "5s",

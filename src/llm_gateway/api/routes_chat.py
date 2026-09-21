@@ -10,11 +10,13 @@ route's only new job is computing cost_usd / cost_saved_usd and binding them.
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Request, Response
+from fastapi import APIRouter, Depends, Request, Response
 
+from llm_gateway.api.dependencies import gateway_gate
 from llm_gateway.config import Settings, Tier
 from llm_gateway.observability.logging import bind_log_fields, get_logger
 from llm_gateway.providers.base import ProviderAdapter, ProviderRegistry
+from llm_gateway.reliability.circuit_breaker import BreakerBoard
 from llm_gateway.reliability.fallback import execute_with_fallback
 from llm_gateway.reliability.retry import TimeoutBudget
 from llm_gateway.router.mapping import RouterService
@@ -62,6 +64,7 @@ def _resolve_route(
 @router.post(
     "/v1/chat/completions",
     response_model=ChatCompletionResponse,
+    dependencies=[Depends(gateway_gate)],  # auth + rate limit — chat route ONLY
     summary="Create a chat completion (OpenAI-compatible)",
 )
 async def create_chat_completion(
@@ -135,8 +138,9 @@ async def create_chat_completion(
     if cache_result is not None and cache_result.near_miss:
         bind_log_fields(near_miss=True, similarity_score=cache_result.similarity)
 
+    breakers: BreakerBoard | None = getattr(http_request.app.state, "breakers", None)
     completion, provider_name = await execute_with_fallback(
-        chain, request, budget=budget, settings=settings.reliability
+        chain, request, budget=budget, settings=settings.reliability, breakers=breakers
     )
 
     if cache is not None:  # write-through — after success only

@@ -20,7 +20,7 @@ REGISTRY.get_sample_value(...) with >=, never ==.
 
 from __future__ import annotations
 
-from prometheus_client import Counter, Histogram
+from prometheus_client import Counter, Gauge, Histogram
 
 gateway_requests_total = Counter(
     "gateway_requests_total",
@@ -45,6 +45,18 @@ gateway_request_latency_ms = Histogram(
     "End-to-end completion latency in milliseconds.",
     buckets=(5, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000, 30000),
 )
+gateway_breaker_state = Gauge(
+    "gateway_breaker_state",
+    "Circuit-breaker state per provider: 0=closed, 1=open, 2=half-open.",
+    ["provider"],
+)
+
+
+def set_breaker_state(provider: str, state: int) -> None:
+    """Single setter — main initializes it for every registered provider at
+    startup (absence reads as 'no data', which is a lie on day one of the
+    panel's life) and the BreakerBoard's on_state callback keeps it current."""
+    gateway_breaker_state.labels(provider=provider).set(state)
 
 
 def observe_request(

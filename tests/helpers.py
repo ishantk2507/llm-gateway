@@ -25,6 +25,7 @@ from pydantic import SecretStr
 
 from llm_gateway.config import (
     AnthropicProviderSettings,
+    AuthSettings,
     GeminiProviderSettings,
     GroqProviderSettings,
     LocalSettings,
@@ -51,6 +52,7 @@ def hermetic_settings(**groups) -> Settings:
         gemini=GeminiProviderSettings(api_key=SecretStr(""), _env_file=None),
         grok=GroqProviderSettings(api_key=SecretStr(""), _env_file=None),
         local=LocalSettings(enabled=False),
+        auth=AuthSettings(api_keys=set()),  # open mode — the suite never sends headers
     )
     pinned.update(groups)
     return Settings(_env_file=None, **pinned)

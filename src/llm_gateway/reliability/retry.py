@@ -1,12 +1,16 @@
 """Retry with full jitter, inside timeout budgets (DESIGN.md §9).
 
-``max_retries=3`` means 3 TOTAL attempts, matching the design doc. The budget
-is one clock per request, created in the route and shared by this layer and
-the fallback walker — a slow provider can never eat the whole request because
-every consumer asks the same object what's left.
+``max_retries`` means TOTAL attempts. Timeout semantics (the live Day-4
+finding, fixed): a per-attempt timeout raises AttemptTimedOut — NOT retried
+on the same provider (restarting the same slow work just burns the budget);
+the fallback walker catches it and spends the remaining budget on the next
+provider. A chain that dies entirely of timeouts is a 504, not a 503.
 
-Testability is built in: ``sleep`` and the RNG are injectable, so retry tests
-run in milliseconds and jitter bounds are checkable without touching globals.
+Budget death BEFORE an attempt, or a backoff sleep that would cross the
+deadline, raises plain RequestTimedOut — the walker does NOT catch that one:
+a dead budget stops everything.
+
+Testability is built in: ``sleep`` and the RNG are injectable.
 """
 
 from __future__ import annotations
@@ -41,8 +45,6 @@ class TimeoutBudget:
 
 
 def full_jitter(attempt: int, settings: ReliabilitySettings, rng: random.Random) -> float:
-    """AWS-style full jitter: uniform(0, min(cap, base * 2^(attempt-1))).
-    Pure + rng-injected so bounds are testable."""
     ceiling = min(settings.backoff_cap_s, settings.backoff_base_s * (2 ** (attempt - 1)))
     return rng.uniform(0, ceiling)
 
@@ -55,13 +57,8 @@ async def with_retries[T](
     sleep: Callable[[float], Awaitable[None]] = asyncio.sleep,
     rng: random.Random | None = None,
 ) -> T:
-    """Run one provider call with up to ``max_retries`` TOTAL attempts.
-
-    ProviderRejected re-raises immediately. Retryable failures back off with
-    full jitter — but never sleep past the point where the budget is dead.
-    """
     rng = rng or random.Random()
-    total_attempts = max(1, settings.max_retries)  # 0 attempts is not a thing
+    total_attempts = max(1, settings.max_retries)
     last_error: Exception | None = None
 
     for attempt in range(1, total_attempts + 1):
@@ -70,17 +67,13 @@ async def with_retries[T](
         slice_s = min(settings.per_attempt_timeout_s, budget.remaining_s)
         try:
             return await asyncio.wait_for(fn(), timeout=slice_s)
+        except TimeoutError as exc:
+            raise AttemptTimedOut(
+                f"attempt {attempt} timed out after {slice_s:.2f}s — "
+                "yielding to fallback, not retried on this provider"
+            ) from exc
         except ProviderRejected:
             raise  # retrying an identical rejected request is pointless
-        except TimeoutError as exc:
-            # not retried; yielding to fallback. A per-attempt timeout is not
-            # evidence the next slice will land, and re-slicing the same
-            # provider is how a slow-but-alive upstream once burned the whole
-            # budget while healthy fallbacks never ran (budget starvation,
-            # DESIGN.md §9). Raise; the walker spends what's left on the chain.
-            raise AttemptTimedOut(
-                f"attempt {attempt} exceeded its {slice_s:.2f}s timeout slice"
-            ) from exc
         except ProviderFailure as exc:
             last_error = exc
             if attempt == total_attempts:
@@ -92,5 +85,5 @@ async def with_retries[T](
                 ) from exc
             await sleep(pause)
 
-    assert last_error is not None  # loop ran at least once
+    assert last_error is not None
     raise ProviderFailure(f"failed after {total_attempts} attempts: {last_error}") from last_error
