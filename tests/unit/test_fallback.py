@@ -6,6 +6,7 @@ import pytest
 
 from llm_gateway.config import ReliabilitySettings
 from llm_gateway.providers.base import ProviderAdapter
+from llm_gateway.reliability.circuit_breaker import BreakerBoard
 from llm_gateway.reliability.fallback import execute_with_fallback
 from llm_gateway.reliability.retry import TimeoutBudget
 from llm_gateway.schemas.errors import (
@@ -122,3 +123,82 @@ async def test_budget_death_between_providers_is_a_504():
             settings=one_shot(),
         )
     assert healthy.calls == 0  # never started — the budget said no
+
+
+# ── breaker integration (Day 6) ──────────────────────────────────────────
+
+
+def board(**overrides) -> BreakerBoard:
+    base = dict(
+        breaker_window=20,
+        breaker_failure_rate=0.5,
+        breaker_cooldown_s=30.0,
+        breaker_half_open_probes=1,
+    )
+    base.update(overrides)
+    return BreakerBoard(ReliabilitySettings(**base))
+
+
+def trip(brd: BreakerBoard, name: str, failures: int = 20) -> None:
+    for _ in range(failures):
+        epoch = brd.allow(name)
+        assert epoch is not None
+        brd.record_failure(name, epoch)
+
+
+async def test_open_breaker_skips_to_backup_without_calling():
+    a, b = FakeAdapter("a", [resp()]), FakeAdapter("b", [resp()])
+    brd = board()
+    trip(brd, "a")
+    _, name = await execute_with_fallback(
+        [a, b], req(), budget=TimeoutBudget(10), settings=one_shot(), breakers=brd
+    )
+    assert name == "b" and a.calls == 0  # skipped: no calls, no window sample
+
+
+async def test_all_circuits_open_is_a_503_naming_circuits():
+    a, b = FakeAdapter("a", [resp()]), FakeAdapter("b", [resp()])
+    brd = board()
+    trip(brd, "a")
+    trip(brd, "b")
+    with pytest.raises(AllProvidersDown, match="circuits open"):
+        await execute_with_fallback(
+            [a, b], req(), budget=TimeoutBudget(10), settings=one_shot(), breakers=brd
+        )
+    assert a.calls == 0 and b.calls == 0
+
+
+async def test_coherent_rejections_never_trip():
+    a = FakeAdapter("a", [ProviderRejected("invalid key")] * 20)
+    brd = board()
+    for _ in range(20):
+        with pytest.raises(ProviderRejected):
+            await execute_with_fallback(
+                [a], req(), budget=TimeoutBudget(10), settings=one_shot(), breakers=brd
+            )
+    assert brd.allow("a") is not None  # 20 rejections = 20 success samples
+
+
+async def test_one_window_sample_per_with_retries_conclusion():
+    # max_retries=3: one conclusion = 3 attempts = exactly ONE breaker sample
+    settings = ReliabilitySettings(
+        max_retries=3,
+        backoff_base_s=0.001,
+        backoff_cap_s=0.002,
+        per_attempt_timeout_s=5.0,
+        request_timeout_budget_s=30.0,
+        breaker_window=2,
+    )
+    brd = BreakerBoard(settings)
+    a = FakeAdapter("a", [ProviderFailure("x")] * 10)
+    with pytest.raises(ProviderFailure):  # pinned single provider
+        await execute_with_fallback(
+            [a], req(), budget=TimeoutBudget(30), settings=settings, breakers=brd
+        )
+    assert a.calls == 3  # three attempts…
+    assert brd.allow("a") is not None  # …but only ONE sample — not yet tripped
+    with pytest.raises(ProviderFailure):
+        await execute_with_fallback(
+            [a], req(), budget=TimeoutBudget(30), settings=settings, breakers=brd
+        )
+    assert brd.allow("a") is None  # second conclusion: 2/2 → tripped
