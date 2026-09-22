@@ -6,6 +6,7 @@ OpenAI-schema compatibility, determinism, error-envelope shape.
 """
 
 from fastapi.testclient import TestClient
+from tests.helpers import hermetic_settings
 
 from llm_gateway.config import (
     AppSettings,
@@ -21,10 +22,10 @@ HELLO = {"model": "auto", "messages": [{"role": "user", "content": "Hello, gatew
 
 
 def make_settings(**mock_overrides) -> Settings:
-    return Settings(
-        _env_file=None,
+    return hermetic_settings(
         app=AppSettings(environment=Environment.TEST),
         mock=MockSettings(latency_ms=1, **mock_overrides),
+        reliability=ReliabilitySettings(backoff_base_s=0.001, backoff_cap_s=0.002),
     )
 
 
@@ -46,7 +47,7 @@ def test_completion_matches_openai_schema_with_contract_headers():
 
     assert response.headers["x-provider-used"] == "mock"
     assert response.headers["x-cache-hit"] == "false"
-    assert response.headers["x-routing-tier"] == "auto"
+    assert response.headers["x-routing-tier"] in {"cheap", "standard", "premium"}
     assert response.headers["x-cost-usd"] == "0.0000"
 
 
@@ -112,13 +113,14 @@ def test_provider_failure_is_a_502_envelope():
 
 
 def test_timeout_budget_exceeded_is_a_504():
-    settings = Settings(
-        _env_file=None,
+    settings = hermetic_settings(
         app=AppSettings(environment=Environment.TEST),
         mock=MockSettings(latency_ms=200),
         reliability=ReliabilitySettings(
+            backoff_base_s=0.001,
+            backoff_cap_s=0.002,
             per_attempt_timeout_s=0.05,
-            request_timeout_budget_s=1.0,
+            request_timeout_budget_s=0.06,
         ),
     )
     with client_for(settings) as client:

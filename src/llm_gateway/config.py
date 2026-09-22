@@ -126,7 +126,8 @@ class CacheSettings(BaseModel):
 
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"  # 384-dim, CPU-viable
     embedder_threads: int = Field(default=4, ge=1)  # thread executor — never block the loop
-    payload_store_url: str = f"sqlite:///{REPO_ROOT / 'cache_payloads.db'}"
+    payload_store_path: Path = REPO_ROOT / "cache_payloads.db"
+    faiss_index_path: Path = REPO_ROOT / "cache_vectors.index"
 
     @model_validator(mode="after")
     def _near_miss_band_below_threshold(self) -> CacheSettings:
@@ -138,11 +139,21 @@ class CacheSettings(BaseModel):
         return self
 
 
+class LocalSettings(BaseModel):
+    """Local SQLite for observability and cache payloads (DESIGN.md §12)."""
+
+    enabled: bool = False
+    base_url: str = "https://localhost:11434/v1"
+    model: str = "llama3.2:1b"
+    timeout_s: float = Field(default=120.0, gt=0)
+
+
 class RouterSettings(BaseModel):
     """Rule-based complexity router (ADR-0001). Rules are data, not code."""
 
     enabled: bool = True
     keywords_path: Path = REPO_ROOT / "data" / "keywords.yaml"
+    tiers_path: Path = REPO_ROOT / "data" / "tiers.yaml"
     default_tier: Tier = Tier.STANDARD
 
 
@@ -218,6 +229,32 @@ class AnthropicProviderSettings(BaseSettings):
     timeout_s: float = Field(default=10.0, gt=0)
 
 
+class GeminiProviderSettings(BaseSettings):
+    """Native Gemini API (generativelanguage.googleapis.com). Free tier via
+    AI Studio — aistudio.google.com, no credit card. Free-tier rate limits
+    are genuinely reachable (~15 RPM), which is a feature here: real 429s
+    exercising the retry layer for free."""
+
+    model_config = SettingsConfigDict(env_prefix="GEMINI_", env_file=".env", extra="ignore")
+
+    api_key: SecretStr = SecretStr("")  # empty → adapter not registered
+    base_url: str = "https://generativelanguage.googleapis.com"
+    model: str = "gemini-2.0-flash"  # free-tier friendly; override via GEMINI_MODEL
+    timeout_s: float = Field(default=10.0, gt=0)
+
+
+class GroqProviderSettings(BaseSettings):
+    """Groq — OpenAI-compatible endpoint hosting open-weights models
+    (gpt-oss, Llama) at very high tokens/sec. Free tier with rate limits."""
+
+    model_config = SettingsConfigDict(env_prefix="GROQ_", env_file=".env", extra="ignore")
+
+    api_key: SecretStr = SecretStr("")
+    base_url: str = "https://api.groq.com/openai/v1"
+    model: str = "openai/gpt-oss-120b"
+    timeout_s: float = Field(default=30.0, gt=0)
+
+
 # ───────────────────────────── root settings ─────────────────────────────
 
 
@@ -243,6 +280,9 @@ class Settings(BaseSettings):
     observability: ObservabilitySettings = Field(default_factory=ObservabilitySettings)
     openai: OpenAIProviderSettings = Field(default_factory=OpenAIProviderSettings)
     anthropic: AnthropicProviderSettings = Field(default_factory=AnthropicProviderSettings)
+    gemini: GeminiProviderSettings = Field(default_factory=GeminiProviderSettings)
+    grok: GroqProviderSettings = Field(default_factory=GroqProviderSettings)
+    local: LocalSettings = Field(default_factory=LocalSettings)
 
     @model_validator(mode="after")
     def _fallback_chain_terminates(self) -> Settings:

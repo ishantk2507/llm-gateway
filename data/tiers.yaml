@@ -1,0 +1,33 @@
+# Tier → cost-ordered provider lists (DESIGN.md §5.3): the first provider in
+# the chain serves; the rest are fallbacks. Entries activate ONLY when the
+# provider is registered (API key set / GW_LOCAL__ENABLED=true) — dormant
+# entries are how future keys slot in without code changes.
+#
+# v1 maps tiers to PROVIDERS (one configured model each); per-tier model
+# selection within a single provider (e.g. gemini-flash vs gemini-pro) is the
+# documented Phase 6 extension.
+
+tiers:
+  cheap:
+    - local
+    - gemini
+    - groq
+  standard:
+    - gemini
+    - groq
+    - openai
+    - local
+  premium:
+    - anthropic
+    - openai
+    - gemini
+    - groq
+    - local
+# Explicit model pins: the request names a model, the router is skipped
+# entirely and the request goes to that provider (502 semantics on failure).
+model_pins:
+  openai: [gpt-, o1, o3, chatgpt]
+  anthropic: [claude-]
+  gemini: [gemini-]
+  local: [llama, qwen, phi, mistral, gemma, deepseek, tinyllama, codellama]
+  
