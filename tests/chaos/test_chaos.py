@@ -2,7 +2,6 @@
 cooldown + probe close the circuit, health tells the truth. All mock (ADR-0006)."""
 
 from fastapi.testclient import TestClient
-from tests.helpers import hermetic_settings
 
 from llm_gateway.config import (
     AppSettings,
@@ -17,6 +16,7 @@ from llm_gateway.observability.repository import RequestRepository
 from llm_gateway.providers.base import ProviderAdapter, ProviderRegistry
 from llm_gateway.providers.mock_adapter import MockProvider
 from llm_gateway.reliability.circuit_breaker import BreakerBoard
+from tests.helpers import hermetic_settings
 
 HELLO = {"model": "auto", "messages": [{"role": "user", "content": "Hello, gateway."}]}
 

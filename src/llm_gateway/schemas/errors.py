@@ -126,9 +126,7 @@ class RateLimited(GatewayError):
     default_message = "rate limit exceeded for this API key"
     default_code = "rate_limit_exceeded"
 
-    def __init__(
-        self, message: str | None = None, *, retry_after: float | None = None
-    ) -> None:
+    def __init__(self, message: str | None = None, *, retry_after: float | None = None) -> None:
         super().__init__(message)
         self.retry_after = retry_after
 

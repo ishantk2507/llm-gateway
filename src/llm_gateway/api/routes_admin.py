@@ -43,7 +43,7 @@ class InvalidateRequest(BaseModel):
     flush: bool = False
 
     @model_validator(mode="after")
-    def _exactly_one(self) -> "InvalidateRequest":
+    def _exactly_one(self) -> InvalidateRequest:
         provided = sum([bool(self.prompt_hash), bool(self.model_family), self.flush])
         if provided != 1:
             raise ValueError("provide exactly one of: prompt_hash | model_family | flush=true")

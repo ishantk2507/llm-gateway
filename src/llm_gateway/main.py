@@ -70,7 +70,11 @@ def create_app(
         # live Redis and write to the repo — test concerns, not runtime ones.
         redis_client = None
         app.state.cache = cache
-        if cache is None and settings.cache.enabled and settings.app.environment != Environment.TEST:
+        if (
+            cache is None
+            and settings.cache.enabled
+            and settings.app.environment != Environment.TEST
+        ):
             service, redis_client = await build_cache(settings)
             app.state.cache = service
 
