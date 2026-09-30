@@ -1,5 +1,5 @@
 ADR-0006: MockProvider as a first-class citizen
-Status: Accepted · Date: 2025-XX-XX
+Status: Accepted · Date: 2025-09-12
 
 Context
 The gateway must be testable, load-testable, and demoable without paid APIkeys, flaky external services, or non-determinism. Options: (a) mock at theHTTP layer per test, (b) a stub route bypassing the provider stack, (c) areal adapter with the same interface as production providers.

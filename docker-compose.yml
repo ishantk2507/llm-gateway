@@ -14,22 +14,33 @@ services:
       - "8000:8000"
     environment:
       GW_REDIS__URL: redis://redis:6379/0
-      GW_OBSERVABILITY__DATABASE_URL: postgresql://gateway:gateway@postgres:5432/gateway
+      # +psycopg selects the psycopg3 dialect — bare postgresql:// would make
+      # SQLAlchemy look for psycopg2, which we don't ship, and crash at boot.
+      GW_OBSERVABILITY__DATABASE_URL: postgresql+psycopg://gateway:gateway@postgres:5432/gateway
       # Standard provider credentials pass through from .env (empty → mock mode)
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
     depends_on:
       redis:
         condition: service_healthy
       postgres:
         condition: service_healthy
+    volumes:
+      # Model weights survive container recreates instead of re-downloading
+      # ~90MB of MiniLM every rebuild. Baking the model into the image is the
+      # commented Dockerfile TODO (Day-7 fix); the volume is the honest v1.
+      - hf-cache:/root/.cache/huggingface
     healthcheck:
       # slim images have no curl — python is always there
       test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://localhost:8000/v1/health')"]
       interval: 10s
       timeout: 3s
       retries: 3
-      start_period: 15s      # raise on Day 3+ (embedding model load)
+      # Embedder load takes ~35-38s locally; in-container, without the
+      # pre-baked model, first boot DOWNLOADS MiniLM (~90MB) — give it room.
+      start_period: 120s
     restart: unless-stopped
 
   redis:
@@ -93,3 +104,4 @@ services:
 
 volumes:
   pgdata:
+  hf-cache:

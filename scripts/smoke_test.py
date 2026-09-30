@@ -7,7 +7,7 @@ Grows into scripts/demo.sh on Day 7.
 
 from openai import BadRequestError, OpenAI
 
-client = OpenAI(base_url="http://localhost:8000/v1", api_key="anything")
+client = OpenAI(base_url="http://localhost:8000/v1", api_key="gw-demo-key")
 
 print("── 1. basic completion ─────────────────────────────")
 r = client.chat.completions.create(

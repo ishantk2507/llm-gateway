@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.env
+*.db
+.pytest_cache/
+.ruff_cache/
+.coverage
+*.index
+cache_payloads.db
+cache_vectors.index
+.python-version
+.zcodeignore
+HANDOFF.md
+.zcode/

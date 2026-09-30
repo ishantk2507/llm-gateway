@@ -12,9 +12,18 @@ How fields travel from route to the final log line:
   plus ``status_code`` and ``latency_ms``.
 
 The dict-sharing is load-bearing: contextvars *set* inside the route's task do
-not propagate back up to middleware, but mutating a shared dict does. Every
-later phase adds fields (``similarity_score`` Day 3, ``rule_fired`` Day 4)
-instead of touching this pipeline.
+not propagate back up to middleware, but mutating a shared dict does.
+
+Day 5 — the middleware is also the single OBSERVATION point. After the
+response, for every completion request (gated on ``model`` in the field
+dict, so health checks and /v1/metrics never pollute the counters):
+
+  1. metrics.observe_request(...) — every completion, including 5xx
+     (provider reads as "unknown" when the request died before one served)
+  2. repository.log_request(...) — persisted rows, error rows included
+
+Both read the same shared dict the route populated: log line, metric, and DB
+row are three projections of one record, correlated by request_id.
 """
 
 from __future__ import annotations
@@ -24,6 +33,7 @@ import sys
 import time
 import uuid
 from contextvars import ContextVar
+from datetime import UTC, datetime
 from typing import Any
 
 import structlog
@@ -87,8 +97,55 @@ def _emit(fields: dict[str, Any], start: float, status_code: int | None = None) 
     logger.info("http_request", **record)
 
 
+async def _observe_and_persist(
+    app: Any, fields: dict[str, Any], latency_ms: float, status_code: int
+) -> None:
+    """Metrics + DB row for one completion request. Never breaks the response."""
+    from llm_gateway.observability import (
+        metrics,  # local import: keeps logging importable standalone
+    )
+
+    metrics.observe_request(
+        provider=str(fields.get("provider_used", "unknown")),
+        tier=str(fields.get("routing_tier", "unknown")),
+        status=str(status_code),
+        cache_hit=bool(fields.get("cache_hit", False)),
+        layer=fields.get("cache_layer"),
+        latency_ms=latency_ms,
+        cost_usd=float(fields.get("cost_usd") or 0.0),
+        saved_usd=float(fields.get("cost_saved_usd") or 0.0),
+    )
+
+    repository = getattr(app.state, "repository", None)
+    if repository is None:
+        return
+    try:
+        await repository.log_request(
+            request_id=fields["request_id"],
+            timestamp=datetime.now(UTC),
+            model=fields.get("model"),
+            provider=fields.get("provider_used"),
+            tier=fields.get("routing_tier"),
+            rule_fired=fields.get("rule_fired"),
+            cache_hit=bool(fields.get("cache_hit", False)),
+            cache_layer=fields.get("cache_layer"),
+            similarity=fields.get("similarity_score"),
+            tokens_in=fields.get("tokens_in"),
+            tokens_out=fields.get("tokens_out"),
+            cost_usd=float(fields.get("cost_usd") or 0.0),
+            cost_saved_usd=float(fields.get("cost_saved_usd") or 0.0),
+            latency_ms=round(latency_ms, 1),
+            status_code=status_code,
+            error=fields.get("error"),
+        )
+    except Exception as exc:
+        # The repository guards itself; this is belt-and-suspenders for
+        # injected test doubles that raise deliberately.
+        logger.warning("repository_persist_failed", error=repr(exc))
+
+
 class RequestLoggingMiddleware(BaseHTTPMiddleware):
-    """One structured line per HTTP request — the seed of DESIGN.md §5.5."""
+    """One structured line per HTTP request — plus metrics + persistence."""
 
     async def dispatch(self, request: Request, call_next):  # noqa: ANN001
         fields: dict[str, Any] = {
@@ -111,5 +168,10 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
         finally:
             structlog.contextvars.clear_contextvars()
             _request_fields.reset(token)
+
+        latency_ms = (time.perf_counter() - start) * 1000
         _emit(fields, start, response.status_code)
+
+        if "model" in fields:  # completion requests only
+            await _observe_and_persist(request.app, fields, latency_ms, response.status_code)
         return response

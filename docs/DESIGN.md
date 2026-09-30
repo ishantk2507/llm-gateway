@@ -361,6 +361,11 @@ CostRecord
 | 5 | Circuit breakers, rate limiting, auth, chaos tests | Production-shaped, not demo-shaped |
 | 6 (stretch) | Streaming passthrough, learned router v2 (same interface), Gemini adapter, K8s | Depth beyond core scope |
 
+
+| Phase 6 additions | Scope | Proves |
+|---|---|---|
+| Agent compatibility | SSE streaming passthrough; tool-call passthrough (request side) + `tool_calls` response normalization; documented agent-harness contract | The gateway serves real agent loops, not just simple chains |
+| Dynamic model catalog (ADR-0008) | `list_models()` per adapter, vendored metadata, snapshot-for-reproducibility, generated tiers | Routing scales to the provider ecosystem without manual maintenance |
 ## 15. Design rationale
 
 - **Systems thinking:** cache, router, adapters, observability are independent,

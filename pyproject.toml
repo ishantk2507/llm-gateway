@@ -1,6 +1,6 @@
 [project]
 name = "llm-gateway"
-version = "0.1.0"
+version = "0.5.0"
 description = "One OpenAI-compatible endpoint; multiple providers; semantic caching; cost-aware routing."
 readme = "README.md"
 license = { text = "MIT" }
@@ -15,14 +15,14 @@ dependencies = [
     "structlog>=24.4",       # structured JSON request logs
     "pyyaml>=6.0",
     # Day 3 — semantic cache (uncomment the day the feature lands, not before)
-    # "faiss-cpu>=1.9",
-    # "sentence-transformers>=3.2",
-    # "numpy>=2.1",
-    # "redis>=5.2",
+    "faiss-cpu>=1.9",
+    "sentence-transformers>=3.2",
+    "numpy>=2.1",
+    "redis>=5.2",
     # Day 5 — observability stores
-    # "prometheus-client>=0.21",
-    # "sqlalchemy>=2.0",
-    # "psycopg[binary]>=3.2",
+    "prometheus-client>=0.21",
+    "sqlalchemy>=2.0",
+    "psycopg[binary]>=3.2",
 ]
 
 [dependency-groups]
@@ -35,6 +35,7 @@ dev = [
     "locust>=2.32",           # Day 6 load tests
     "ruff>=0.8",
     "openai>=3.13.0",
+    "langchain-openai>=1.6.2",
 ]
 
 [build-system]

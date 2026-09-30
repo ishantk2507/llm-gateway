@@ -41,7 +41,8 @@ def run(*args: str) -> None:
         "uv",
         "run",
         "uvicorn",
-        "llm_gateway.main:app",
+        "llm_gateway.main:create_app",
+        "--factory",
         "--reload",
         "--host",
         "0.0.0.0",
@@ -84,6 +85,10 @@ def logs() -> None:
     sh("docker", "compose", "logs", "-f", "gateway")
 
 
+def eval() -> None:
+    sh("uv", "run", "python", "evals/run_router_eval.py")
+
+
 def clean() -> None:
     for name in (".pytest_cache", ".ruff_cache", "htmlcov"):
         shutil.rmtree(ROOT / name, ignore_errors=True)
@@ -117,7 +122,7 @@ TARGETS: dict[str, tuple[str, Callable]] = {
     "compose-down": ("stop the stack (volumes kept)", compose_down),
     "logs": ("tail gateway logs", logs),
     "clean": ("delete caches and artifacts (never touches .venv)", clean),
-    "eval": ("router golden-set eval", _not_yet("Day 4")),
+    "eval": ("router golden-set eval", eval),
     "load-test": ("locust load test", _not_yet("Day 6")),
     "chaos": ("kill primary provider under load", _not_yet("Day 6")),
     "demo": ("run the 5-minute demo", _not_yet("Day 7")),

@@ -1,0 +1,177 @@
+# ADR-0001: the router's entire configuration — data, not code.
+# FIRST MATCH WINS; order is semantic: premium rules first, then tightly-
+# constrained cheap rules, then standard catch-alls, then default.
+# Keywords match on word boundaries, case-insensitive, against the last user
+# message. The iteration loop is editing THIS FILE, never code.
+#
+# Structure notes:
+# - trivially_short was DELETED: its unique coverage was already held by
+#   simple_factual, while its <=5-token window devoured every short concept
+#   question ("What is OAuth?"). It was the engine of the standard->cheap errors.
+# - "design a" AND "design an" are both listed because \bdesign a\b can never
+#   match "design an" — no word boundary between a and n. Same for create/plan.
+# - simple_factual's not_keywords are the label-alignment partners: the domain
+#   terms there are exactly the "What is X?" prompts labeled standard (paragraph
+#   concepts, per rubric edge rule 6), plus markers that signal comparison or
+#   explanation — never one-shot facts.
+
+default_tier: standard
+
+rules:
+  # ── premium ────────────────────────────────────────────────────────────
+  - name: code_task
+    tier: premium
+    any_keywords:
+      [write a function, write a program, write a script, write code,
+       write a class, write a method, write a test, write tests,
+       write a query, write a command, write a dockerfile, write me a,
+       write the code, write some code, create a function, implement,
+       refactor, debug this, fix this code, fix this bug, fix the bug,
+       fix this error, fix this python, fix this java, fix this javascript,
+       fix this sql, sql query, regex, regular expression, unit test]
+  - name: write_code_with_language
+    tier: premium
+    all_keywords: [write]
+    any_keywords: [python, javascript, typescript, java, bash, shell,
+                   sql, c++, rust, golang, dockerfile]
+  - name: build_code_with_language
+    tier: premium
+    all_keywords: [build]
+    any_keywords: [python, javascript, typescript, java, bash, shell,
+                   sql, c++, rust, golang, dockerfile]
+  - name: has_code_block
+    tier: premium
+    has_code: true
+  - name: deep_reasoning
+    tier: premium
+    any_keywords:
+      [prove, derive, step by step, walk me through, analyze, compare,
+       recommend, trade-offs, trade offs, design, plan a, plan an,
+       create a, create an, architect, how would you design, calculate,
+       solve for, study plan, trace, diagnose, optimize, propose, choose,
+       identify, evaluate, justify, normalize]
+  - name: explain_multi_concept
+    tier: premium
+    any_keywords: [explain]
+    # Calibrated against the golden set: the longest standard-labeled explain
+    # prompt is 9 tokens; the shortest multi-concept premium one is 13.
+    # Long explain = multi-part question, per rubric edge rule 4.
+    min_tokens: 12
+  - name: long_and_complex
+    tier: premium
+    min_tokens: 400
+  - name: math_heavy
+    tier: premium
+    any_keywords: [integral, derivative, matrix, theorem, asymptotic, complexity]
+    min_tokens: 60
+
+  # ── cheap — constraints are tight so they can't steal explain-type prompts ──
+  - name: acronym_expansion
+    tier: cheap
+    # Literal "what does X stand for" is always a one-shot lookup, even when
+    # X is a domain term (graphql, oauth, ...) blocked below in simple_factual's
+    # not_keywords. Runs first so the denylist can't shadow it — a term can't
+    # simultaneously be "too deep for cheap" for its concept form and "fine for
+    # cheap" for its acronym-expansion form without a rule ordered ahead of it.
+    any_keywords: [stand for, stands for, short for, an acronym for, acronym for]
+    max_tokens: 12
+  - name: greeting
+    tier: cheap
+    any_keywords: [hi, hello, hey, thanks, thank you, good morning, good evening, yo]
+    max_tokens: 8
+  - name: translate_short
+    tier: cheap
+    any_keywords: [translate]
+    max_tokens: 10   # "Translate 'good morning' to Spanish." in; five-page contract out
+  - name: simple_factual
+    tier: cheap
+    any_keywords:
+      [what is, what's, what does, what color, what language, what planet,
+       what gas, who is, who was, who wrote, when did, when was, where is,
+       how many, how much, capital of, define, spell, name]
+    max_tokens: 20
+    not_keywords:
+      # markers — anything signaling comparison/explanation is not one-shot
+      [explain, describe, summarize, analyze, compare, difference between,
+       differences between, why, how does, causes, caused,
+       # domain — paragraph-depth concepts labeled standard in the golden set
+       oauth, kubernetes, graphql, raft, jwt, deadlock, mutex, semaphore,
+       dependency injection, eventual consistency, normalization, indexing,
+       index, encryption, process, thread, transformer, embedding, overfitting,
+       cross-validation, consistency, scaling, microservice, monolith, replica,
+       firewall, vector, gradient, compiler, recursion, docker, cache, caching,
+       queue, transaction, machine learning, machine translation, neural,
+       object-oriented, programming, world war, tides, opportunity cost,
+       inflation, hash, confusion matrix, big-o, binary tree, observability,
+       idempotent, file system, load balancer, load balancing, cdn,
+       circuit breaker, rest api, endpoint, proof, migration, blue-green,
+       api gateway,
+       a/b testing, acid, adapter pattern, adversarial example, adversarial
+       pair, ambiguity, ambiguous prompt, api versioning, architecture
+       diagram, async/await, attention in transformers, audit logging,
+       authentication, authorization, autoscaling, b-tree, backpressure,
+       backpropagation, backward compatibility, batch processing, bayes'
+       theorem, benchmark, benchmark accuracy, binary heap, binary search,
+       boundary case, brainstorming, calibration, canary deployment, cap
+       theorem, capacity planning, checkpoint, ci/cd, classifier, clean
+       architecture, code generation, code review, cognitive load,
+       compaction, compression, concurrency, confidence interval, confidence
+       scoring, connection pool, connection pooling, consensus, context
+       window, contract testing, coroutine, cost-sensitive classification,
+       csrf, cursor pagination, data augmentation, data deduplication, data
+       lake, data leakage, data pipeline, data retention, data validation,
+       data warehouse, database lock, dataset imbalance, denormalization,
+       dependency inversion, dependency management, deployment pipeline,
+       derivation, derivative, digital signature, disaster recovery, disaster
+       recovery plan, distributed system, dns, dns record, durability,
+       environment configuration, error budget, error cost, escalation,
+       escalation threshold, evaluation metric, event-driven architecture,
+       eventual delivery, evolution, explanation, exponential backoff, f1
+       score, factory pattern, failover, fallback, fallback model, false
+       negative in routing, false positive in routing, fault tolerance,
+       feature, feature flagging, fine-tuning, fixture in pytest, function
+       calling, garbage collection, git hook, golden set, golden-set label,
+       graceful degradation, graph, graph in computer science, health probe,
+       hexagonal architecture, horizontal partitioning, http, hyperparameter
+       tuning, hypothesis test, idempotency, input validation, integral,
+       integration testing, interface contract, json schema, json
+       serialization, json validation, kafka, language model, latency versus
+       throughput, leader election, least privilege, linear regression, llm
+       agent, llm router, lsm tree, memory leak, message broker, minimum
+       sufficient capability, mocking, mocking http requests, model
+       capability, model distillation, model drift, model fallback, model
+       quality, model routing, model tier, model training, model versioning,
+       mongodb, multi-step prompt, network partition, nosql database,
+       one-shot factual question, optimistic locking, orm, p-value,
+       pagination, paraphrasing, pessimistic locking, photosynthesis, plan,
+       postgresql, precision, precision in classification, precision-recall
+       trade-off, prioritization, probability, profiling, project plan,
+       prompt classification, prompt complexity, prompt difficulty, prompt
+       formatting, prompt injection, prompt routing, prompt truncation,
+       provider adapter, provider failover, provider reliability, public-key
+       cryptography, pytest, python decorator, quality threshold,
+       quantization, quicksort, quorum, race condition, randomization, rate
+       limiting, recall, recall in classification, redis, regression,
+       regression test, replication, replication lag, request deduplication,
+       retrieval-augmented generation, retry budget, retry storm, rewriting,
+       routing benchmark, routing error, schema evolution, selectivity,
+       semantic search, separation of concerns, serializability,
+       serialization, server-sent events, service dependency, session,
+       sharding, single point of failure, sliding window, socket, sorting
+       algorithm, sql, sql injection, sql join, stack overflow,
+       stale-while-revalidate, standardization, statistical power,
+       statistical significance, stratified sampling, stream processing,
+       streaming, structured output, summarization, tcp, technical debt,
+       terraform, test coverage, test double, timeout budget, tls, token
+       bucket, tokenization, tool calling, tracing, trade-off, trade-off
+       analysis, translation, uncertainty, version control, water cycle, web
+       socket, websocket, write-ahead logging, xss]
+
+  # ── standard ───────────────────────────────────────────────────────────
+  - name: explain_concept
+    tier: standard
+    any_keywords: [explain, describe, summarize, outline, draft, rewrite,
+                   difference between, differences between, why does, how does]
+  - name: structured_transform
+    tier: standard
+    has_structured_data: true

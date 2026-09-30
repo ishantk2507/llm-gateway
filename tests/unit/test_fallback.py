@@ -1,0 +1,204 @@
+"""Chain-walker semantics with fakes — above the HTTP layer, so no respx."""
+
+import asyncio
+
+import pytest
+
+from llm_gateway.config import ReliabilitySettings
+from llm_gateway.providers.base import ProviderAdapter
+from llm_gateway.reliability.circuit_breaker import BreakerBoard
+from llm_gateway.reliability.fallback import execute_with_fallback
+from llm_gateway.reliability.retry import TimeoutBudget
+from llm_gateway.schemas.errors import (
+    AllProvidersDown,
+    ProviderFailure,
+    ProviderRejected,
+    RequestTimedOut,
+)
+from llm_gateway.schemas.openai_api import (
+    ChatCompletionRequest,
+    ChatCompletionResponse,
+    Choice,
+    Message,
+    Usage,
+)
+
+
+def one_shot() -> ReliabilitySettings:
+    """One attempt per provider — tests the WALKER, not the retry layer."""
+    return ReliabilitySettings(
+        max_retries=1,
+        backoff_base_s=0.001,
+        backoff_cap_s=0.002,
+        per_attempt_timeout_s=5.0,
+        request_timeout_budget_s=10.0,
+    )
+
+
+def req() -> ChatCompletionRequest:
+    return ChatCompletionRequest(model="auto", messages=[Message(role="user", content="q")])
+
+
+def resp() -> ChatCompletionResponse:
+    return ChatCompletionResponse(
+        id="x",
+        created=1,
+        model="m",
+        choices=[Choice(message=Message(role="assistant", content="r"))],
+        usage=Usage(prompt_tokens=1, completion_tokens=1, total_tokens=2),
+    )
+
+
+class FakeAdapter(ProviderAdapter):
+    def __init__(self, name: str, script: list) -> None:
+        self.name = name
+        self.script = list(script)
+        self.calls = 0
+
+    async def complete(self, request) -> ChatCompletionResponse:
+        self.calls += 1
+        item = self.script.pop(0) if self.script else ProviderFailure("script exhausted")
+        if isinstance(item, Exception):
+            raise item
+        return item
+
+    async def health_check(self) -> bool:
+        return True
+
+
+class SlowBrokenAdapter(ProviderAdapter):
+    name = "slow"
+
+    async def complete(self, request) -> ChatCompletionResponse:
+        await asyncio.sleep(0.05)
+        raise ProviderFailure("slow death")
+
+    async def health_check(self) -> bool:
+        return True
+
+
+async def test_first_healthy_provider_serves():
+    a, b = FakeAdapter("a", [resp()]), FakeAdapter("b", [resp()])
+    _, name = await execute_with_fallback(
+        [a, b], req(), budget=TimeoutBudget(10), settings=one_shot()
+    )
+    assert name == "a" and b.calls == 0
+
+
+async def test_failure_fails_over_in_order():
+    a, b = FakeAdapter("a", [ProviderFailure("down")]), FakeAdapter("b", [resp()])
+    _, name = await execute_with_fallback(
+        [a, b], req(), budget=TimeoutBudget(10), settings=one_shot()
+    )
+    assert name == "b" and a.calls == 1
+
+
+async def test_rejection_also_moves_on():
+    a, b = FakeAdapter("a", [ProviderRejected("too long")]), FakeAdapter("b", [resp()])
+    _, name = await execute_with_fallback(
+        [a, b], req(), budget=TimeoutBudget(10), settings=one_shot()
+    )
+    assert name == "b"
+
+
+async def test_chain_exhaustion_raises_all_providers_down():
+    a, b = FakeAdapter("a", [ProviderFailure("x")]), FakeAdapter("b", [ProviderFailure("y")])
+    with pytest.raises(AllProvidersDown, match="a, b"):
+        await execute_with_fallback([a, b], req(), budget=TimeoutBudget(10), settings=one_shot())
+
+
+async def test_pinned_single_failure_escalates_as_upstream_error():
+    a = FakeAdapter("a", [ProviderFailure("down")])
+    with pytest.raises(ProviderFailure):  # escapes as 502, not 503 (DESIGN.md §7.3)
+        await execute_with_fallback([a], req(), budget=TimeoutBudget(10), settings=one_shot())
+
+
+async def test_budget_death_between_providers_is_a_504():
+    healthy = FakeAdapter("b", [resp()])
+    with pytest.raises(RequestTimedOut):
+        await execute_with_fallback(
+            [SlowBrokenAdapter(), healthy],
+            req(),
+            budget=TimeoutBudget(0.02),
+            settings=one_shot(),
+        )
+    assert healthy.calls == 0  # never started — the budget said no
+
+
+# ── breaker integration (Day 6) ──────────────────────────────────────────
+
+
+def board(**overrides) -> BreakerBoard:
+    base = dict(
+        breaker_window=20,
+        breaker_failure_rate=0.5,
+        breaker_cooldown_s=30.0,
+        breaker_half_open_probes=1,
+    )
+    base.update(overrides)
+    return BreakerBoard(ReliabilitySettings(**base))
+
+
+def trip(brd: BreakerBoard, name: str, failures: int = 20) -> None:
+    for _ in range(failures):
+        epoch = brd.allow(name)
+        assert epoch is not None
+        brd.record_failure(name, epoch)
+
+
+async def test_open_breaker_skips_to_backup_without_calling():
+    a, b = FakeAdapter("a", [resp()]), FakeAdapter("b", [resp()])
+    brd = board()
+    trip(brd, "a")
+    _, name = await execute_with_fallback(
+        [a, b], req(), budget=TimeoutBudget(10), settings=one_shot(), breakers=brd
+    )
+    assert name == "b" and a.calls == 0  # skipped: no calls, no window sample
+
+
+async def test_all_circuits_open_is_a_503_naming_circuits():
+    a, b = FakeAdapter("a", [resp()]), FakeAdapter("b", [resp()])
+    brd = board()
+    trip(brd, "a")
+    trip(brd, "b")
+    with pytest.raises(AllProvidersDown, match="circuits open"):
+        await execute_with_fallback(
+            [a, b], req(), budget=TimeoutBudget(10), settings=one_shot(), breakers=brd
+        )
+    assert a.calls == 0 and b.calls == 0
+
+
+async def test_coherent_rejections_never_trip():
+    a = FakeAdapter("a", [ProviderRejected("invalid key")] * 20)
+    brd = board()
+    for _ in range(20):
+        with pytest.raises(ProviderRejected):
+            await execute_with_fallback(
+                [a], req(), budget=TimeoutBudget(10), settings=one_shot(), breakers=brd
+            )
+    assert brd.allow("a") is not None  # 20 rejections = 20 success samples
+
+
+async def test_one_window_sample_per_with_retries_conclusion():
+    # max_retries=3: one conclusion = 3 attempts = exactly ONE breaker sample
+    settings = ReliabilitySettings(
+        max_retries=3,
+        backoff_base_s=0.001,
+        backoff_cap_s=0.002,
+        per_attempt_timeout_s=5.0,
+        request_timeout_budget_s=30.0,
+        breaker_window=2,
+    )
+    brd = BreakerBoard(settings)
+    a = FakeAdapter("a", [ProviderFailure("x")] * 10)
+    with pytest.raises(ProviderFailure):  # pinned single provider
+        await execute_with_fallback(
+            [a], req(), budget=TimeoutBudget(30), settings=settings, breakers=brd
+        )
+    assert a.calls == 3  # three attempts…
+    assert brd.allow("a") is not None  # …but only ONE sample — not yet tripped
+    with pytest.raises(ProviderFailure):
+        await execute_with_fallback(
+            [a], req(), budget=TimeoutBudget(30), settings=settings, breakers=brd
+        )
+    assert brd.allow("a") is None  # second conclusion: 2/2 → tripped

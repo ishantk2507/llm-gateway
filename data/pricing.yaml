@@ -1,0 +1,165 @@
+# Cost table — USD per 1M tokens.
+#
+# Source verification date: 2026-09-19
+#
+# FIRST MATCH WINS.
+# Patterns are prefix-matched against the SERVING model string returned
+# by the provider.
+#
+# Rates are standard published API rates.
+# Account-specific free tiers / enterprise contracts are NOT represented.
+#
+# Unknown models should be treated as UNPRICED.
+# Do not silently apply a family fallback to a new model.
+
+models:
+
+  # ================================================================
+  # OPENAI — 2026
+  # ================================================================
+
+  - {pattern: "gpt-6-astra", provider: openai,
+     input_per_mtok: 10.00, output_per_mtok: 50.00}
+
+  - {pattern: "gpt-5.6-sol", provider: openai,
+     input_per_mtok: 4.00, output_per_mtok: 20.00}
+
+  - {pattern: "gpt-5.6-terra", provider: openai,
+     input_per_mtok: 2.00, output_per_mtok: 12.00}
+
+  - {pattern: "gpt-5.6-luna", provider: openai,
+     input_per_mtok: 0.20, output_per_mtok: 1.20}
+
+  - {pattern: "gpt-5.6", provider: openai,
+     input_per_mtok: 4.00, output_per_mtok: 20.00}
+
+  - {pattern: "gpt-5.5", provider: openai,
+     input_per_mtok: 5.00, output_per_mtok: 30.00}
+
+  - {pattern: "gpt-5.4-mini", provider: openai,
+     input_per_mtok: 0.75, output_per_mtok: 4.50}
+
+  - {pattern: "gpt-5.4", provider: openai,
+     input_per_mtok: 2.50, output_per_mtok: 15.00}
+
+  - {pattern: "gpt-5.3-codex-spark", provider: openai,
+     input_per_mtok: null, output_per_mtok: null}
+
+  - {pattern: "gpt-5.3-codex", provider: openai,
+     input_per_mtok: 1.75, output_per_mtok: 14.00}
+
+  - {pattern: "gpt-5.2", provider: openai,
+     input_per_mtok: 1.75, output_per_mtok: 14.00}
+
+
+  # ================================================================
+  # GOOGLE GEMINI — 2026
+  # ================================================================
+
+  - {pattern: "gemini-3.8-flash", provider: gemini,
+     input_per_mtok: 0.75, output_per_mtok: 3.75}
+
+  - {pattern: "gemini-3.7-flash", provider: gemini,
+     input_per_mtok: null, output_per_mtok: null}
+
+  - {pattern: "gemini-3.6-flash", provider: gemini,
+     input_per_mtok: 0.75, output_per_mtok: 3.75}
+
+  - {pattern: "gemini-3.5-flash-lite", provider: gemini,
+     input_per_mtok: null, output_per_mtok: null}
+
+  - {pattern: "gemini-3.5-flash", provider: gemini,
+     input_per_mtok: null, output_per_mtok: null}
+
+  - {pattern: "gemini-3.1-pro", provider: gemini,
+     input_per_mtok: 2.00, output_per_mtok: 12.00}
+
+  - {pattern: "gemini-3.1-flash-lite", provider: gemini,
+     input_per_mtok: 0.25, output_per_mtok: 1.50}
+
+
+  # ================================================================
+  # ANTHROPIC — 2026
+  # ================================================================
+
+  - {pattern: "claude-fable-5-1", provider: anthropic,
+     input_per_mtok: 10.00, output_per_mtok: 50.00}
+
+  - {pattern: "claude-mythos-5-1", provider: anthropic,
+     input_per_mtok: 10.00, output_per_mtok: 50.00}
+
+  - {pattern: "claude-fable-5", provider: anthropic,
+     input_per_mtok: 10.00, output_per_mtok: 50.00}
+
+  - {pattern: "claude-mythos-5", provider: anthropic,
+     input_per_mtok: 10.00, output_per_mtok: 50.00}
+
+  - {pattern: "claude-opus-5", provider: anthropic,
+     input_per_mtok: 5.00, output_per_mtok: 25.00}
+
+  - {pattern: "claude-sonnet-5", provider: anthropic,
+     input_per_mtok: 2.00, output_per_mtok: 10.00}
+
+  - {pattern: "claude-opus-4-8", provider: anthropic,
+     input_per_mtok: null, output_per_mtok: null}
+
+  - {pattern: "claude-opus-4-7", provider: anthropic,
+     input_per_mtok: null, output_per_mtok: null}
+
+  - {pattern: "claude-opus-4-6", provider: anthropic,
+     input_per_mtok: null, output_per_mtok: null}
+
+  - {pattern: "claude-sonnet-4-6", provider: anthropic,
+     input_per_mtok: null, output_per_mtok: null}
+
+
+  # ================================================================
+  # GROQ — 2026 AVAILABLE MODELS
+  # ================================================================
+
+  - {pattern: "openai/gpt-oss-120b", provider: groq,
+     input_per_mtok: 0.15, output_per_mtok: 0.60}
+
+  - {pattern: "openai/gpt-oss-20b", provider: groq,
+     input_per_mtok: 0.075, output_per_mtok: 0.30}
+
+  - {pattern: "qwen/qwen3.8-27b", provider: groq,
+     input_per_mtok: 0.80, output_per_mtok: 4.00}
+
+  - {pattern: "qwen/qwen3.6-27b", provider: groq,
+     input_per_mtok: 0.60, output_per_mtok: 3.00}
+
+  - {pattern: "openai/gpt-oss-safeguard-20b", provider: groq,
+     input_per_mtok: 0.075, output_per_mtok: 0.30}
+
+  # MiniMax M2.7 is enterprise/contact-sales on Groq.
+  - {pattern: "minimaxai/minimax-m2.7", provider: groq,
+     input_per_mtok: null, output_per_mtok: null}
+
+
+  # ================================================================
+  # LOCAL / SELF-HOSTED
+  # ================================================================
+
+  - {pattern: "llama3", provider: local,
+     input_per_mtok: 0.0, output_per_mtok: 0.0}
+
+  - {pattern: "qwen", provider: local,
+     input_per_mtok: 0.0, output_per_mtok: 0.0}
+
+  - {pattern: "phi", provider: local,
+     input_per_mtok: 0.0, output_per_mtok: 0.0}
+
+  - {pattern: "mistral", provider: local,
+     input_per_mtok: 0.0, output_per_mtok: 0.0}
+
+  - {pattern: "gemma", provider: local,
+     input_per_mtok: 0.0, output_per_mtok: 0.0}
+
+
+  # ================================================================
+  # MOCK
+  # ================================================================
+
+  - {pattern: "mock", provider: mock,
+     input_per_mtok: 0.0, output_per_mtok: 0.0}

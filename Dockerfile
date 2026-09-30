@@ -25,12 +25,13 @@ ENV PYTHONUNBUFFERED=1 \
 WORKDIR /app
 
 COPY --from=builder /app/.venv /app/.venv
-# TODO(day-3): COPY --from=builder /opt/hf-cache /opt/hf-cache   (and set HF_HOME)
-# TODO(day-4): COPY data ./data
+# TODO(day-7): bake the HF model into the image (COPY --from=builder /opt/hf-cache
+# and set HF_HOME) — until then the hf-cache compose volume avoids re-downloads.
 
 COPY pyproject.toml uv.lock ./
 COPY src ./src
+COPY data ./data
 
 EXPOSE 8000
 # One worker BY DESIGN — in-memory FAISS index + breaker state (DESIGN.md §13).
-CMD ["uvicorn", "llm_gateway.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "llm_gateway.main:create_app", "--factory", "--host", "0.0.0.0", "--port", "8000"]
