@@ -101,7 +101,7 @@ def test_health_reports_the_mock():
     assert response.status_code == 200
     body = response.json()
     assert body["status"] == "ok"
-    assert {"name": "mock", "healthy": True} in body["providers"]
+    assert {"name": "mock", "healthy": True, "breaker": "closed"} in body["providers"]
 
 
 def test_provider_failure_is_a_502_envelope():

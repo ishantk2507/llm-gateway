@@ -5,6 +5,8 @@ import asyncio
 
 from fastapi.testclient import TestClient
 
+from tests.helpers import hermetic_settings
+
 from llm_gateway.config import (
     AppSettings,
     Environment,
@@ -35,8 +37,7 @@ def make_settings(**reliability_overrides) -> Settings:
         request_timeout_budget_s=10.0,
     )
     base.update(reliability_overrides)
-    return Settings(
-        _env_file=None,
+    return hermetic_settings(
         app=AppSettings(environment=Environment.TEST),
         reliability=ReliabilitySettings(**base),
     )
