@@ -4,7 +4,6 @@ through the real app, all offline (ADR-0006)."""
 import asyncio
 
 from fastapi.testclient import TestClient
-
 from tests.helpers import hermetic_settings
 
 from llm_gateway.config import (
